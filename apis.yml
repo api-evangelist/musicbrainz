@@ -1,0 +1,32 @@
+aid: musicbrainz
+name: MusicBrainz
+description: "Music"
+url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "Music"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - Music
+  - Public APIs
+apis:
+  - name: MusicBrainz
+    description: "Music"
+    humanURL: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+    baseURL: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+    tags:
+      - Music
+    properties:
+      - type: Documentation
+        url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+common:
+  - type: Website
+    url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
