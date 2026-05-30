@@ -1,0 +1,92 @@
+{
+  "title": "MusicBrainz Artist Structure",
+  "description": "Hierarchical field map for the MusicBrainz Artist JSON object.",
+  "type": "object",
+  "fields": [
+    {"name": "id", "type": "string", "format": "uuid", "description": "MusicBrainz Identifier (MBID)."},
+    {"name": "name", "type": "string", "description": "Primary display name."},
+    {"name": "sort-name", "type": "string", "description": "Sortable form of the name."},
+    {"name": "type", "type": "string", "enum": ["Person", "Group", "Orchestra", "Choir", "Character", "Other"]},
+    {"name": "type-id", "type": "string", "format": "uuid"},
+    {"name": "gender", "type": "string", "enum": ["Male", "Female", "Other", "Not applicable"]},
+    {"name": "gender-id", "type": "string", "format": "uuid"},
+    {"name": "country", "type": "string", "description": "ISO 3166-1 alpha-2 code."},
+    {"name": "disambiguation", "type": "string", "description": "Short distinguishing comment."},
+    {"name": "isnis", "type": "array", "items": "string", "description": "ISO 27729 ISNI codes."},
+    {"name": "ipis", "type": "array", "items": "string", "description": "CISAC IPI codes."},
+    {
+      "name": "area",
+      "type": "object",
+      "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "name", "type": "string"},
+        {"name": "sort-name", "type": "string"},
+        {"name": "type", "type": "string"},
+        {"name": "iso-3166-1-codes", "type": "array", "items": "string"}
+      ]
+    },
+    {"name": "begin-area", "type": "object", "description": "Area where the artist originated."},
+    {"name": "end-area", "type": "object", "description": "Area where the artist ended."},
+    {
+      "name": "life-span",
+      "type": "object",
+      "fields": [
+        {"name": "begin", "type": "string", "description": "Year, year-month, or ISO date."},
+        {"name": "end", "type": "string"},
+        {"name": "ended", "type": "boolean"}
+      ]
+    },
+    {
+      "name": "aliases",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "fields": [
+          {"name": "name", "type": "string"},
+          {"name": "sort-name", "type": "string"},
+          {"name": "locale", "type": "string"},
+          {"name": "type", "type": "string"},
+          {"name": "primary", "type": "boolean"},
+          {"name": "begin", "type": "string"},
+          {"name": "end", "type": "string"}
+        ]
+      }
+    },
+    {
+      "name": "tags",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "fields": [
+          {"name": "name", "type": "string"},
+          {"name": "count", "type": "integer"}
+        ]
+      }
+    },
+    {
+      "name": "rating",
+      "type": "object",
+      "fields": [
+        {"name": "value", "type": "number", "range": [0, 5]},
+        {"name": "votes-count", "type": "integer"}
+      ]
+    },
+    {
+      "name": "relations",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "fields": [
+          {"name": "type", "type": "string"},
+          {"name": "type-id", "type": "string"},
+          {"name": "direction", "type": "string", "enum": ["forward", "backward"]},
+          {"name": "target-type", "type": "string"},
+          {"name": "attributes", "type": "array", "items": "string"},
+          {"name": "begin", "type": "string"},
+          {"name": "end", "type": "string"},
+          {"name": "ended", "type": "boolean"}
+        ]
+      }
+    }
+  ]
+}

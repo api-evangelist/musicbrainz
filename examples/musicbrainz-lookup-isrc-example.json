@@ -1,0 +1,38 @@
+{
+  "operation": "lookupRecordingsByISRC",
+  "request": {
+    "method": "GET",
+    "url": "https://musicbrainz.org/ws/2/isrc/USGF19102751",
+    "headers": {
+      "User-Agent": "ApiEvangelistDemo/1.0 ( contact@example.com )",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "fmt": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "isrc": "USGF19102751",
+      "recordings": [
+        {
+          "id": "fcbcdc39-8851-4efc-a02a-ab0e13be224f",
+          "title": "Smells Like Teen Spirit",
+          "length": 301920,
+          "video": false,
+          "artist-credit": [
+            {
+              "name": "Nirvana",
+              "artist": {
+                "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+                "name": "Nirvana",
+                "sort-name": "Nirvana"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

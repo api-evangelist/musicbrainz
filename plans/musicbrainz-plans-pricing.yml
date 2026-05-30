@@ -1,0 +1,165 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: MusicBrainz
+providerId: musicbrainz
+created: '2026-05-29'
+modified: '2026-05-29'
+tags:
+  - Music
+  - Metadata
+  - Open Source
+  - Non Profit
+  - Donation
+description: >-
+  MusicBrainz is operated by the MetaBrainz Foundation, a US 501(c)(3) non-profit. The public Web Service v2
+  is free to use under the Social Contract: no API key, no per-call billing, no commercial pricing tiers. The
+  project is funded primarily by individual donations and "supporter" agreements with commercial users who
+  consume the live data feed or commercial dumps at scale. Heavy commercial users are asked (not strictly
+  required) to become MetaBrainz supporters at https://metabrainz.org/supporters and to negotiate replication
+  / dump access through that programme rather than scraping the public web service.
+plans:
+  - id: musicbrainz-public
+    name: Public Web Service
+    type: free
+    description: >-
+      The default access tier for the public MusicBrainz Web Service v2 at https://musicbrainz.org/ws/2.
+      No registration, no API key. All callers share the same 1 request per second per IP ceiling and must
+      send a meaningful User-Agent. Suitable for personal apps, evaluation, research, and low-volume
+      integrations.
+    entries:
+      - label: API Requests
+        description: No per-request charge; access is metered only by the global rate limit.
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://musicbrainz.org/ws/2
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Rate Limit
+        description: Hard ceiling of one request per second per source IP (global, not per application).
+        name: rate_limit
+        type: rate
+        metric: requests_per_second
+        limit: 1
+        timeFrame: second
+        geo: global
+        domains:
+          - https://musicbrainz.org/ws/2
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Public Documentation
+      - name: Community Forum Support
+      - name: All Read Endpoints (lookup, browse, search)
+      - name: Authenticated Submission Endpoints
+      - name: ISRC / ISWC / DiscID / URL Resolution
+      - name: Genre Taxonomy
+      - name: User Collections
+  - id: musicbrainz-donor
+    name: Donor / Individual Supporter
+    type: donation
+    description: >-
+      Individual donor tier - same API access as the public tier, but the caller has chosen to support
+      MetaBrainz financially via https://metabrainz.org/donate. Donations directly fund the public
+      service. No technical privileges are granted, but the project's sustainability depends on this tier.
+    entries:
+      - label: API Requests
+        description: Same as the public tier (no per-request charge).
+        name: api_requests
+        type: quota
+        metric: requests
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://musicbrainz.org/ws/2
+        unit: 1
+        price: donation
+        userMultiplied: false
+      - label: Suggested Donation
+        description: Suggested recurring monthly donation amount; any positive amount is accepted.
+        name: suggested_donation
+        type: contribution
+        metric: usd_per_month
+        limit: 5
+        timeFrame: month
+        geo: global
+        domains:
+          - https://metabrainz.org/donate
+        unit: 1
+        price: '5.00'
+        userMultiplied: false
+    elements:
+      - name: All Public Tier Endpoints
+      - name: Public Donor Acknowledgement (optional)
+      - name: Direct Project Funding
+  - id: musicbrainz-supporter
+    name: Commercial Supporter
+    type: enterprise
+    description: >-
+      The supported access path for commercial users with high-volume needs. Rather than scaling the
+      public web service, commercial users replicate the MusicBrainz database locally using the
+      Live Data Feed or commercial dumps. The "MetaBrainz Supporter" agreement covers replication
+      access, commercial use of the CC-BY-NC-SA supplemental data, support, and a public
+      acknowledgement. Tier amounts are negotiated based on company size and usage. See
+      https://metabrainz.org/supporters and https://musicbrainz.org/doc/Live_Data_Feed.
+    entries:
+      - label: API Requests (Public WS)
+        description: Public web service still rate-limited at 1/sec/IP; commercial supporters are
+          expected to run their own replicated database for production traffic.
+        name: api_requests_public
+        type: rate
+        metric: requests_per_second
+        limit: 1
+        timeFrame: second
+        geo: global
+        domains:
+          - https://musicbrainz.org/ws/2
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Live Data Feed Access
+        description: Hourly replication packets covering every change to the canonical database;
+          allows the supporter to keep a private replica in continuous sync.
+        name: live_data_feed
+        type: feature
+        metric: enabled
+        limit: 1
+        timeFrame: instant
+        geo: global
+        domains:
+          - https://metabrainz.org/api/musicbrainz
+        unit: 1
+        price: custom
+        userMultiplied: false
+      - label: Supporter Contribution
+        description: Negotiated monthly/annual financial contribution; tiers commonly range from
+          a few hundred to several thousand USD per month based on usage.
+        name: supporter_contribution
+        type: contribution
+        metric: usd_per_month
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains:
+          - https://metabrainz.org/supporters
+        unit: 1
+        price: custom
+        userMultiplied: false
+    elements:
+      - name: All Public Tier Endpoints
+      - name: Live Data Feed Replication
+      - name: Commercial Use of CC-BY-NC-SA Data
+      - name: Direct Support Channel
+      - name: Listed on Supporters Page
+      - name: Influence on Roadmap
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

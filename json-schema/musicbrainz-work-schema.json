@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://musicbrainz.org/schemas/work",
+  "title": "MusicBrainz Work",
+  "description": "Schema for a MusicBrainz Work entity (an abstract musical composition) as returned by the Web Service v2.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "title": {"type": "string", "examples": ["Smells Like Teen Spirit"]},
+    "type": {"type": ["string", "null"], "examples": ["Song", "Symphony", "Opera", "Concerto"]},
+    "type-id": {"type": ["string", "null"]},
+    "language": {"type": ["string", "null"], "description": "Primary lyric language as ISO 639-3.", "examples": ["eng"]},
+    "languages": {"type": "array", "items": {"type": "string"}, "description": "All known lyric languages."},
+    "iswcs": {"type": "array", "items": {"type": "string"}, "description": "International Standard Musical Work Codes.", "examples": [["T-101.690.320-9"]]},
+    "attributes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "type-id": {"type": "string"},
+          "value": {"type": "string"},
+          "value-id": {"type": ["string", "null"]}
+        }
+      },
+      "description": "Typed attributes such as catalog numbers, opus numbers, key, etc."
+    },
+    "disambiguation": {"type": "string"},
+    "tags": {"type": "array", "items": {"type": "object", "properties": {"name": {"type": "string"}, "count": {"type": "integer"}}}},
+    "rating": {"type": "object", "properties": {"value": {"type": ["number", "null"]}, "votes-count": {"type": "integer"}}},
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string", "examples": ["composer", "lyricist", "arranger", "performance"]},
+          "type-id": {"type": "string"},
+          "direction": {"type": "string", "enum": ["forward", "backward"]},
+          "target-type": {"type": "string"},
+          "artist": {"type": "object"},
+          "recording": {"type": "object"}
+        }
+      }
+    }
+  },
+  "required": ["id", "title"]
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://musicbrainz.org/schemas/artist",
+  "title": "MusicBrainz Artist",
+  "description": "Schema for a MusicBrainz Artist entity as returned by the Web Service v2 in JSON format.",
+  "type": "object",
+  "properties": {
+    "id": {"$ref": "#/$defs/MBID"},
+    "name": {"type": "string", "description": "Primary display name of the artist.", "examples": ["Nirvana"]},
+    "sort-name": {"type": "string", "description": "Sortable form of the name (e.g. 'Beatles, The').", "examples": ["Nirvana"]},
+    "type": {"type": ["string", "null"], "enum": ["Person", "Group", "Orchestra", "Choir", "Character", "Other", null], "description": "Artist category."},
+    "type-id": {"$ref": "#/$defs/MBID"},
+    "gender": {"type": ["string", "null"], "enum": ["Male", "Female", "Other", "Not applicable", null]},
+    "gender-id": {"type": ["string", "null"]},
+    "country": {"type": ["string", "null"], "description": "ISO 3166-1 alpha-2 country code.", "pattern": "^[A-Z]{2}$"},
+    "area": {"$ref": "#/$defs/Area"},
+    "begin-area": {"$ref": "#/$defs/Area"},
+    "end-area": {"$ref": "#/$defs/Area"},
+    "disambiguation": {"type": "string", "description": "Short human-readable comment distinguishing this artist from others with the same name."},
+    "isnis": {"type": "array", "items": {"type": "string"}, "description": "International Standard Name Identifiers."},
+    "ipis": {"type": "array", "items": {"type": "string"}, "description": "Interested Parties Information codes (CISAC)."},
+    "life-span": {"$ref": "#/$defs/LifeSpan"},
+    "aliases": {"type": "array", "items": {"$ref": "#/$defs/Alias"}},
+    "tags": {"type": "array", "items": {"$ref": "#/$defs/Tag"}},
+    "rating": {"$ref": "#/$defs/Rating"},
+    "relations": {"type": "array", "items": {"$ref": "#/$defs/Relation"}}
+  },
+  "required": ["id", "name", "sort-name"],
+  "$defs": {
+    "MBID": {
+      "type": "string",
+      "format": "uuid",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "examples": ["5b11f4ce-a62d-471e-81fc-a69a8278c7da"]
+    },
+    "LifeSpan": {
+      "type": "object",
+      "properties": {
+        "begin": {"type": ["string", "null"]},
+        "end": {"type": ["string", "null"]},
+        "ended": {"type": "boolean"}
+      }
+    },
+    "Alias": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "sort-name": {"type": "string"},
+        "locale": {"type": ["string", "null"]},
+        "type": {"type": ["string", "null"]},
+        "primary": {"type": ["boolean", "null"]},
+        "begin": {"type": ["string", "null"]},
+        "end": {"type": ["string", "null"]}
+      },
+      "required": ["name"]
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "count": {"type": "integer", "minimum": 0}
+      },
+      "required": ["name", "count"]
+    },
+    "Rating": {
+      "type": "object",
+      "properties": {
+        "value": {"type": ["number", "null"], "minimum": 0, "maximum": 5},
+        "votes-count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "Area": {
+      "type": "object",
+      "properties": {
+        "id": {"$ref": "#/$defs/MBID"},
+        "name": {"type": "string"},
+        "sort-name": {"type": "string"},
+        "type": {"type": ["string", "null"]},
+        "iso-3166-1-codes": {"type": "array", "items": {"type": "string"}}
+      },
+      "required": ["id", "name"]
+    },
+    "Relation": {
+      "type": "object",
+      "properties": {
+        "type": {"type": "string"},
+        "type-id": {"$ref": "#/$defs/MBID"},
+        "direction": {"type": "string", "enum": ["forward", "backward"]},
+        "target-type": {"type": "string"},
+        "attributes": {"type": "array", "items": {"type": "string"}},
+        "begin": {"type": ["string", "null"]},
+        "end": {"type": ["string", "null"]},
+        "ended": {"type": "boolean"}
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "operation": "browseOrSearchRecordings",
+  "request": {
+    "method": "GET",
+    "url": "https://musicbrainz.org/ws/2/recording",
+    "headers": {
+      "User-Agent": "ApiEvangelistDemo/1.0 ( contact@example.com )",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "query": "recording:\"smells like teen spirit\" AND artist:nirvana",
+      "limit": 2,
+      "fmt": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "created": "2026-05-29T12:00:00.000Z",
+      "count": 412,
+      "offset": 0,
+      "recordings": [
+        {
+          "id": "fcbcdc39-8851-4efc-a02a-ab0e13be224f",
+          "score": 100,
+          "title": "Smells Like Teen Spirit",
+          "length": 301920,
+          "video": false,
+          "artist-credit": [
+            {
+              "name": "Nirvana",
+              "artist": {
+                "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+                "name": "Nirvana",
+                "sort-name": "Nirvana",
+                "disambiguation": "90s US grunge band"
+              }
+            }
+          ],
+          "first-release-date": "1991-09-10",
+          "releases": [
+            {
+              "id": "76df3287-6cda-33eb-8e9a-044b5e15ffdd",
+              "title": "Nevermind",
+              "status": "Official",
+              "date": "1991-09-24",
+              "country": "US"
+            }
+          ],
+          "isrcs": ["USGF19102751"]
+        },
+        {
+          "id": "5e6e3a5e-9c0e-4d2f-9e8f-7c0a2b9a1234",
+          "score": 99,
+          "title": "Smells Like Teen Spirit",
+          "length": 305000,
+          "video": false,
+          "artist-credit": [{"name": "Nirvana", "artist": {"id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da", "name": "Nirvana"}}],
+          "first-release-date": "1992-12-15"
+        }
+      ]
+    }
+  }
+}

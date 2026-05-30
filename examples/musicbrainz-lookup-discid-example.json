@@ -1,0 +1,50 @@
+{
+  "operation": "lookupReleasesByDiscID",
+  "request": {
+    "method": "GET",
+    "url": "https://musicbrainz.org/ws/2/discid/49HHV7Eb8UKF3aQiNmu1GR8vKjY-",
+    "headers": {
+      "User-Agent": "ApiEvangelistDemo/1.0 ( contact@example.com )",
+      "Accept": "application/json"
+    },
+    "parameters": {
+      "inc": "artists+recordings",
+      "cdstubs": "no",
+      "fmt": "json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "id": "49HHV7Eb8UKF3aQiNmu1GR8vKjY-",
+      "sectors": 178054,
+      "offsets": [150, 22995, 41758, 59765, 79850, 100450, 119500, 138123, 156540],
+      "releases": [
+        {
+          "id": "76df3287-6cda-33eb-8e9a-044b5e15ffdd",
+          "title": "Nevermind",
+          "status": "Official",
+          "quality": "normal",
+          "date": "1991-09-24",
+          "country": "US",
+          "barcode": "720642442524",
+          "artist-credit": [
+            {
+              "name": "Nirvana",
+              "artist": {
+                "id": "5b11f4ce-a62d-471e-81fc-a69a8278c7da",
+                "name": "Nirvana",
+                "sort-name": "Nirvana"
+              }
+            }
+          ],
+          "release-group": {
+            "id": "1b022e01-4da6-387b-8658-8678046e4cef",
+            "title": "Nevermind",
+            "primary-type": "Album"
+          }
+        }
+      ]
+    }
+  }
+}

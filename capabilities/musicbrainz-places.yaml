@@ -1,0 +1,159 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Places
+  description: 'MusicBrainz Web Service v2 — Places. 2 operations. Lead operation: Lookup Place By MBID. Self-contained Naftiko
+    capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Places
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-places
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Places business capability. Self-contained, no shared references.
+    resources:
+    - name: place-mbid
+      path: /place/{mbid}
+      operations:
+      - name: lookupPlace
+        method: GET
+        description: Lookup Place By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mbid
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: place
+      path: /place
+      operations:
+      - name: browseOrSearchPlaces
+        method: GET
+        description: Browse Or Search Places
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: area
+          in: query
+          type: string
+        - name: collection
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-places-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Places. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/place/{mbid}
+      name: place-mbid
+      description: REST surface for place-mbid.
+      operations:
+      - method: GET
+        name: lookupPlace
+        description: Lookup Place By MBID
+        call: musicbrainz-places.lookupPlace
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          mbid: rest.mbid
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/place
+      name: place
+      description: REST surface for place.
+      operations:
+      - method: GET
+        name: browseOrSearchPlaces
+        description: Browse Or Search Places
+        call: musicbrainz-places.browseOrSearchPlaces
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          area: rest.area
+          collection: rest.collection
+          limit: rest.limit
+          offset: rest.offset
+          inc: rest.inc
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-places-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Places. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: lookup-place
+      description: Lookup Place By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-places.lookupPlace
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        mbid: tools.mbid
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: browse-or-search-places
+      description: Browse Or Search Places
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-places.browseOrSearchPlaces
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        area: tools.area
+        collection: tools.collection
+        limit: tools.limit
+        offset: tools.offset
+        inc: tools.inc
+        fmt: tools.fmt

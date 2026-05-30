@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://musicbrainz.org/schemas/release",
+  "title": "MusicBrainz Release",
+  "description": "Schema for a MusicBrainz Release entity (a specific issue of a release group) as returned by the Web Service v2.",
+  "type": "object",
+  "properties": {
+    "id": {"$ref": "#/$defs/MBID"},
+    "title": {"type": "string", "examples": ["Nevermind"]},
+    "status": {"type": ["string", "null"], "enum": ["Official", "Promotion", "Bootleg", "Pseudo-Release", "Withdrawn", "Cancelled", null]},
+    "status-id": {"type": ["string", "null"]},
+    "quality": {"type": "string", "enum": ["low", "normal", "high"]},
+    "packaging": {"type": ["string", "null"], "examples": ["Jewel Case", "Digipak", "None"]},
+    "packaging-id": {"type": ["string", "null"]},
+    "language": {"type": ["string", "null"], "description": "ISO 639-3 language code.", "examples": ["eng"]},
+    "script": {"type": ["string", "null"], "description": "ISO 15924 script code.", "examples": ["Latn"]},
+    "date": {"type": ["string", "null"], "description": "Release date (year, year-month, or full ISO date).", "examples": ["1991-09-24"]},
+    "country": {"type": ["string", "null"], "description": "ISO 3166-1 alpha-2 country code."},
+    "barcode": {"type": ["string", "null"], "description": "GTIN/EAN/UPC barcode.", "examples": ["720642442524"]},
+    "asin": {"type": ["string", "null"]},
+    "disambiguation": {"type": "string"},
+    "artist-credit": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "joinphrase": {"type": "string"},
+          "artist": {"type": "object", "properties": {"id": {"$ref": "#/$defs/MBID"}, "name": {"type": "string"}, "sort-name": {"type": "string"}}}
+        }
+      }
+    },
+    "release-group": {
+      "type": "object",
+      "properties": {
+        "id": {"$ref": "#/$defs/MBID"},
+        "title": {"type": "string"},
+        "primary-type": {"type": ["string", "null"]},
+        "secondary-types": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "label-info": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "catalog-number": {"type": ["string", "null"]},
+          "label": {
+            "type": "object",
+            "properties": {
+              "id": {"$ref": "#/$defs/MBID"},
+              "name": {"type": "string"},
+              "sort-name": {"type": "string"},
+              "label-code": {"type": ["integer", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "position": {"type": "integer", "minimum": 1},
+          "format": {"type": "string", "examples": ["CD", "12\" Vinyl", "Digital Media"]},
+          "format-id": {"type": "string"},
+          "title": {"type": "string"},
+          "track-count": {"type": "integer", "minimum": 0},
+          "tracks": {"type": "array", "items": {"$ref": "#/$defs/Track"}},
+          "discs": {"type": "array", "items": {"$ref": "#/$defs/Disc"}}
+        }
+      }
+    },
+    "cover-art-archive": {
+      "type": "object",
+      "properties": {
+        "artwork": {"type": "boolean"},
+        "count": {"type": "integer", "minimum": 0},
+        "front": {"type": "boolean"},
+        "back": {"type": "boolean"},
+        "darkened": {"type": "boolean"}
+      }
+    },
+    "text-representation": {
+      "type": "object",
+      "properties": {
+        "language": {"type": ["string", "null"]},
+        "script": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "required": ["id", "title"],
+  "$defs": {
+    "MBID": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "Track": {
+      "type": "object",
+      "properties": {
+        "id": {"$ref": "#/$defs/MBID"},
+        "position": {"type": "integer"},
+        "number": {"type": "string"},
+        "title": {"type": "string"},
+        "length": {"type": ["integer", "null"], "description": "Length in milliseconds."},
+        "recording": {
+          "type": "object",
+          "properties": {
+            "id": {"$ref": "#/$defs/MBID"},
+            "title": {"type": "string"},
+            "length": {"type": ["integer", "null"]},
+            "video": {"type": "boolean"}
+          }
+        }
+      },
+      "required": ["id", "position", "title"]
+    },
+    "Disc": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "description": "28-character MusicBrainz Disc ID."},
+        "sectors": {"type": "integer"},
+        "offsets": {"type": "array", "items": {"type": "integer"}}
+      }
+    }
+  }
+}

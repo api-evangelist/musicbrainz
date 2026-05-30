@@ -1,0 +1,181 @@
+extends: spectral:oas
+rules:
+  musicbrainz-operation-ids-required:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  musicbrainz-operation-summary-required:
+    description: All operations must have a Title Case summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  musicbrainz-tags-required:
+    description: All operations must have at least one tag
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: tags
+      function: truthy
+
+  musicbrainz-description-required:
+    description: Operations should have descriptions
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  musicbrainz-response-200-get:
+    description: GET operations must document a 200 response
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: responses.200
+      function: truthy
+
+  musicbrainz-response-429-required:
+    description: All operations must document 429 Too Many Requests (MusicBrainz enforces 1 req/sec/IP)
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: responses.429
+      function: truthy
+
+  musicbrainz-response-404-required-lookup:
+    description: Lookup operations (entity by MBID) must document 404 Not Found
+    severity: warn
+    given: "$.paths[?(@property.match(/\\{mbid\\}|\\{isrc\\}|\\{iswc\\}|\\{discid\\}/))][get]"
+    then:
+      field: responses.404
+      function: truthy
+
+  musicbrainz-mbid-uuid-format:
+    description: MBID path parameters must use UUID format
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete].parameters[?(@.name == 'mbid')]"
+    then:
+      field: schema.format
+      function: pattern
+      functionOptions:
+        match: "^uuid$"
+
+  musicbrainz-isrc-pattern:
+    description: ISRC path parameters should validate the 12-character ISRC pattern
+    severity: warn
+    given: "$.paths[*][get].parameters[?(@.name == 'isrc')]"
+    then:
+      field: schema.pattern
+      function: truthy
+
+  musicbrainz-fmt-query-parameter:
+    description: Read endpoints should expose a `fmt` query parameter for XML/JSON content negotiation
+    severity: info
+    given: "$.paths[*].get"
+    then:
+      field: parameters
+      function: truthy
+
+  musicbrainz-inc-query-parameter:
+    description: Lookup and browse endpoints should expose an `inc` query parameter for sub-resource includes
+    severity: info
+    given: "$.paths[?(@property.match(/^\\/(artist|release|release-group|recording|work|label|place|area|event|instrument|series|url|isrc|iswc|discid)/))][get]"
+    then:
+      field: parameters
+      function: truthy
+
+  musicbrainz-pagination-limit-param:
+    description: Browse and search endpoints should support `limit` (1-100, default 25)
+    severity: warn
+    given: "$.paths[/artist|/release|/release-group|/recording|/work|/label|/place|/event|/instrument|/series|/genre/all]..parameters[?(@.name == 'limit')]"
+    then:
+      function: truthy
+
+  musicbrainz-pagination-offset-param:
+    description: Browse and search endpoints should support `offset` for pagination
+    severity: warn
+    given: "$.paths[/artist|/release|/release-group|/recording|/work|/label|/place|/event|/instrument|/series|/genre/all]..parameters[?(@.name == 'offset')]"
+    then:
+      function: truthy
+
+  musicbrainz-submission-requires-client:
+    description: All POST/PUT/DELETE submission endpoints must require a `client` query parameter
+    severity: error
+    given: "$.paths[*][post,put,delete].parameters[?(@.name == 'client')]"
+    then:
+      field: required
+      function: truthy
+
+  musicbrainz-submission-requires-auth:
+    description: All submission endpoints must require authentication (HTTPBasic or OAuth2)
+    severity: error
+    given: "$.paths[*][post,put,delete]"
+    then:
+      field: security
+      function: truthy
+
+  musicbrainz-auth-schemes-defined:
+    description: API must declare HTTPBasic and OAuth2 security schemes
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      function: truthy
+
+  musicbrainz-server-https:
+    description: All server URLs must use HTTPS
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  musicbrainz-ws2-base-path:
+    description: Production server URL should be rooted at /ws/2
+    severity: warn
+    given: "$.servers[?(@.url.match(/musicbrainz\\.org/))].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "/ws/2$"
+
+  musicbrainz-user-agent-documented:
+    description: API description must mention the mandatory User-Agent requirement
+    severity: warn
+    given: "$.info.description"
+    then:
+      function: pattern
+      functionOptions:
+        match: "(?i)user-agent"
+
+  musicbrainz-rate-limit-documented:
+    description: API description must mention the 1 request per second per IP rate limit
+    severity: warn
+    given: "$.info.description"
+    then:
+      function: pattern
+      functionOptions:
+        match: "(?i)(one|1).{0,12}(request|req).{0,12}(per|/).{0,12}(second|sec|ip)"
+
+  musicbrainz-response-schema-required:
+    description: Success responses on lookup endpoints should reference a defined schema
+    severity: info
+    given: "$.paths[?(@property.match(/\\{mbid\\}/))][get].responses.200.content.application/json"
+    then:
+      field: schema
+      function: truthy
+
+  musicbrainz-path-kebab-case:
+    description: Paths should use lowercase with kebab-case (hyphens) for multi-word segments
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9_{}-]+)+$"

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://musicbrainz.org/schemas/recording",
+  "title": "MusicBrainz Recording",
+  "description": "Schema for a MusicBrainz Recording entity (a distinct audio capture of a performance) as returned by the Web Service v2.",
+  "type": "object",
+  "properties": {
+    "id": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "title": {"type": "string", "examples": ["Smells Like Teen Spirit"]},
+    "length": {"type": ["integer", "null"], "description": "Length in milliseconds.", "examples": [301920]},
+    "video": {"type": "boolean", "description": "True if the recording is a music video rather than audio only."},
+    "disambiguation": {"type": "string"},
+    "first-release-date": {"type": ["string", "null"], "description": "Earliest known release date for this recording."},
+    "isrcs": {"type": "array", "items": {"type": "string", "pattern": "^[A-Z]{2}[A-Z0-9]{3}[0-9]{7}$"}, "description": "International Standard Recording Codes."},
+    "artist-credit": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "joinphrase": {"type": "string"},
+          "artist": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "name": {"type": "string"},
+              "sort-name": {"type": "string"},
+              "disambiguation": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "releases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": "string"},
+          "status": {"type": ["string", "null"]},
+          "date": {"type": ["string", "null"]},
+          "country": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "tags": {"type": "array", "items": {"type": "object", "properties": {"name": {"type": "string"}, "count": {"type": "integer"}}}},
+    "rating": {"type": "object", "properties": {"value": {"type": ["number", "null"]}, "votes-count": {"type": "integer"}}},
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "type-id": {"type": "string"},
+          "direction": {"type": "string", "enum": ["forward", "backward"]},
+          "target-type": {"type": "string"},
+          "work": {"type": "object"},
+          "artist": {"type": "object"},
+          "url": {"type": "object"}
+        }
+      }
+    }
+  },
+  "required": ["id", "title"]
+}

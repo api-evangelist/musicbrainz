@@ -1,0 +1,308 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Identifiers
+  description: 'MusicBrainz Web Service v2 — Identifiers. 5 operations. Lead operation: Lookup Recordings By ISRC. Self-contained
+    Naftiko capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Identifiers
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-identifiers
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Identifiers business capability. Self-contained, no shared references.
+    resources:
+    - name: isrc-isrc
+      path: /isrc/{isrc}
+      operations:
+      - name: lookupRecordingsByISRC
+        method: GET
+        description: Lookup Recordings By ISRC
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: isrc
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: iswc-iswc
+      path: /iswc/{iswc}
+      operations:
+      - name: lookupWorksByISWC
+        method: GET
+        description: Lookup Works By ISWC
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: iswc
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: discid-discid
+      path: /discid/{discid}
+      operations:
+      - name: lookupReleasesByDiscID
+        method: GET
+        description: Lookup Releases By Disc ID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: discid
+          in: path
+          type: string
+          required: true
+        - name: toc
+          in: query
+          type: string
+        - name: cdstubs
+          in: query
+          type: string
+        - name: media-format
+          in: query
+          type: string
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: url
+      path: /url
+      operations:
+      - name: lookupUrlsByResource
+        method: GET
+        description: Lookup URLs By Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resource
+          in: query
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: url-mbid
+      path: /url/{mbid}
+      operations:
+      - name: lookupUrl
+        method: GET
+        description: Lookup URL By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mbid
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-identifiers-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Identifiers. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/isrc/{isrc}
+      name: isrc-isrc
+      description: REST surface for isrc-isrc.
+      operations:
+      - method: GET
+        name: lookupRecordingsByISRC
+        description: Lookup Recordings By ISRC
+        call: musicbrainz-identifiers.lookupRecordingsByISRC
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          isrc: rest.isrc
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/iswc/{iswc}
+      name: iswc-iswc
+      description: REST surface for iswc-iswc.
+      operations:
+      - method: GET
+        name: lookupWorksByISWC
+        description: Lookup Works By ISWC
+        call: musicbrainz-identifiers.lookupWorksByISWC
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          iswc: rest.iswc
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/discid/{discid}
+      name: discid-discid
+      description: REST surface for discid-discid.
+      operations:
+      - method: GET
+        name: lookupReleasesByDiscID
+        description: Lookup Releases By Disc ID
+        call: musicbrainz-identifiers.lookupReleasesByDiscID
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          discid: rest.discid
+          toc: rest.toc
+          cdstubs: rest.cdstubs
+          media-format: rest.media-format
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/url
+      name: url
+      description: REST surface for url.
+      operations:
+      - method: GET
+        name: lookupUrlsByResource
+        description: Lookup URLs By Resource
+        call: musicbrainz-identifiers.lookupUrlsByResource
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          resource: rest.resource
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/url/{mbid}
+      name: url-mbid
+      description: REST surface for url-mbid.
+      operations:
+      - method: GET
+        name: lookupUrl
+        description: Lookup URL By MBID
+        call: musicbrainz-identifiers.lookupUrl
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          mbid: rest.mbid
+          inc: rest.inc
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-identifiers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Identifiers. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: lookup-isrc
+      description: Lookup Recordings By ISRC
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-identifiers.lookupRecordingsByISRC
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        isrc: tools.isrc
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: lookup-iswc
+      description: Lookup Works By ISWC
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-identifiers.lookupWorksByISWC
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        iswc: tools.iswc
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: lookup-discid
+      description: Lookup Releases By Disc ID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-identifiers.lookupReleasesByDiscID
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        discid: tools.discid
+        toc: tools.toc
+        cdstubs: tools.cdstubs
+        media-format: tools.media-format
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: lookup-url-resource
+      description: Lookup URLs By Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-identifiers.lookupUrlsByResource
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        resource: tools.resource
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: lookup-url
+      description: Lookup URL By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-identifiers.lookupUrl
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        mbid: tools.mbid
+        inc: tools.inc
+        fmt: tools.fmt

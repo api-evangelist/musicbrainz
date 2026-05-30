@@ -1,30 +1,324 @@
 aid: musicbrainz
 name: MusicBrainz
-description: "Music"
-url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+description: MusicBrainz is an open-source, community-maintained music encyclopedia operated by the MetaBrainz Foundation,
+  a US 501(c)(3) non-profit. It collects metadata about artists, releases, recordings, works, labels, places, areas,
+  events, instruments, series, URLs, and the relationships between them, then exposes the catalog through a free public
+  REST web service at https://musicbrainz.org/ws/2/. The dataset itself is released under CC0 (core data) and CC-BY-NC-SA
+  (supplemental tables), the schema is open, and full database dumps and a live replication feed are available. The web
+  service is read-mostly with authenticated submission endpoints for tags, ratings, collections, barcodes, and ISRCs,
+  and is rate-limited to one request per IP per second with a mandatory descriptive User-Agent header.
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-29'
+x-type: opensource
 x-source: public-apis/public-apis
-x-category: "Music"
-x-tier: 3
-x-tier-reason: bulk-registered-from-public-apis
+x-category: Music
+x-governance: MetaBrainz Foundation (501(c)(3) non-profit)
+x-license-data: CC0 (core) / CC-BY-NC-SA (supplemental)
+x-license-code: GPLv2 / LGPL / MIT (varies by repo)
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/musicbrainz/main/apis.yml
 tags:
   - Music
-  - Public APIs
+  - Metadata
+  - Encyclopedia
+  - Open Data
+  - Catalog
+  - Identifiers
+  - ISRC
+  - ISWC
+  - MBID
+  - DiscID
+  - Artists
+  - Releases
+  - Recordings
+  - Works
+  - Labels
+  - Cover Art
+  - Open Source
+  - Non Profit
 apis:
-  - name: MusicBrainz
-    description: "Music"
-    humanURL: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
-    baseURL: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+  - aid: musicbrainz:musicbrainz-web-service
+    name: MusicBrainz Web Service v2
+    description: The MusicBrainz Web Service v2 provides a free read-mostly REST API over the entire MusicBrainz catalog
+      of music metadata. It supports three primary access patterns - lookup (fetch one entity by MBID), browse (list
+      entities linked to a parent entity), and search (Lucene query across the indexed catalog) - across twelve core
+      entity types (artist, release, release-group, recording, work, label, place, area, event, instrument, series,
+      url, genre). Non-MBID lookups are available for ISRC (recordings), ISWC (works), disc IDs (releases), and URLs.
+      Authenticated submission endpoints (HTTP Basic or OAuth2) allow clients to submit tags, ratings, collection
+      membership, barcodes, and ISRCs. Responses are returned in XML (default) or JSON via the `fmt=json` parameter.
+      The service enforces a strict one-request-per-second-per-IP rate limit and requires a meaningful User-Agent
+      header on every request.
+    humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+    baseURL: https://musicbrainz.org/ws/2
     tags:
-      - Music
+      - Artists
+      - Releases
+      - Release Groups
+      - Recordings
+      - Works
+      - Labels
+      - Places
+      - Areas
+      - Events
+      - Instruments
+      - Series
+      - URLs
+      - Genres
+      - ISRC
+      - ISWC
+      - DiscID
+      - Browse
+      - Search
+      - Collections
+      - Submission
     properties:
       - type: Documentation
-        url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+        url: https://musicbrainz.org/doc/MusicBrainz_API
+      - type: OpenAPI
+        url: openapi/musicbrainz-web-service-openapi.yml
+      - type: GettingStarted
+        url: https://musicbrainz.org/doc/MusicBrainz_API
+      - type: Authentication
+        url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+      - type: RateLimits
+        url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+      - type: Search
+        url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+      - type: Examples
+        url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+      - type: Schema
+        url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+      - type: Identifiers
+        url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+      - type: JSONSchema
+        url: json-schema/musicbrainz-artist-schema.json
+      - type: JSONSchema
+        url: json-schema/musicbrainz-release-schema.json
+      - type: JSONSchema
+        url: json-schema/musicbrainz-recording-schema.json
+      - type: JSONSchema
+        url: json-schema/musicbrainz-work-schema.json
+      - type: JSONStructure
+        url: json-structure/musicbrainz-artist-structure.json
+      - type: JSONLD
+        url: json-ld/musicbrainz-context.jsonld
+      - type: SpectralRules
+        url: rules/musicbrainz-rules.yml
+      - type: Vocabulary
+        url: vocabulary/musicbrainz-vocabulary.yml
+      - type: Plans
+        url: plans/musicbrainz-plans-pricing.yml
+      - type: RateLimitsSpec
+        url: rate-limits/musicbrainz-rate-limits.yml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-artists.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-releases.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-recordings.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-works.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-labels.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-places.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-areas.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-events.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-instruments.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-series.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-identifiers.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-search.yaml
+      - type: NaftikoCapability
+        url: capabilities/musicbrainz-collections.yaml
+      - type: SDK
+        url: https://pypi.org/project/musicbrainzngs/
+        title: Python SDK (musicbrainzngs)
+      - type: SDK
+        url: https://www.npmjs.com/package/musicbrainz-api
+        title: Node.js SDK (musicbrainz-api)
+      - type: SDK
+        url: https://github.com/metabrainz/libmusicbrainz
+        title: C++ Client Library (libmusicbrainz)
+      - type: SDK
+        url: https://github.com/metabrainz/mbdata
+        title: Python SQLAlchemy Models (mbdata)
+      - type: SDK
+        url: https://github.com/metabrainz/mb-rngpy
+        title: Python RELAX NG Bindings (mb-rngpy)
+      - type: Schema
+        url: https://github.com/metabrainz/mmd-schema
+        title: MMD RELAX NG Schema
+    features:
+      - type: EntityLookup
+        description: Fetch any of twelve entity types (artist, release, release-group, recording, work, label, place,
+          area, event, instrument, series, url) by MBID with configurable sub-resource includes.
+      - type: BrowseRelationships
+        description: List all entities linked to a given parent entity (e.g. all releases by an artist, all recordings
+          on a release) with pagination.
+      - type: LuceneSearch
+        description: Full Lucene query syntax across all indexed entities with per-entity searchable fields, scoring,
+          and 100-result pages.
+      - type: IdentifierLookups
+        description: Direct lookups by industry identifiers - ISRC for recordings, ISWC for works, DiscID for releases,
+          and arbitrary URLs.
+      - type: RichRelationships
+        description: First-class typed relationships between entities (composer, lyricist, performer, member-of-band,
+          location-of-event, etc.) returned via `inc=*-rels` parameters.
+      - type: CommunityTagsAndRatings
+        description: Public folksonomy tags and aggregate 1-5 ratings on every entity, plus per-user tags and ratings
+          for authenticated users.
+      - type: UserCollections
+        description: Authenticated users can maintain typed collections (release, recording, work, etc.) and clients
+          can add or remove entities via PUT/DELETE.
+      - type: SubmissionEndpoints
+        description: Authenticated POST endpoints for submitting user tags, ratings, release barcodes, and recording
+          ISRCs without going through the editor UI.
+      - type: GenreTaxonomy
+        description: Dedicated `/genre/all` endpoint returning the full curated genre taxonomy in XML, JSON, or
+          plain text.
+      - type: FormatChoice
+        description: All responses available in MMD-2 XML (default, supports submission) or JSON (`fmt=json`,
+          read-only).
+    useCases:
+      - type: MusicLibraryTagging
+        description: Look up canonical artist, release, recording, and work metadata to tag local music libraries
+          (Picard, beets, MusicBee, Roon).
+      - type: DiscographyEnrichment
+        description: Pull complete discographies, credits, and relationships for an artist or label into a music
+          app, store, or knowledge graph.
+      - type: AcousticIdentification
+        description: Combine MusicBrainz IDs with AcoustID fingerprints to identify unknown audio files and
+          retrieve full metadata.
+      - type: CDIdentification
+        description: Use libdiscid + the `/discid` endpoint to identify physical CDs from their TOC and fetch
+          the corresponding release.
+      - type: ISRCAndISWCResolution
+        description: Resolve industry identifiers (ISRC, ISWC) to canonical recording and work metadata for
+          rights management and analytics workflows.
+      - type: KnowledgeGraphIngestion
+        description: Ingest MusicBrainz dumps or the live replication feed into a property graph or RDF store
+          for music research and recommendation systems.
+      - type: WikidataCrossReference
+        description: Bridge between MusicBrainz MBIDs and Wikidata QIDs / Wikipedia articles via stored URL
+          relationships.
+      - type: CoverArtRetrieval
+        description: Use MBIDs returned by the API to fetch high-resolution release artwork from the companion
+          Cover Art Archive.
+    integrations:
+      - name: MusicBrainz Picard
+        description: Official cross-platform music tagger built on the MusicBrainz API; canonical end-user client.
+        url: https://picard.musicbrainz.org/
+      - name: AcoustID
+        description: Open audio fingerprinting database that returns MBIDs for identified recordings.
+        url: https://acoustid.org/
+      - name: Cover Art Archive
+        description: Sister project that stores release artwork keyed by MusicBrainz release MBID.
+        url: https://coverartarchive.org/
+      - name: ListenBrainz
+        description: MetaBrainz sister project for listening history; uses MusicBrainz MBIDs as the canonical
+          identifier for tracks and artists.
+        url: https://listenbrainz.org/
+      - name: Wikidata
+        description: Bidirectional cross-references via the MusicBrainz MBID external identifier on Wikidata
+          and URL relationships in MusicBrainz.
+        url: https://www.wikidata.org/wiki/Property:P434
+      - name: Discogs
+        description: Cross-referenced via stored URL relationships; many MusicBrainz releases link to a Discogs
+          release.
+        url: https://www.discogs.com/
 common:
   - type: Website
-    url: https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2
+    url: https://musicbrainz.org/
+  - type: Foundation
+    url: https://metabrainz.org/
+  - type: GitHubOrganization
+    url: https://github.com/metabrainz
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Developer
+    url: https://musicbrainz.org/doc/Developer_Resources
+  - type: Forum
+    url: https://community.metabrainz.org/
+  - type: IRC
+    url: ircs://irc.libera.chat/#musicbrainz
+  - type: Blog
+    url: https://blog.metabrainz.org/
+  - type: TermsOfService
+    url: https://metabrainz.org/social-contract
+  - type: PrivacyPolicy
+    url: https://metabrainz.org/privacy
+  - type: License
+    url: https://musicbrainz.org/doc/About/Data_License
+  - type: Donate
+    url: https://metabrainz.org/donate
+  - type: Database
+    url: https://musicbrainz.org/doc/MusicBrainz_Database
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Download
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Download
+  - type: Replication
+    url: https://musicbrainz.org/doc/Replication_Mechanics
+  - type: Mirror
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Mirror
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: StyleGuide
+    url: https://musicbrainz.org/doc/Style
+  - type: API
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: GitHubRepository
+    url: https://github.com/metabrainz/musicbrainz-server
+    title: MusicBrainz Server (canonical implementation)
+  - type: GitHubRepository
+    url: https://github.com/metabrainz/musicbrainz-docker
+    title: MusicBrainz Docker (self-hosted replica)
+  - type: GitHubRepository
+    url: https://github.com/metabrainz/musicbrainz-docs
+    title: MusicBrainz Documentation Source
+  - type: GitHubRepository
+    url: https://github.com/metabrainz/mmd-schema
+    title: MMD RELAX NG Schema
+  - type: CLI
+    url: https://github.com/metabrainz/libdiscid
+    title: libdiscid (DiscID computation)
+  - type: Tools
+    url: https://picard.musicbrainz.org/
+    title: MusicBrainz Picard (Tagger)
+  - type: Tools
+    url: https://github.com/usercourses63/musicbrainz-mcp-server
+    title: MCP Server (community)
+  - type: SourceCode
+    url: https://github.com/metabrainz/musicbrainz-server
+  - type: Mobile
+    url: https://github.com/metabrainz/musicbrainz-android
+    title: MusicBrainz Android
+  - type: Mobile
+    url: https://github.com/metabrainz/musicbrainz-ios
+    title: MusicBrainz iOS
+  - type: SisterProject
+    url: https://listenbrainz.org/
+    title: ListenBrainz
+  - type: SisterProject
+    url: https://coverartarchive.org/
+    title: Cover Art Archive
+  - type: SisterProject
+    url: https://critiquebrainz.org/
+    title: CritiqueBrainz
+  - type: SisterProject
+    url: https://bookbrainz.org/
+    title: BookBrainz
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
 maintainers:

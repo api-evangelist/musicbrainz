@@ -1,0 +1,103 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: MusicBrainz
+providerId: musicbrainz
+created: '2026-05-29'
+modified: '2026-05-29'
+tags:
+  - Music
+  - Metadata
+  - Open Data
+  - Rate Limiting
+  - Etiquette
+  - Throttling
+description: >-
+  Machine-readable rate limit policy for the public MusicBrainz Web Service v2 at
+  https://musicbrainz.org/ws/2. MusicBrainz enforces a hard ceiling of one request per second per source
+  IP, regardless of authentication. There are no API keys, so the rate-limit subject is always the source
+  IP. Every request must include a meaningful User-Agent header identifying the application (and ideally
+  a contact URL or email); generic, empty, or library-default User-Agents are subject to outright IP
+  blocking. Commercial users with high volume are expected to replicate the database locally rather than
+  scale the public web service.
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 503
+  rateLimitedAlternate: 429
+  serviceUnavailable: 503
+limits:
+  - tier: public
+    name: Per-IP Rate Ceiling
+    scope: source-ip
+    metric: requests_per_second
+    limit: 1
+    burst: 1
+    timeFrame: second
+    applies:
+      - MusicBrainz Web Service v2
+  - tier: public
+    name: User-Agent Requirement
+    scope: source-ip
+    metric: meaningful_user_agent
+    limit: 1
+    timeFrame: instant
+    applies:
+      - MusicBrainz Web Service v2
+  - tier: supporter
+    name: Per-IP Rate Ceiling (Public WS)
+    scope: source-ip
+    metric: requests_per_second
+    limit: 1
+    burst: 1
+    timeFrame: second
+    applies:
+      - MusicBrainz Web Service v2
+  - tier: supporter
+    name: Live Data Feed (No Public WS Limit)
+    scope: contract
+    metric: replication_packets
+    limit: -1
+    timeFrame: hour
+    applies:
+      - Live Data Feed
+policies:
+  - name: One Request Per Second Per IP
+    description: >-
+      The canonical policy is "All users of the API must ensure that each of their client applications
+      never make more than ONE call per second." This is per source IP, not per application or per
+      authenticated user. Multiple apps sharing an IP must share the same 1 req/sec budget. Bursts above
+      1/sec are not tolerated.
+  - name: Meaningful User-Agent Required
+    description: >-
+      Every request must include a User-Agent that identifies the application, its version, and ideally
+      a contact URL or email. The recommended format is "AppName/Version ( contact )", e.g.
+      "MyTagger/1.2.3 ( https://example.com/contact )". Default library User-Agents (urllib, requests,
+      curl) are blocked.
+  - name: 503 With Retry-After
+    description: >-
+      When the rate limit is exceeded, the public web service returns HTTP 503 Service Unavailable with
+      a Retry-After header indicating how many seconds to wait before retrying. Some mirrors and reverse
+      proxies may return HTTP 429 instead. Clients should honour both.
+  - name: Backoff Strategy
+    description: >-
+      Clients should implement exponential backoff with jitter on any 5xx response, and should pause for
+      at least the Retry-After value before resuming. A persistent rate-limit violation may result in
+      temporary or permanent IP blocking.
+  - name: Replicate For High Volume
+    description: >-
+      Any caller whose traffic exceeds what the public web service comfortably serves at 1 req/sec is
+      expected to set up a local MusicBrainz replica using the Live Data Feed (free) or to negotiate
+      commercial replication access via the MetaBrainz Supporter programme.
+  - name: Cache Responses
+    description: >-
+      The canonical data changes slowly; responses include standard HTTP caching headers and clients are
+      expected to cache aggressively (especially MBID lookups, which are immutable references).
+  - name: No API Key
+    description: >-
+      The public web service does not require or accept an API key. Authentication via HTTP Basic or
+      OAuth 2.0 is only required for user-specific reads (private collections, user tags/ratings) and
+      for submission endpoints; it does not raise the rate ceiling.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

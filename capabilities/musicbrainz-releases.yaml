@@ -1,0 +1,189 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Releases
+  description: 'MusicBrainz Web Service v2 — Releases. 2 operations. Lead operation: Lookup Release By MBID. Self-contained
+    Naftiko capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Releases
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-releases
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Releases business capability. Self-contained, no shared references.
+    resources:
+    - name: release-mbid
+      path: /release/{mbid}
+      operations:
+      - name: lookupRelease
+        method: GET
+        description: Lookup Release By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mbid
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: release
+      path: /release
+      operations:
+      - name: browseOrSearchReleases
+        method: GET
+        description: Browse Or Search Releases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: area
+          in: query
+          type: string
+        - name: artist
+          in: query
+          type: string
+        - name: collection
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+        - name: recording
+          in: query
+          type: string
+        - name: release-group
+          in: query
+          type: string
+        - name: track
+          in: query
+          type: string
+        - name: track_artist
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-releases-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Releases. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/release/{mbid}
+      name: release-mbid
+      description: REST surface for release-mbid.
+      operations:
+      - method: GET
+        name: lookupRelease
+        description: Lookup Release By MBID
+        call: musicbrainz-releases.lookupRelease
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          mbid: rest.mbid
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/release
+      name: release
+      description: REST surface for release.
+      operations:
+      - method: GET
+        name: browseOrSearchReleases
+        description: Browse Or Search Releases
+        call: musicbrainz-releases.browseOrSearchReleases
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          area: rest.area
+          artist: rest.artist
+          collection: rest.collection
+          label: rest.label
+          recording: rest.recording
+          release-group: rest.release-group
+          track: rest.track
+          track_artist: rest.track_artist
+          limit: rest.limit
+          offset: rest.offset
+          inc: rest.inc
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-releases-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Releases. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: lookup-release
+      description: Lookup Release By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-releases.lookupRelease
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        mbid: tools.mbid
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: browse-or-search-releases
+      description: Browse Or Search Releases
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-releases.browseOrSearchReleases
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        area: tools.area
+        artist: tools.artist
+        collection: tools.collection
+        label: tools.label
+        recording: tools.recording
+        release-group: tools.release-group
+        track: tools.track
+        track_artist: tools.track_artist
+        limit: tools.limit
+        offset: tools.offset
+        inc: tools.inc
+        fmt: tools.fmt

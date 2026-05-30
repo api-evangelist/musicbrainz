@@ -1,0 +1,169 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Recordings
+  description: 'MusicBrainz Web Service v2 — Recordings. 2 operations. Lead operation: Lookup Recording By MBID. Self-contained
+    Naftiko capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Recordings
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-recordings
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Recordings business capability. Self-contained, no shared references.
+    resources:
+    - name: recording-mbid
+      path: /recording/{mbid}
+      operations:
+      - name: lookupRecording
+        method: GET
+        description: Lookup Recording By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mbid
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: recording
+      path: /recording
+      operations:
+      - name: browseOrSearchRecordings
+        method: GET
+        description: Browse Or Search Recordings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: artist
+          in: query
+          type: string
+        - name: collection
+          in: query
+          type: string
+        - name: release
+          in: query
+          type: string
+        - name: work
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-recordings-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Recordings. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/recording/{mbid}
+      name: recording-mbid
+      description: REST surface for recording-mbid.
+      operations:
+      - method: GET
+        name: lookupRecording
+        description: Lookup Recording By MBID
+        call: musicbrainz-recordings.lookupRecording
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          mbid: rest.mbid
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/recording
+      name: recording
+      description: REST surface for recording.
+      operations:
+      - method: GET
+        name: browseOrSearchRecordings
+        description: Browse Or Search Recordings
+        call: musicbrainz-recordings.browseOrSearchRecordings
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          artist: rest.artist
+          collection: rest.collection
+          release: rest.release
+          work: rest.work
+          limit: rest.limit
+          offset: rest.offset
+          inc: rest.inc
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-recordings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Recordings. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: lookup-recording
+      description: Lookup Recording By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-recordings.lookupRecording
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        mbid: tools.mbid
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: browse-or-search-recordings
+      description: Browse Or Search Recordings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-recordings.browseOrSearchRecordings
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        artist: tools.artist
+        collection: tools.collection
+        release: tools.release
+        work: tools.work
+        limit: tools.limit
+        offset: tools.offset
+        inc: tools.inc
+        fmt: tools.fmt

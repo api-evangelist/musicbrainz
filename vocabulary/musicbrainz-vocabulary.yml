@@ -1,0 +1,277 @@
+vocabulary:
+  name: MusicBrainz Music Metadata Vocabulary
+  description: >-
+    Domain vocabulary for the MusicBrainz music encyclopedia, covering the canonical entity model
+    (artist, release, recording, work, label, place, area, event, instrument, series, URL, genre),
+    industry identifiers (MBID, ISRC, ISWC, DiscID, label code, barcode), relationships, and
+    community contribution concepts (tags, ratings, collections, editor).
+  version: "1.0.0"
+  created: "2026-05-29"
+  modified: "2026-05-29"
+  provider: MusicBrainz
+  domain: Music Metadata / Open Encyclopedia
+terms:
+  - term: MBID
+    definition: >-
+      MusicBrainz Identifier - a UUID v4 that uniquely and persistently identifies any MusicBrainz entity
+      (artist, release, recording, work, etc.). MBIDs are the canonical primary key across the API.
+    tags: [Identity, Reference]
+    aliases: [MusicBrainz ID, GID]
+    examples: ["5b11f4ce-a62d-471e-81fc-a69a8278c7da"]
+  - term: ISRC
+    definition: >-
+      International Standard Recording Code - a 12-character industry identifier for sound and music-video
+      recordings. MusicBrainz stores multiple ISRCs per recording and exposes a dedicated `/isrc/{isrc}` lookup.
+    tags: [Identifier, Industry Standard]
+    examples: ["USGF19102751"]
+  - term: ISWC
+    definition: >-
+      International Standard Musical Work Code - an industry identifier for musical compositions (works),
+      not recordings. Exposed via `/iswc/{iswc}` lookup.
+    tags: [Identifier, Industry Standard]
+    examples: ["T-101.690.320-9"]
+  - term: DiscID
+    definition: >-
+      A 28-character identifier computed from a CD's table of contents (TOC), used to identify physical
+      audio CDs without needing the CD's metadata. Computed by libdiscid and resolved via `/discid/{discid}`.
+    tags: [Identifier, Physical Media]
+    aliases: [Disc ID, MusicBrainz Disc ID]
+  - term: Barcode
+    definition: >-
+      A UPC/EAN/GTIN code printed on the release packaging, used for retail identification. Stored
+      per-release and submittable via the barcode submission endpoint.
+    tags: [Identifier, Retail]
+  - term: Label Code
+    definition: >-
+      A numeric code assigned by the IFPI to record labels for industry-wide identification. Stored
+      without the "LC" prefix.
+    tags: [Identifier, Industry Standard]
+  - term: ISNI
+    definition: >-
+      International Standard Name Identifier - an ISO standard for uniquely identifying public identities
+      of contributors to creative works. Stored on artists and labels.
+    tags: [Identifier, Industry Standard]
+  - term: IPI
+    definition: >-
+      Interested Parties Information code - a CISAC identifier for songwriters, composers, and publishers.
+      Stored on artists and labels.
+    tags: [Identifier, Rights]
+  - term: Artist
+    definition: >-
+      A person, group, orchestra, choir, character, or other artistic entity. Artists have a type, an
+      optional gender (for persons), an associated area, a life span, and aliases.
+    tags: [Entity, Creator]
+    schema_type: MusicGroup
+  - term: Release
+    definition: >-
+      A specific issue of a release group - a particular pressing, country release, or edition.
+      Releases have packaging, a barcode, a label, a country, a date, language, and media (discs/sides).
+    tags: [Entity, Content]
+    schema_type: MusicAlbum
+  - term: Release Group
+    definition: >-
+      A logical grouping of releases that fans would consider a single album. Holds the primary type
+      (Album, Single, EP, Broadcast, Other), secondary types (Compilation, Live, Soundtrack, etc.),
+      and a first-release date.
+    tags: [Entity, Content]
+  - term: Recording
+    definition: >-
+      A distinct audio capture of a performance. A single recording can appear on many releases as
+      tracks. Carries ISRCs.
+    tags: [Entity, Audio]
+    schema_type: MusicRecording
+  - term: Work
+    definition: >-
+      An abstract musical composition - the song/composition itself, independent of any recording or
+      performance. Carries ISWCs and links to composers, lyricists, and arrangers.
+    tags: [Entity, Composition]
+    schema_type: MusicComposition
+  - term: Track
+    definition: >-
+      A specific appearance of a recording on a release - the per-release ordering, position, number,
+      and title. Tracks are not standalone MBIDs in the same way other entities are.
+    tags: [Entity, Reference]
+  - term: Label
+    definition: >-
+      A record label or imprint - the company responsible for issuing a release. Labels have a country,
+      a label code, a type (Imprint, Production, Distributor, etc.), and a life span.
+    tags: [Entity, Business]
+    schema_type: Organization
+  - term: Place
+    definition: >-
+      A physical location relevant to music - a studio, venue, stadium, or pressing plant. Places
+      have an address, geographic coordinates, and an associated area.
+    tags: [Entity, Location]
+    schema_type: Place
+  - term: Area
+    definition: >-
+      A geographic area - country, subdivision, county, city, district, or island. Areas form a
+      hierarchy and use ISO 3166-1/-2/-3 codes when applicable.
+    tags: [Entity, Geography]
+    schema_type: AdministrativeArea
+  - term: Event
+    definition: >-
+      An organized happening at which artists performed - a concert, festival, launch event, ceremony,
+      or convention. Events have a date/time, a setlist, and link to artists, places, and series.
+    tags: [Entity, Performance]
+    schema_type: Event
+  - term: Instrument
+    definition: >-
+      A musical instrument or family of instruments used in recordings. Instruments have a type
+      (Wind, String, Percussion, Electronic, Family, Ensemble, Other) and a free-text description.
+    tags: [Entity, Equipment]
+  - term: Series
+    definition: >-
+      An ordered grouping of related entities - a tour series, award ceremony series, recording series,
+      release-group series, etc.
+    tags: [Entity, Grouping]
+  - term: URL
+    definition: >-
+      A URL linked to one or more MusicBrainz entities. URLs are first-class entities so the same
+      resource (e.g. an artist's homepage) can be looked up directly via `/url?resource=...`.
+    tags: [Entity, Reference]
+  - term: Genre
+    definition: >-
+      A curated music genre from the MusicBrainz genre taxonomy. Genres are a special tag with an MBID,
+      enumerable via `/genre/all`.
+    tags: [Taxonomy, Classification]
+  - term: Relationship
+    definition: >-
+      A first-class typed link between two MusicBrainz entities (e.g. composer, lyricist, performer,
+      member-of-band, location-of-event, sample-of). Returned via `inc=*-rels` parameters with a
+      direction and optional attributes.
+    tags: [Relation, Graph]
+    aliases: [Relation, AR]
+  - term: Disambiguation
+    definition: >-
+      A short human-readable comment that distinguishes an entity from others with the same name
+      (e.g. "90s US grunge band" for Nirvana).
+    tags: [Metadata, Identity]
+  - term: Artist Credit
+    definition: >-
+      An ordered list of artists with optional join phrases that produces a single human-readable
+      attribution string (e.g. "Jay-Z feat. Linkin Park"). Used on releases, recordings, tracks,
+      and release groups.
+    tags: [Attribution, Credit]
+  - term: Tag
+    definition: >-
+      A community folksonomy term applied to any entity. Tags have an aggregate count from upvotes
+      and can be filtered by user. Submittable via the `/tag` endpoint while authenticated.
+    tags: [Community, Folksonomy]
+  - term: Rating
+    definition: >-
+      A community 1-5 star aggregate score on any entity, plus a vote count. Per-user ratings are
+      available to authenticated callers via `inc=user-ratings`.
+    tags: [Community, Quality]
+  - term: Collection
+    definition: >-
+      A personal or shared list of MusicBrainz entities owned by an editor. Collections are typed
+      (release collection, work collection, etc.) and can be managed via PUT/DELETE.
+    tags: [User, Curation]
+  - term: Editor
+    definition: >-
+      A registered MusicBrainz user who can submit edits, tags, ratings, and maintain collections.
+      Editors are referenced by username (not MBID) in collection lookups.
+    tags: [User, Contributor]
+    aliases: [User, Contributor]
+  - term: Life Span
+    definition: >-
+      A begin/end date pair plus an `ended` boolean attached to artists, labels, places, and events.
+      Dates may be year, year-month, or full ISO date precision.
+    tags: [Time, Metadata]
+  - term: Cover Art Archive
+    definition: >-
+      The MetaBrainz sister project that stores release artwork, keyed by release MBID. Releases
+      include a `cover-art-archive` block summarizing artwork availability.
+    tags: [Sister Project, Artwork]
+    aliases: [CAA]
+  - term: MMD-2 XML
+    definition: >-
+      The MusicBrainz XML Metadata (MMD) schema, version 2, defined in mmd-schema/mmd-2.0/musicbrainz.rng.
+      The default response format for the Web Service v2.
+    tags: [Format, Schema]
+  - term: Live Data Feed
+    definition: >-
+      Hourly replication packets published to mirrors of the MusicBrainz database so any consumer can
+      keep a local replica in sync with the central database.
+    tags: [Replication, Bulk Data]
+  - term: User-Agent Requirement
+    definition: >-
+      Every Web Service v2 request must include a meaningful User-Agent identifying the application
+      (and ideally a contact). Generic or empty User-Agents are subject to IP blocking.
+    tags: [Policy, Etiquette]
+  - term: Rate Limit
+    definition: >-
+      The MusicBrainz Web Service v2 enforces a strict ceiling of one HTTP request per second per
+      source IP. Exceeding it returns HTTP 503 (or 429 on some mirrors) with a Retry-After hint.
+    tags: [Policy, Throttling]
+  - term: NGS
+    definition: >-
+      Next-Generation Schema - the redesigned MusicBrainz database introduced in 2011 that established
+      the release/release-group/recording/work split used by the current API.
+    tags: [Schema, History]
+classifications:
+  core_entities:
+    - artist
+    - release
+    - release-group
+    - recording
+    - work
+    - label
+    - place
+    - area
+    - event
+    - instrument
+    - series
+    - url
+    - genre
+  artist_types:
+    - Person
+    - Group
+    - Orchestra
+    - Choir
+    - Character
+    - Other
+  release_statuses:
+    - Official
+    - Promotion
+    - Bootleg
+    - Pseudo-Release
+    - Withdrawn
+    - Cancelled
+  primary_release_group_types:
+    - Album
+    - Single
+    - EP
+    - Broadcast
+    - Other
+  secondary_release_group_types:
+    - Compilation
+    - Soundtrack
+    - Spokenword
+    - Interview
+    - Audiobook
+    - Audio drama
+    - Live
+    - Remix
+    - DJ-mix
+    - Mixtape/Street
+    - Demo
+    - Field recording
+  identifiers:
+    - MBID
+    - ISRC
+    - ISWC
+    - DiscID
+    - Barcode
+    - Label Code
+    - ISNI
+    - IPI
+    - ASIN
+  authentication:
+    - HTTPBasic
+    - OAuth2
+  response_formats:
+    - xml
+    - json
+    - txt

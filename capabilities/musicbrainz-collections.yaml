@@ -1,0 +1,398 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Collections And Submission
+  description: 'MusicBrainz Web Service v2 — Collections And Submission. 8 operations. Lead operation: List User Collections.
+    Self-contained Naftiko capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Collections And Submission
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-collections
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Collections And Submission business capability. Self-contained, no shared references.
+    resources:
+    - name: collection
+      path: /collection
+      operations:
+      - name: listUserCollections
+        method: GET
+        description: List User Collections
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: editor
+          in: query
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: collection-collection-mbid
+      path: /collection/{collection_mbid}
+      operations:
+      - name: lookupCollection
+        method: GET
+        description: Lookup Collection By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: collection_mbid
+          in: path
+          type: string
+          required: true
+        - name: fmt
+          in: query
+          type: string
+    - name: collection-collection-mbid-entity-type
+      path: /collection/{collection_mbid}/{entity_type}
+      operations:
+      - name: addEntitiesToCollection
+        method: PUT
+        description: Add Entities To Collection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: collection_mbid
+          in: path
+          type: string
+          required: true
+        - name: entity_type
+          in: path
+          type: string
+          required: true
+        - name: client
+          in: query
+          type: string
+          required: true
+      - name: removeEntitiesFromCollection
+        method: DELETE
+        description: Remove Entities From Collection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: collection_mbid
+          in: path
+          type: string
+          required: true
+        - name: entity_type
+          in: path
+          type: string
+          required: true
+        - name: client
+          in: query
+          type: string
+          required: true
+    - name: tag
+      path: /tag
+      operations:
+      - name: submitTags
+        method: POST
+        description: Submit User Tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: client
+          in: query
+          type: string
+          required: true
+    - name: rating
+      path: /rating
+      operations:
+      - name: submitRatings
+        method: POST
+        description: Submit User Ratings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: client
+          in: query
+          type: string
+          required: true
+    - name: release
+      path: /release
+      operations:
+      - name: submitBarcodes
+        method: POST
+        description: Submit Release Barcodes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: client
+          in: query
+          type: string
+          required: true
+    - name: recording
+      path: /recording
+      operations:
+      - name: submitISRCs
+        method: POST
+        description: Submit Recording ISRCs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: client
+          in: query
+          type: string
+          required: true
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-collections-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Collections And Submission. One Spectral-compliant resource
+      per consumed operation, prefixed with /ws/2.
+    resources:
+    - path: /ws/2/collection
+      name: collection
+      description: REST surface for collection.
+      operations:
+      - method: GET
+        name: listUserCollections
+        description: List User Collections
+        call: musicbrainz-collections.listUserCollections
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          editor: rest.editor
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/collection/{collection-mbid}
+      name: collection-collection-mbid
+      description: REST surface for collection-collection-mbid.
+      operations:
+      - method: GET
+        name: lookupCollection
+        description: Lookup Collection By MBID
+        call: musicbrainz-collections.lookupCollection
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          collection_mbid: rest.collection_mbid
+          fmt: rest.fmt
+    - path: /ws/2/collection/{collection-mbid}/{entity-type}
+      name: collection-collection-mbid-entity-type
+      description: REST surface for collection-collection-mbid-entity-type.
+      operations:
+      - method: PUT
+        name: addEntitiesToCollection
+        description: Add Entities To Collection
+        call: musicbrainz-collections.addEntitiesToCollection
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          collection_mbid: rest.collection_mbid
+          entity_type: rest.entity_type
+          client: rest.client
+      - method: DELETE
+        name: removeEntitiesFromCollection
+        description: Remove Entities From Collection
+        call: musicbrainz-collections.removeEntitiesFromCollection
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          collection_mbid: rest.collection_mbid
+          entity_type: rest.entity_type
+          client: rest.client
+    - path: /ws/2/tag
+      name: tag
+      description: REST surface for tag.
+      operations:
+      - method: POST
+        name: submitTags
+        description: Submit User Tags
+        call: musicbrainz-collections.submitTags
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          client: rest.client
+    - path: /ws/2/rating
+      name: rating
+      description: REST surface for rating.
+      operations:
+      - method: POST
+        name: submitRatings
+        description: Submit User Ratings
+        call: musicbrainz-collections.submitRatings
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          client: rest.client
+    - path: /ws/2/release
+      name: release
+      description: REST surface for release.
+      operations:
+      - method: POST
+        name: submitBarcodes
+        description: Submit Release Barcodes
+        call: musicbrainz-collections.submitBarcodes
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          client: rest.client
+    - path: /ws/2/recording
+      name: recording
+      description: REST surface for recording.
+      operations:
+      - method: POST
+        name: submitISRCs
+        description: Submit Recording ISRCs
+        call: musicbrainz-collections.submitISRCs
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          client: rest.client
+  - type: mcp
+    namespace: musicbrainz-collections-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Collections And Submission. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-user-collections
+      description: List User Collections
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.listUserCollections
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        editor: tools.editor
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: lookup-collection
+      description: Lookup Collection By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.lookupCollection
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        collection_mbid: tools.collection_mbid
+        fmt: tools.fmt
+    - name: add-entities-to-collection
+      description: Add Entities To Collection
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.addEntitiesToCollection
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        collection_mbid: tools.collection_mbid
+        entity_type: tools.entity_type
+        client: tools.client
+    - name: remove-entities-from-collection
+      description: Remove Entities From Collection
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: musicbrainz-collections.removeEntitiesFromCollection
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        collection_mbid: tools.collection_mbid
+        entity_type: tools.entity_type
+        client: tools.client
+    - name: submit-tags
+      description: Submit User Tags
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: musicbrainz-collections.submitTags
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        client: tools.client
+    - name: submit-ratings
+      description: Submit User Ratings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.submitRatings
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        client: tools.client
+    - name: submit-barcodes
+      description: Submit Release Barcodes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.submitBarcodes
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        client: tools.client
+    - name: submit-isrcs
+      description: Submit Recording ISRCs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: musicbrainz-collections.submitISRCs
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        client: tools.client

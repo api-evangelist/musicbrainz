@@ -1,0 +1,149 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Areas
+  description: 'MusicBrainz Web Service v2 — Areas. 2 operations. Lead operation: Lookup Area By MBID. Self-contained Naftiko
+    capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Areas
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-areas
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Areas business capability. Self-contained, no shared references.
+    resources:
+    - name: area-mbid
+      path: /area/{mbid}
+      operations:
+      - name: lookupArea
+        method: GET
+        description: Lookup Area By MBID
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mbid
+          in: path
+          type: string
+          required: true
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    - name: area
+      path: /area
+      operations:
+      - name: browseOrSearchAreas
+        method: GET
+        description: Browse Or Search Areas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: inc
+          in: query
+          type: string
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-areas-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Areas. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/area/{mbid}
+      name: area-mbid
+      description: REST surface for area-mbid.
+      operations:
+      - method: GET
+        name: lookupArea
+        description: Lookup Area By MBID
+        call: musicbrainz-areas.lookupArea
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          mbid: rest.mbid
+          inc: rest.inc
+          fmt: rest.fmt
+    - path: /ws/2/area
+      name: area
+      description: REST surface for area.
+      operations:
+      - method: GET
+        name: browseOrSearchAreas
+        description: Browse Or Search Areas
+        call: musicbrainz-areas.browseOrSearchAreas
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          inc: rest.inc
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-areas-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Areas. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: lookup-area
+      description: Lookup Area By MBID
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-areas.lookupArea
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        mbid: tools.mbid
+        inc: tools.inc
+        fmt: tools.fmt
+    - name: browse-or-search-areas
+      description: Browse Or Search Areas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-areas.browseOrSearchAreas
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        inc: tools.inc
+        fmt: tools.fmt

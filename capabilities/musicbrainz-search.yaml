@@ -1,0 +1,759 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: MusicBrainz Web Service v2 — Search
+  description: 'MusicBrainz Web Service v2 — Search. 12 operations. Lead operation: Search Artists By Lucene Query. Self-contained
+    Naftiko capability covering one MusicBrainz business surface.'
+  tags:
+  - MusicBrainz
+  - Search
+  created: '2026-05-29'
+  modified: '2026-05-29'
+binds:
+- namespace: env
+  keys:
+    MUSICBRAINZ_USER_AGENT: MUSICBRAINZ_USER_AGENT
+capability:
+  consumes:
+  - type: http
+    namespace: musicbrainz-search
+    baseUri: https://musicbrainz.org/ws/2
+    description: MusicBrainz Web Service v2 — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: artist
+      path: /artist
+      operations:
+      - name: searchArtists
+        method: GET
+        description: Search Artists By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: release
+      path: /release
+      operations:
+      - name: searchReleases
+        method: GET
+        description: Search Releases By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: release-group
+      path: /release-group
+      operations:
+      - name: searchReleasegroups
+        method: GET
+        description: Search Release Groups By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: recording
+      path: /recording
+      operations:
+      - name: searchRecordings
+        method: GET
+        description: Search Recordings By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: work
+      path: /work
+      operations:
+      - name: searchWorks
+        method: GET
+        description: Search Works By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: label
+      path: /label
+      operations:
+      - name: searchLabels
+        method: GET
+        description: Search Labels By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: place
+      path: /place
+      operations:
+      - name: searchPlaces
+        method: GET
+        description: Search Places By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: area
+      path: /area
+      operations:
+      - name: searchAreas
+        method: GET
+        description: Search Areas By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: event
+      path: /event
+      operations:
+      - name: searchEvents
+        method: GET
+        description: Search Events By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: instrument
+      path: /instrument
+      operations:
+      - name: searchInstruments
+        method: GET
+        description: Search Instruments By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: series
+      path: /series
+      operations:
+      - name: searchSeries
+        method: GET
+        description: Search Series By Lucene Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+        - name: dismax
+          in: query
+          type: boolean
+    - name: genre-all
+      path: /genre/all
+      operations:
+      - name: listAllGenres
+        method: GET
+        description: List All Genres
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: offset
+          in: query
+          type: integer
+        - name: fmt
+          in: query
+          type: string
+    headers:
+      User-Agent: '{{env.MUSICBRAINZ_USER_AGENT}}'
+      Accept: application/json
+  exposes:
+  - type: rest
+    namespace: musicbrainz-search-rest
+    port: 8080
+    description: REST adapter for MusicBrainz Web Service v2 — Search. One Spectral-compliant resource per consumed operation,
+      prefixed with /ws/2.
+    resources:
+    - path: /ws/2/artist
+      name: artist
+      description: REST surface for artist.
+      operations:
+      - method: GET
+        name: searchArtists
+        description: Search Artists By Lucene Query
+        call: musicbrainz-search.searchArtists
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/release
+      name: release
+      description: REST surface for release.
+      operations:
+      - method: GET
+        name: searchReleases
+        description: Search Releases By Lucene Query
+        call: musicbrainz-search.searchReleases
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/release-group
+      name: release-group
+      description: REST surface for release-group.
+      operations:
+      - method: GET
+        name: searchReleasegroups
+        description: Search Release Groups By Lucene Query
+        call: musicbrainz-search.searchReleasegroups
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/recording
+      name: recording
+      description: REST surface for recording.
+      operations:
+      - method: GET
+        name: searchRecordings
+        description: Search Recordings By Lucene Query
+        call: musicbrainz-search.searchRecordings
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/work
+      name: work
+      description: REST surface for work.
+      operations:
+      - method: GET
+        name: searchWorks
+        description: Search Works By Lucene Query
+        call: musicbrainz-search.searchWorks
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/label
+      name: label
+      description: REST surface for label.
+      operations:
+      - method: GET
+        name: searchLabels
+        description: Search Labels By Lucene Query
+        call: musicbrainz-search.searchLabels
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/place
+      name: place
+      description: REST surface for place.
+      operations:
+      - method: GET
+        name: searchPlaces
+        description: Search Places By Lucene Query
+        call: musicbrainz-search.searchPlaces
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/area
+      name: area
+      description: REST surface for area.
+      operations:
+      - method: GET
+        name: searchAreas
+        description: Search Areas By Lucene Query
+        call: musicbrainz-search.searchAreas
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/event
+      name: event
+      description: REST surface for event.
+      operations:
+      - method: GET
+        name: searchEvents
+        description: Search Events By Lucene Query
+        call: musicbrainz-search.searchEvents
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/instrument
+      name: instrument
+      description: REST surface for instrument.
+      operations:
+      - method: GET
+        name: searchInstruments
+        description: Search Instruments By Lucene Query
+        call: musicbrainz-search.searchInstruments
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/series
+      name: series
+      description: REST surface for series.
+      operations:
+      - method: GET
+        name: searchSeries
+        description: Search Series By Lucene Query
+        call: musicbrainz-search.searchSeries
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          query: rest.query
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+          dismax: rest.dismax
+    - path: /ws/2/genre/all
+      name: genre-all
+      description: REST surface for genre-all.
+      operations:
+      - method: GET
+        name: listAllGenres
+        description: List All Genres
+        call: musicbrainz-search.listAllGenres
+        outputParameters:
+        - type: object
+          mapping: $.
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          fmt: rest.fmt
+  - type: mcp
+    namespace: musicbrainz-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for MusicBrainz Web Service v2 — Search. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: search-artist
+      description: Search Artists By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchArtists
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-release
+      description: Search Releases By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchReleases
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-release-group
+      description: Search Release Groups By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchReleasegroups
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-recording
+      description: Search Recordings By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchRecordings
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-work
+      description: Search Works By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchWorks
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-label
+      description: Search Labels By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchLabels
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-place
+      description: Search Places By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchPlaces
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-area
+      description: Search Areas By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchAreas
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-event
+      description: Search Events By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchEvents
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-instrument
+      description: Search Instruments By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchInstruments
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: search-series
+      description: Search Series By Lucene Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.searchSeries
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        query: tools.query
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
+        dismax: tools.dismax
+    - name: list-all-genres
+      description: List All Genres
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: musicbrainz-search.listAllGenres
+      outputParameters:
+      - type: object
+        mapping: $.
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        fmt: tools.fmt
