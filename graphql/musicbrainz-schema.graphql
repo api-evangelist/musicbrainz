@@ -1,0 +1,989 @@
+"""
+MusicBrainz GraphQL Schema
+Conceptual schema derived from the MusicBrainz REST API v2.
+MusicBrainz is an open music encyclopedia operated by the MetaBrainz Foundation.
+REST API: https://musicbrainz.org/ws/2/
+Documentation: https://musicbrainz.org/doc/MusicBrainz_API
+"""
+
+schema {
+  query: Query
+}
+
+# ---------------------------------------------------------------------------
+# Root Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  """Look up an Artist by MusicBrainz ID (MBID)."""
+  artist(mbid: ID!): Artist
+
+  """Search artists by name or Lucene query."""
+  searchArtists(query: String!, limit: Int, offset: Int): ArtistSearchResult
+
+  """Look up a Release by MBID."""
+  release(mbid: ID!): Release
+
+  """Search releases."""
+  searchReleases(query: String!, limit: Int, offset: Int): ReleaseSearchResult
+
+  """Look up a ReleaseGroup by MBID."""
+  releaseGroup(mbid: ID!): ReleaseGroup
+
+  """Search release groups."""
+  searchReleaseGroups(query: String!, limit: Int, offset: Int): ReleaseGroupSearchResult
+
+  """Look up a Recording by MBID."""
+  recording(mbid: ID!): Recording
+
+  """Search recordings."""
+  searchRecordings(query: String!, limit: Int, offset: Int): RecordingSearchResult
+
+  """Look up a Work by MBID."""
+  work(mbid: ID!): Work
+
+  """Search works."""
+  searchWorks(query: String!, limit: Int, offset: Int): WorkSearchResult
+
+  """Look up a Label by MBID."""
+  label(mbid: ID!): Label
+
+  """Search labels."""
+  searchLabels(query: String!, limit: Int, offset: Int): LabelSearchResult
+
+  """Look up a Place by MBID."""
+  place(mbid: ID!): Place
+
+  """Search places."""
+  searchPlaces(query: String!, limit: Int, offset: Int): PlaceSearchResult
+
+  """Look up an Area by MBID."""
+  area(mbid: ID!): Area
+
+  """Search areas."""
+  searchAreas(query: String!, limit: Int, offset: Int): AreaSearchResult
+
+  """Look up an Event by MBID."""
+  event(mbid: ID!): Event
+
+  """Search events."""
+  searchEvents(query: String!, limit: Int, offset: Int): EventSearchResult
+
+  """Look up an Instrument by MBID."""
+  instrument(mbid: ID!): Instrument
+
+  """Search instruments."""
+  searchInstruments(query: String!, limit: Int, offset: Int): InstrumentSearchResult
+
+  """Look up a Series by MBID."""
+  series(mbid: ID!): Series
+
+  """Search series."""
+  searchSeries(query: String!, limit: Int, offset: Int): SeriesSearchResult
+
+  """Look up a URL entity by MBID."""
+  url(mbid: ID!): URL
+
+  """Fetch the full genre taxonomy."""
+  genres(limit: Int, offset: Int): GenreConnection
+
+  """Look up a Genre by MBID."""
+  genre(mbid: ID!): Genre
+
+  """Look up recordings by ISRC."""
+  lookupByISRC(isrc: String!): [Recording]
+
+  """Look up works by ISWC."""
+  lookupByISWC(iswc: String!): [Work]
+
+  """Look up releases by DiscID."""
+  lookupByDiscID(discid: String!): [Release]
+}
+
+# ---------------------------------------------------------------------------
+# Scalar types
+# ---------------------------------------------------------------------------
+
+"""ISO 8601 date string (YYYY, YYYY-MM, or YYYY-MM-DD)."""
+scalar Date
+
+"""A MusicBrainz Identifier (UUID v4)."""
+scalar MBID
+
+# ---------------------------------------------------------------------------
+# Common / shared interfaces and types
+# ---------------------------------------------------------------------------
+
+"""Any entity that carries a MusicBrainz MBID."""
+interface Entity {
+  mbid: MBID!
+}
+
+"""An entity that can have community tags and ratings."""
+interface Annotatable {
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+}
+
+"""Typed alias for an artist."""
+type ArtistCredit {
+  artist: Artist
+  name: String
+  joinPhrase: String
+}
+
+"""A folksonomy tag attached to an entity."""
+type Tag {
+  name: String!
+  count: Int
+}
+
+"""Aggregate community rating for an entity."""
+type Rating {
+  value: Float
+  votesCount: Int
+}
+
+"""A date range with optional begin and end dates."""
+type LifeSpan {
+  begin: Date
+  end: Date
+  ended: Boolean
+}
+
+"""Coordinates for geographic entities."""
+type Coordinates {
+  latitude: Float
+  longitude: Float
+}
+
+"""An alias or alternative name for an entity."""
+type Alias {
+  name: String!
+  sortName: String
+  locale: String
+  type: String
+  typeId: MBID
+  primary: Boolean
+  beginDate: Date
+  endDate: Date
+}
+
+"""An external identifier linked to an entity."""
+type ExternalLink {
+  url: String!
+  type: String
+  typeId: MBID
+}
+
+"""An ISO 3166 country code."""
+type Country {
+  code: String!
+  name: String
+}
+
+"""A release-to-label pairing with catalog number."""
+type ReleaseLabel {
+  label: Label
+  catalogNumber: String
+}
+
+"""A medium (disc or side) within a release."""
+type Medium {
+  position: Int
+  title: String
+  format: String
+  formatId: MBID
+  discCount: Int
+  trackCount: Int
+  tracks: [Track]
+}
+
+"""A track on a medium."""
+type Track {
+  mbid: MBID
+  position: Int
+  number: String
+  title: String
+  length: Int
+  artistCredit: [ArtistCredit]
+  recording: Recording
+}
+
+"""A CD table-of-contents disc entry."""
+type Disc {
+  discId: String!
+  sectors: Int
+  offsetCount: Int
+  offsets: [Int]
+  releases: [Release]
+}
+
+"""An ISRC (International Standard Recording Code)."""
+type ISRC {
+  isrc: String!
+  recordings: [Recording]
+}
+
+"""An ISWC (International Standard Musical Work Code)."""
+type ISWC {
+  iswc: String!
+  works: [Work]
+}
+
+"""A typed relationship between two MusicBrainz entities."""
+type Relationship {
+  type: String!
+  typeId: MBID
+  direction: RelationshipDirection
+  targetType: String
+  begin: Date
+  end: Date
+  ended: Boolean
+  attributes: [RelationshipAttribute]
+  target: RelationshipTarget
+  sourceCredit: String
+  targetCredit: String
+  orderingKey: Int
+}
+
+"""Direction of a relationship."""
+enum RelationshipDirection {
+  FORWARD
+  BACKWARD
+}
+
+"""An attribute that qualifies a relationship (e.g. "additional", "live")."""
+type RelationshipAttribute {
+  type: String!
+  typeId: MBID
+  value: String
+  valueId: MBID
+}
+
+"""Union of all entity types that can be relationship targets."""
+union RelationshipTarget =
+    Artist
+  | Release
+  | ReleaseGroup
+  | Recording
+  | Work
+  | Label
+  | Place
+  | Area
+  | Event
+  | Instrument
+  | Series
+  | URL
+
+# ---------------------------------------------------------------------------
+# Artist
+# ---------------------------------------------------------------------------
+
+"""
+An artist is generally a musician (or a group of musicians), but can also be
+a producer, lyricist, or other music professional.
+"""
+type Artist implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  sortName: String
+  disambiguation: String
+  type: ArtistType
+  typeId: MBID
+  gender: Gender
+  genderId: MBID
+  country: String
+  area: Area
+  beginArea: Area
+  endArea: Area
+  lifeSpan: LifeSpan
+  isnis: [String]
+  ipis: [String]
+  aliases: [Alias]
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  releases(limit: Int, offset: Int, type: [ReleaseType], status: [ReleaseStatus]): ReleaseConnection
+  releaseGroups(limit: Int, offset: Int, type: [ReleaseGroupType]): ReleaseGroupConnection
+  recordings(limit: Int, offset: Int): RecordingConnection
+  works(limit: Int, offset: Int): WorkConnection
+}
+
+"""The classification of an artist entity."""
+enum ArtistType {
+  PERSON
+  GROUP
+  ORCHESTRA
+  CHOIR
+  CHARACTER
+  OTHER
+}
+
+"""Gender values used for persons."""
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  NOT_APPLICABLE
+  OTHER
+}
+
+# ---------------------------------------------------------------------------
+# Release Group
+# ---------------------------------------------------------------------------
+
+"""
+A release group groups several different releases into a single logical entity,
+representing the overall concept of a particular album, single, or other release.
+"""
+type ReleaseGroup implements Entity & Annotatable {
+  mbid: MBID!
+  title: String!
+  disambiguation: String
+  firstReleaseDate: Date
+  primaryType: ReleaseGroupType
+  primaryTypeId: MBID
+  secondaryTypes: [ReleaseGroupSecondaryType]
+  artistCredit: [ArtistCredit]
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  releases(limit: Int, offset: Int): ReleaseConnection
+  aliases: [Alias]
+}
+
+"""Primary release group classification."""
+enum ReleaseGroupType {
+  ALBUM
+  SINGLE
+  EP
+  BROADCAST
+  OTHER
+}
+
+"""Secondary type to further qualify a release group."""
+enum ReleaseGroupSecondaryType {
+  COMPILATION
+  SOUNDTRACK
+  SPOKENWORD
+  INTERVIEW
+  AUDIOBOOK
+  AUDIO_DRAMA
+  LIVE
+  REMIX
+  DJ_MIX
+  MIXTAPE_STREET
+  DEMO
+  FIELD_RECORDING
+}
+
+# ---------------------------------------------------------------------------
+# Release
+# ---------------------------------------------------------------------------
+
+"""
+A release represents the publication of a release group, including packaging,
+label, country, barcode, and the physical or digital media and track listing.
+"""
+type Release implements Entity & Annotatable {
+  mbid: MBID!
+  title: String!
+  disambiguation: String
+  date: Date
+  country: String
+  status: ReleaseStatus
+  statusId: MBID
+  quality: ReleaseQuality
+  packaging: String
+  packagingId: MBID
+  barcode: String
+  asin: String
+  language: String
+  script: String
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  artistCredit: [ArtistCredit]
+  releaseGroup: ReleaseGroup
+  releaseEvents: [ReleaseEvent]
+  labels: [ReleaseLabel]
+  media: [Medium]
+  relations: [Relationship]
+  coverArtArchive: CoverArtArchiveInfo
+  aliases: [Alias]
+}
+
+"""Publication status of a release."""
+enum ReleaseStatus {
+  OFFICIAL
+  PROMOTION
+  BOOTLEG
+  PSEUDO_RELEASE
+  CANCELLED
+  WITHDRAWN
+  EXPUNGED
+}
+
+"""Data quality classification for a release."""
+enum ReleaseQuality {
+  LOW
+  NORMAL
+  HIGH
+}
+
+"""A country-and-date combination for a release event."""
+type ReleaseEvent {
+  date: Date
+  area: Area
+}
+
+"""Summary of whether artwork is available in the Cover Art Archive."""
+type CoverArtArchiveInfo {
+  artwork: Boolean
+  count: Int
+  front: Boolean
+  back: Boolean
+  darkened: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Recording
+# ---------------------------------------------------------------------------
+
+"""
+A recording is an entity in MusicBrainz which can be linked to tracks on releases.
+Each track must always be associated with a single recording.
+"""
+type Recording implements Entity & Annotatable {
+  mbid: MBID!
+  title: String!
+  disambiguation: String
+  length: Int
+  video: Boolean
+  firstReleaseDate: Date
+  artistCredit: [ArtistCredit]
+  isrcs: [String]
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  releases(limit: Int, offset: Int): ReleaseConnection
+  aliases: [Alias]
+}
+
+# ---------------------------------------------------------------------------
+# Work
+# ---------------------------------------------------------------------------
+
+"""
+A work is a distinct intellectual or artistic creation, which can be expressed
+in the form of one or more audio recordings (e.g. a song, opera, or symphony).
+"""
+type Work implements Entity & Annotatable {
+  mbid: MBID!
+  title: String!
+  disambiguation: String
+  type: String
+  typeId: MBID
+  language: String
+  languages: [String]
+  iswcs: [String]
+  attributes: [WorkAttribute]
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+}
+
+"""A key-value attribute on a work (e.g. ASCAP ID, key signature)."""
+type WorkAttribute {
+  type: String!
+  typeId: MBID
+  value: String
+  valueId: MBID
+}
+
+# ---------------------------------------------------------------------------
+# Label
+# ---------------------------------------------------------------------------
+
+"""
+A record label or music publisher.
+"""
+type Label implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  sortName: String
+  disambiguation: String
+  type: LabelType
+  typeId: MBID
+  labelCode: Int
+  country: String
+  area: Area
+  lifeSpan: LifeSpan
+  isnis: [String]
+  ipis: [String]
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  releases(limit: Int, offset: Int): ReleaseConnection
+  aliases: [Alias]
+}
+
+"""Classification of a label."""
+enum LabelType {
+  ORIGINAL_PRODUCTION
+  BOOTLEG_PRODUCTION
+  REISSUE_PRODUCTION
+  DISTRIBUTION
+  HOLDING
+  RIGHTS_SOCIETY
+  IMPRINT
+  PUBLISHER
+}
+
+# ---------------------------------------------------------------------------
+# Place
+# ---------------------------------------------------------------------------
+
+"""
+A place is a building or outdoor area used for performing or producing music.
+"""
+type Place implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  disambiguation: String
+  type: PlaceType
+  typeId: MBID
+  address: String
+  area: Area
+  coordinates: Coordinates
+  lifeSpan: LifeSpan
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+}
+
+"""Classification of a place."""
+enum PlaceType {
+  STUDIO
+  VENUE
+  STADIUM
+  INDOOR_ARENA
+  RELIGIOUS_BUILDING
+  EDUCATIONAL_INSTITUTION
+  PRESSING_PLANT
+  OTHER
+}
+
+# ---------------------------------------------------------------------------
+# Area
+# ---------------------------------------------------------------------------
+
+"""
+An area is a geographic region or settlement (continent, country, city, etc.).
+"""
+type Area implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  sortName: String
+  disambiguation: String
+  type: AreaType
+  typeId: MBID
+  isoCodes: [String]
+  lifeSpan: LifeSpan
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+  containedIn: Area
+  contains: [Area]
+}
+
+"""Classification of an area."""
+enum AreaType {
+  COUNTRY
+  SUBDIVISION
+  COUNTY
+  MUNICIPALITY
+  CITY
+  DISTRICT
+  ISLAND
+}
+
+# ---------------------------------------------------------------------------
+# Event
+# ---------------------------------------------------------------------------
+
+"""
+An event is a performance or gathering, e.g. a concert, festival, or awards ceremony.
+"""
+type Event implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  disambiguation: String
+  type: EventType
+  typeId: MBID
+  time: String
+  cancelled: Boolean
+  setlist: String
+  lifeSpan: LifeSpan
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+}
+
+"""Classification of an event."""
+enum EventType {
+  CONCERT
+  FESTIVAL
+  LAUNCH_EVENT
+  CONVENTION_EXPO
+  MASTERCLASS_CLINIC
+  AWARD_CEREMONY
+  OTHER
+}
+
+# ---------------------------------------------------------------------------
+# Instrument
+# ---------------------------------------------------------------------------
+
+"""
+An instrument is a device created or adapted to make musical sounds.
+"""
+type Instrument implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  sortName: String
+  disambiguation: String
+  type: InstrumentType
+  typeId: MBID
+  description: String
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+}
+
+"""Family classification of an instrument."""
+enum InstrumentType {
+  WIND_INSTRUMENT
+  STRING_INSTRUMENT
+  PERCUSSION_INSTRUMENT
+  ELECTRONIC_INSTRUMENT
+  KEYBOARD_INSTRUMENT
+  PITCHED_PERCUSSION_INSTRUMENT
+  FAMILY
+  OTHER
+}
+
+# ---------------------------------------------------------------------------
+# Series
+# ---------------------------------------------------------------------------
+
+"""
+A series is a sequence of separate release groups, releases, recordings,
+works or events that share a theme or are connected in some way.
+"""
+type Series implements Entity & Annotatable {
+  mbid: MBID!
+  name: String!
+  disambiguation: String
+  type: SeriesType
+  typeId: MBID
+  orderingType: String
+  annotation: String
+  tags: [Tag]
+  userTags: [Tag]
+  rating: Rating
+  userRating: Float
+  relations: [Relationship]
+  aliases: [Alias]
+}
+
+"""Classification of a series."""
+enum SeriesType {
+  RELEASE_GROUP_SERIES
+  RELEASE_SERIES
+  RECORDING_SERIES
+  WORK_SERIES
+  CATALOGUE
+  TOUR
+  FESTIVAL_SERIES
+  RUN_OF_CONCERTS
+  OTHER
+}
+
+# ---------------------------------------------------------------------------
+# URL
+# ---------------------------------------------------------------------------
+
+"""
+A URL entity in MusicBrainz represents a web address and the relationship
+between that web address and a music entity.
+"""
+type URL implements Entity {
+  mbid: MBID!
+  resource: String!
+  relations: [Relationship]
+}
+
+# ---------------------------------------------------------------------------
+# Genre
+# ---------------------------------------------------------------------------
+
+"""A genre from the MusicBrainz genre taxonomy."""
+type Genre implements Entity {
+  mbid: MBID!
+  name: String!
+  disambiguation: String
+  count: Int
+}
+
+# ---------------------------------------------------------------------------
+# Search result types
+# ---------------------------------------------------------------------------
+
+"""Paginated search results for artists."""
+type ArtistSearchResult {
+  count: Int!
+  offset: Int!
+  artists: [ArtistSearchHit]
+}
+
+"""A single artist search hit with a relevance score."""
+type ArtistSearchHit {
+  score: Int
+  artist: Artist
+}
+
+"""Paginated search results for releases."""
+type ReleaseSearchResult {
+  count: Int!
+  offset: Int!
+  releases: [ReleaseSearchHit]
+}
+
+"""A single release search hit."""
+type ReleaseSearchHit {
+  score: Int
+  release: Release
+}
+
+"""Paginated search results for release groups."""
+type ReleaseGroupSearchResult {
+  count: Int!
+  offset: Int!
+  releaseGroups: [ReleaseGroupSearchHit]
+}
+
+"""A single release group search hit."""
+type ReleaseGroupSearchHit {
+  score: Int
+  releaseGroup: ReleaseGroup
+}
+
+"""Paginated search results for recordings."""
+type RecordingSearchResult {
+  count: Int!
+  offset: Int!
+  recordings: [RecordingSearchHit]
+}
+
+"""A single recording search hit."""
+type RecordingSearchHit {
+  score: Int
+  recording: Recording
+}
+
+"""Paginated search results for works."""
+type WorkSearchResult {
+  count: Int!
+  offset: Int!
+  works: [WorkSearchHit]
+}
+
+"""A single work search hit."""
+type WorkSearchHit {
+  score: Int
+  work: Work
+}
+
+"""Paginated search results for labels."""
+type LabelSearchResult {
+  count: Int!
+  offset: Int!
+  labels: [LabelSearchHit]
+}
+
+"""A single label search hit."""
+type LabelSearchHit {
+  score: Int
+  label: Label
+}
+
+"""Paginated search results for places."""
+type PlaceSearchResult {
+  count: Int!
+  offset: Int!
+  places: [PlaceSearchHit]
+}
+
+"""A single place search hit."""
+type PlaceSearchHit {
+  score: Int
+  place: Place
+}
+
+"""Paginated search results for areas."""
+type AreaSearchResult {
+  count: Int!
+  offset: Int!
+  areas: [AreaSearchHit]
+}
+
+"""A single area search hit."""
+type AreaSearchHit {
+  score: Int
+  area: Area
+}
+
+"""Paginated search results for events."""
+type EventSearchResult {
+  count: Int!
+  offset: Int!
+  events: [EventSearchHit]
+}
+
+"""A single event search hit."""
+type EventSearchHit {
+  score: Int
+  event: Event
+}
+
+"""Paginated search results for instruments."""
+type InstrumentSearchResult {
+  count: Int!
+  offset: Int!
+  instruments: [InstrumentSearchHit]
+}
+
+"""A single instrument search hit."""
+type InstrumentSearchHit {
+  score: Int
+  instrument: Instrument
+}
+
+"""Paginated search results for series."""
+type SeriesSearchResult {
+  count: Int!
+  offset: Int!
+  series: [SeriesSearchHit]
+}
+
+"""A single series search hit."""
+type SeriesSearchHit {
+  score: Int
+  series: Series
+}
+
+# ---------------------------------------------------------------------------
+# Connection / pagination types
+# ---------------------------------------------------------------------------
+
+"""Paginated list of artists."""
+type ArtistConnection {
+  totalCount: Int
+  nodes: [Artist]
+  pageInfo: PageInfo
+}
+
+"""Paginated list of releases."""
+type ReleaseConnection {
+  totalCount: Int
+  nodes: [Release]
+  pageInfo: PageInfo
+}
+
+"""Paginated list of release groups."""
+type ReleaseGroupConnection {
+  totalCount: Int
+  nodes: [ReleaseGroup]
+  pageInfo: PageInfo
+}
+
+"""Paginated list of recordings."""
+type RecordingConnection {
+  totalCount: Int
+  nodes: [Recording]
+  pageInfo: PageInfo
+}
+
+"""Paginated list of works."""
+type WorkConnection {
+  totalCount: Int
+  nodes: [Work]
+  pageInfo: PageInfo
+}
+
+"""Paginated list of genres."""
+type GenreConnection {
+  totalCount: Int
+  nodes: [Genre]
+  pageInfo: PageInfo
+}
+
+"""Standard Relay-style page information."""
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ---------------------------------------------------------------------------
+# Release type enums (used in browse filters)
+# ---------------------------------------------------------------------------
+
+"""Primary release type filter."""
+enum ReleaseType {
+  ALBUM
+  SINGLE
+  EP
+  BROADCAST
+  OTHER
+}
