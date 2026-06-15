@@ -1,0 +1,1540 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Artists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Artist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/artist/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up an artist by MBID, optionally including sub-resources and relationships via `inc`."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Artists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/artist",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Lucene query string (mutually exclusive with browse parameters)."
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recording",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release-group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "work",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              },
+              {
+                "name": "dismax",
+                "value": "",
+                "type": "query",
+                "description": "When true, use the simpler dismax query parser instead of full Lucene."
+              }
+            ]
+          },
+          "docs": "Browse artists linked to a parent entity (`area`, `collection`, `recording`, `release`, `release-group`, `work`) or search the indexed catalog with a Lucene `query`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/release/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a release by MBID. Common includes are `artist-credits`, `labels`, `discids`, `recordings`, `release-groups`, `media`, `isrcs`."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/release",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "recording",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release-group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "track",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "track_artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse releases linked to a parent entity or search by Lucene query. Browse may be filtered by `type`, `status`, and `release-group-status`."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Release Barcodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/release",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit GTIN/EAN/UPC barcodes for one or more releases (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit Recording ISRCs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/recording",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit ISRCs for one or more recordings (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit User Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/tag",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit one or more user tags (upvote/downvote/withdraw) on entities (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit User Ratings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/rating",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit one or more user ratings (integer 0-5, with 0 meaning withdraw) on entities (XML body, requires authentication)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Release Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Release Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/release-group/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a release group by MBID."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Release Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/release-group",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse release groups linked to an artist, collection, or release; or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recordings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Recording",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/recording/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a recording by MBID. Common includes are `artist-credits`, `releases`, `isrcs`, `url-rels`, `work-rels`."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Recordings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/recording",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "work",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse recordings linked to an artist, collection, release, or work; or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Works",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Work",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/work/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a work by MBID. Common includes are `artist-rels`, `recording-rels`, `aliases`."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Works",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/work",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse works linked to an artist or collection, or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Label",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/label/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a label by MBID."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Labels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/label",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "release",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse labels linked to an area, collection, or release, or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Places",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Place",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/place/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a place by MBID."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Places",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/place",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse places linked to an area or collection, or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Areas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Area",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/area/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a geographic area by MBID."
+        },
+        {
+          "info": {
+            "name": "Search Areas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/area",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Lucene-syntax search query string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Search areas with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/event/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up an event by MBID."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/event",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "place",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse events linked to an area, artist, collection, place, or other event, or search with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instruments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Instrument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/instrument/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up an instrument by MBID."
+        },
+        {
+          "info": {
+            "name": "Search Instruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/instrument",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Lucene-syntax search query string."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Search instruments with a Lucene query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Series",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/series/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a series by MBID."
+        },
+        {
+          "info": {
+            "name": "Search Series",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/series",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Search series with a Lucene query, or browse by collection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/url/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a URL by MBID."
+        },
+        {
+          "info": {
+            "name": "Lookup Urls By Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/url",
+            "params": [
+              {
+                "name": "resource",
+                "value": "https://www.nin.com/",
+                "type": "query",
+                "description": "A URL to look up. May be repeated up to 100 times in one request."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up one or more URLs by the resource string (up to 100 `resource` parameters per request)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Genres",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Genres",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/genre/all",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return every entry from the curated MusicBrainz genre taxonomy. Also supports `fmt=txt` for a plain-text list of genre names."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Recordings By ISRC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/isrc/:isrc",
+            "params": [
+              {
+                "name": "isrc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Recording Code (12 characters)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up all recordings that share an International Standard Recording Code."
+        },
+        {
+          "info": {
+            "name": "Lookup Works By ISWC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/iswc/:iswc",
+            "params": [
+              {
+                "name": "iswc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Musical Work Code (e.g. T-101.690.320-9)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up all works that share an International Standard Musical Work Code."
+        },
+        {
+          "info": {
+            "name": "Lookup Releases By Disc ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/discid/:discid",
+            "params": [
+              {
+                "name": "discid",
+                "value": "",
+                "type": "path",
+                "description": "28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+              },
+              {
+                "name": "toc",
+                "value": "",
+                "type": "query",
+                "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found."
+              },
+              {
+                "name": "cdstubs",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include CD-stub matches when no release matches."
+              },
+              {
+                "name": "media-format",
+                "value": "",
+                "type": "query",
+                "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up releases that match a CD's MusicBrainz Disc ID. Supports fuzzy TOC matching and optional CD-stub fallback."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/collection",
+            "params": [
+              {
+                "name": "editor",
+                "value": "",
+                "type": "query",
+                "description": "MusicBrainz editor (username) whose collections to list."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "List the collections owned by a MusicBrainz editor. Use `inc=user-collections` while authenticated to also include private collections."
+        },
+        {
+          "info": {
+            "name": "Lookup Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a collection by MBID."
+        },
+        {
+          "info": {
+            "name": "Add Entities To Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid/:entity_type",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add up to ~400 entities (semicolon-separated MBIDs) to an existing collection."
+        },
+        {
+          "info": {
+            "name": "Remove Entities From Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid/:entity_type",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove entities (semicolon-separated MBIDs) from a collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

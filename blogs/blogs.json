@@ -1,0 +1,15 @@
+{
+  "repo": "musicbrainz",
+  "feeds": [
+    {
+      "source": "https://blog.metabrainz.org/",
+      "feed_url": "https://blog.metabrainz.org/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "none",
+      "error": "HTTPError 403 - Anubis bot protection"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-07T00:00:00Z"
+}
