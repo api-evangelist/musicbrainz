@@ -19,7 +19,7 @@ x-category: Music
 x-governance: MetaBrainz Foundation (501(c)(3) non-profit)
 x-license-data: CC0 (core) / CC-BY-NC-SA (supplemental)
 x-license-code: GPLv2 / LGPL / MIT (varies by repo)
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/musicbrainz/main/apis.yml
 tags:
 - Music
