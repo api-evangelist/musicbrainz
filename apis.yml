@@ -116,19 +116,19 @@ apis:
     url: plans/musicbrainz-plans-pricing.yml
   - type: RateLimitsSpec
     url: rate-limits/musicbrainz-rate-limits.yml
-  - type: SDK
+  - type: SDKs
     url: https://pypi.org/project/musicbrainzngs/
     title: Python SDK (musicbrainzngs)
-  - type: SDK
+  - type: SDKs
     url: https://www.npmjs.com/package/musicbrainz-api
     title: Node.js SDK (musicbrainz-api)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/metabrainz/libmusicbrainz
     title: C++ Client Library (libmusicbrainz)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/metabrainz/mbdata
     title: Python SQLAlchemy Models (mbdata)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/metabrainz/mb-rngpy
     title: Python RELAX NG Bindings (mb-rngpy)
   - type: Schema
@@ -230,7 +230,7 @@ common:
   url: https://musicbrainz.org/doc/MusicBrainz_API
 - type: Developer
   url: https://musicbrainz.org/doc/Developer_Resources
-- type: Forum
+- type: Forums
   url: https://community.metabrainz.org/
 - type: IRC
   url: ircs://irc.libera.chat/#musicbrainz

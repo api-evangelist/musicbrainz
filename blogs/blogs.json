@@ -7,9 +7,9 @@
       "title": "",
       "saved": 0,
       "method": "none",
-      "error": "HTTPError 403 - Anubis bot protection"
+      "error": "HTTPError 403 - Anubis bot protection (feed/, ?feed=rss2, and HTML page all blocked)"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-07T00:00:00Z"
+  "fetched": "2026-06-21T17:00:00Z"
 }
