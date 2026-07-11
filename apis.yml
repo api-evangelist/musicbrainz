@@ -220,6 +220,8 @@ apis:
       link to a Discogs release.
     url: https://www.discogs.com/
 common:
+- type: OAuthScopes
+  url: scopes/musicbrainz-scopes.yml
 - type: Website
   url: https://musicbrainz.org/
 - type: Foundation

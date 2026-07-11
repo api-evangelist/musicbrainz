@@ -1,0 +1,54 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/musicbrainz-web-service-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/musicbrainz-web-service-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://musicbrainz.org/oauth2/authorize
+    tokenUrl: https://musicbrainz.org/oauth2/token
+  description: OAuth 2.0 authentication via the MusicBrainz OAuth server.
+scopes:
+- scope: collection
+  description: Manage collections
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: email
+  description: Access user email
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: profile
+  description: Access user profile
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: rating
+  description: Submit ratings
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: submit_barcode
+  description: Submit release barcodes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: submit_isrc
+  description: Submit recording ISRCs
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- scope: tag
+  description: Submit tags
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
