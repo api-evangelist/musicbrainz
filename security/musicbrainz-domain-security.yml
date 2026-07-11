@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: musicbrainz.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 10 23:59:59 2026 GMT
+  hsts: false
+- host: beta.musicbrainz.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 10 23:59:59 2026 GMT
+  hsts: false
+domains:
+- domain: musicbrainz.org
+  dnssec: false
+  caa:
+  - 0 issue "digicert.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "comodoca.com"
+  - 0 issue "sectigo.com"
+  - 0 issuewild "digicert.com"
+  - 0 issuewild "sectigo.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: none

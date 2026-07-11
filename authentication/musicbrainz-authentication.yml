@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/musicbrainz-web-service-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: HTTPBasic
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using MusicBrainz editor credentials. Required for
+    submission and user-specific endpoints.
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://musicbrainz.org/oauth2/authorize
+    tokenUrl: https://musicbrainz.org/oauth2/token
+    scopes: 7
+  description: OAuth 2.0 authentication via the MusicBrainz OAuth server.
+  sources:
+  - openapi/musicbrainz-web-service-openapi.yml
