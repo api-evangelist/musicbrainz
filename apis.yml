@@ -220,6 +220,8 @@ apis:
       link to a Discogs release.
     url: https://www.discogs.com/
 common:
+- type: AgenticAccess
+  url: agentic-access/musicbrainz-agentic-access.yml
 - type: DomainSecurity
   url: security/musicbrainz-domain-security.yml
 - type: Authentication
