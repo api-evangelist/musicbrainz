@@ -1,0 +1,247 @@
+openapi: 3.0.3
+info:
+  title: MusicBrainz Web Service v2 Areas Submission API
+  version: '2.0'
+  description: 'The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,
+
+    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).
+
+
+    The API supports three primary access patterns over twelve core entity types
+
+    (artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):
+
+
+    - **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.
+
+    - **Browse** — list entities linked to a given parent entity, with pagination.
+
+    - **Search** — full Lucene query syntax across the indexed catalog.
+
+
+    Non-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.
+
+
+    Responses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.
+
+
+    The API enforces a strict rate limit of **one request per IP per second** and requires a meaningful
+
+    **User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).
+
+    Submission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.
+
+    '
+  contact:
+    name: MetaBrainz Foundation
+    url: https://metabrainz.org/
+    email: support@metabrainz.org
+  license:
+    name: API access is free; data licensed CC0 (core) and CC-BY-NC-SA (supplemental)
+    url: https://musicbrainz.org/doc/About/Data_License
+  termsOfService: https://metabrainz.org/social-contract
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://musicbrainz.org/ws/2
+  description: Production MusicBrainz Web Service v2
+- url: https://beta.musicbrainz.org/ws/2
+  description: Beta MusicBrainz Web Service v2 (pre-release schema changes)
+tags:
+- name: Submission
+  description: Authenticated submission of tags, ratings, barcodes, and ISRCs.
+paths:
+  /release:
+    post:
+      operationId: submitBarcodes
+      summary: Submit Release Barcodes
+      description: Submit GTIN/EAN/UPC barcodes for one or more releases (XML body, requires authentication).
+      tags:
+      - Submission
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - submit_barcode
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - $ref: '#/components/parameters/Client'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+              description: MMD-2 XML metadata document with release barcode entries.
+      responses:
+        '200':
+          description: Submission accepted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /recording:
+    post:
+      operationId: submitISRCs
+      summary: Submit Recording ISRCs
+      description: Submit ISRCs for one or more recordings (XML body, requires authentication).
+      tags:
+      - Submission
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - submit_isrc
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - $ref: '#/components/parameters/Client'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+              description: MMD-2 XML document with `<recording>` entries and `<isrc-list>`.
+      responses:
+        '200':
+          description: Submission accepted
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /tag:
+    post:
+      operationId: submitTags
+      summary: Submit User Tags
+      description: Submit one or more user tags (upvote/downvote/withdraw) on entities (XML body, requires authentication).
+      tags:
+      - Submission
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - tag
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - $ref: '#/components/parameters/Client'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+              description: MMD-2 XML with `<user-tag>` elements (vote attribute optional).
+      responses:
+        '200':
+          description: Tag submission accepted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /rating:
+    post:
+      operationId: submitRatings
+      summary: Submit User Ratings
+      description: Submit one or more user ratings (integer 0-5, with 0 meaning withdraw) on entities (XML body, requires authentication).
+      tags:
+      - Submission
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - rating
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - $ref: '#/components/parameters/Client'
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              type: string
+              description: MMD-2 XML with `<user-rating>` elements.
+      responses:
+        '200':
+          description: Rating submission accepted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  responses:
+    Forbidden:
+      description: Authenticated but not authorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request or invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Client:
+      name: client
+      in: query
+      required: true
+      description: Application identifier in the form `name-version` for submission requests.
+      schema:
+        type: string
+        example: my-tagger-1.0.0
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using MusicBrainz editor credentials. Required for submission and user-specific endpoints.
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via the MusicBrainz OAuth server.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://musicbrainz.org/oauth2/authorize
+          tokenUrl: https://musicbrainz.org/oauth2/token
+          scopes:
+            profile: Access user profile
+            email: Access user email
+            tag: Submit tags
+            rating: Submit ratings
+            collection: Manage collections
+            submit_barcode: Submit release barcodes
+            submit_isrc: Submit recording ISRCs

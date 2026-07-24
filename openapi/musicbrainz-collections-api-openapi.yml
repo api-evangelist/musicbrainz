@@ -1,0 +1,270 @@
+openapi: 3.0.3
+info:
+  title: MusicBrainz Web Service v2 Areas Collections API
+  version: '2.0'
+  description: 'The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,
+
+    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).
+
+
+    The API supports three primary access patterns over twelve core entity types
+
+    (artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):
+
+
+    - **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.
+
+    - **Browse** — list entities linked to a given parent entity, with pagination.
+
+    - **Search** — full Lucene query syntax across the indexed catalog.
+
+
+    Non-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.
+
+
+    Responses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.
+
+
+    The API enforces a strict rate limit of **one request per IP per second** and requires a meaningful
+
+    **User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).
+
+    Submission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.
+
+    '
+  contact:
+    name: MetaBrainz Foundation
+    url: https://metabrainz.org/
+    email: support@metabrainz.org
+  license:
+    name: API access is free; data licensed CC0 (core) and CC-BY-NC-SA (supplemental)
+    url: https://musicbrainz.org/doc/About/Data_License
+  termsOfService: https://metabrainz.org/social-contract
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://musicbrainz.org/ws/2
+  description: Production MusicBrainz Web Service v2
+- url: https://beta.musicbrainz.org/ws/2
+  description: Beta MusicBrainz Web Service v2 (pre-release schema changes)
+tags:
+- name: Collections
+  description: Authenticated user collections of entities.
+paths:
+  /collection:
+    get:
+      operationId: listUserCollections
+      summary: List User Collections
+      description: List the collections owned by a MusicBrainz editor. Use `inc=user-collections` while authenticated to also include private collections.
+      tags:
+      - Collections
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: editor
+        in: query
+        required: true
+        schema:
+          type: string
+        description: MusicBrainz editor (username) whose collections to list.
+      - $ref: '#/components/parameters/Inc'
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Collection list
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /collection/{collection_mbid}:
+    get:
+      operationId: lookupCollection
+      summary: Lookup Collection
+      description: Look up a collection by MBID.
+      tags:
+      - Collections
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: collection_mbid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - $ref: '#/components/parameters/Format'
+      responses:
+        '200':
+          description: Collection metadata
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+  /collection/{collection_mbid}/{entity_type}:
+    put:
+      operationId: addEntitiesToCollection
+      summary: Add Entities To Collection
+      description: Add up to ~400 entities (semicolon-separated MBIDs) to an existing collection.
+      tags:
+      - Collections
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: collection_mbid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - areas
+          - artists
+          - events
+          - labels
+          - places
+          - recordings
+          - release-groups
+          - releases
+          - works
+      - $ref: '#/components/parameters/Client'
+      responses:
+        '200':
+          description: Entities added
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+    delete:
+      operationId: removeEntitiesFromCollection
+      summary: Remove Entities From Collection
+      description: Remove entities (semicolon-separated MBIDs) from a collection.
+      tags:
+      - Collections
+      security:
+      - HTTPBasic: []
+      - OAuth2:
+        - collection
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+      parameters:
+      - name: collection_mbid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - areas
+          - artists
+          - events
+          - labels
+          - places
+          - recordings
+          - release-groups
+          - releases
+          - works
+      - $ref: '#/components/parameters/Client'
+      responses:
+        '200':
+          description: Entities removed
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+components:
+  parameters:
+    Client:
+      name: client
+      in: query
+      required: true
+      description: Application identifier in the form `name-version` for submission requests.
+      schema:
+        type: string
+        example: my-tagger-1.0.0
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
+    Format:
+      name: fmt
+      in: query
+      required: false
+      description: Response serialization format. Defaults to XML; set to `json` for JSON.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        default: xml
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using MusicBrainz editor credentials. Required for submission and user-specific endpoints.
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication via the MusicBrainz OAuth server.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://musicbrainz.org/oauth2/authorize
+          tokenUrl: https://musicbrainz.org/oauth2/token
+          scopes:
+            profile: Access user profile
+            email: Access user email
+            tag: Submit tags
+            rating: Submit ratings
+            collection: Manage collections
+            submit_barcode: Submit release barcodes
+            submit_isrc: Submit recording ISRCs
