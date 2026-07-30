@@ -10,6 +10,19 @@ description: MusicBrainz is an open-source, community-maintained music encyclope
   web service is read-mostly with authenticated submission endpoints for tags, ratings,
   collections, barcodes, and ISRCs, and is rate-limited to one request per IP per
   second with a mandatory descriptive User-Agent header.
+accessModel:
+  pricing: paid
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Paid · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-29'
@@ -19,7 +32,7 @@ x-category: Music
 x-governance: MetaBrainz Foundation (501(c)(3) non-profit)
 x-license-data: CC0 (core) / CC-BY-NC-SA (supplemental)
 x-license-code: GPLv2 / LGPL / MIT (varies by repo)
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/musicbrainz.png
 url: https://raw.githubusercontent.com/api-evangelist/musicbrainz/main/apis.yml
 tags:
 - Music
@@ -41,47 +54,18 @@ tags:
 - Open Source
 - Non Profit
 apis:
-- aid: musicbrainz:musicbrainz-web-service
-  name: MusicBrainz Web Service v2
-  description: The MusicBrainz Web Service v2 provides a free read-mostly REST API
-    over the entire MusicBrainz catalog of music metadata. It supports three primary
-    access patterns - lookup (fetch one entity by MBID), browse (list entities linked
-    to a parent entity), and search (Lucene query across the indexed catalog) - across
-    twelve core entity types (artist, release, release-group, recording, work, label,
-    place, area, event, instrument, series, url, genre). Non-MBID lookups are available
-    for ISRC (recordings), ISWC (works), disc IDs (releases), and URLs. Authenticated
-    submission endpoints (HTTP Basic or OAuth2) allow clients to submit tags, ratings,
-    collection membership, barcodes, and ISRCs. Responses are returned in XML (default)
-    or JSON via the `fmt=json` parameter. The service enforces a strict one-request-per-second-per-IP
-    rate limit and requires a meaningful User-Agent header on every request.
+- aid: musicbrainz:musicbrainz-areas-api
+  name: MusicBrainz Areas API
+  description: Lookup, browse, and search for geographic areas (countries, cities, etc.).
   humanURL: https://musicbrainz.org/doc/MusicBrainz_API
   baseURL: https://musicbrainz.org/ws/2
   tags:
-  - Artists
-  - Releases
-  - Release Groups
-  - Recordings
-  - Works
-  - Labels
-  - Places
   - Areas
-  - Events
-  - Instruments
-  - Series
-  - URLs
-  - Genres
-  - ISRC
-  - ISWC
-  - DiscID
-  - Browse
-  - Search
-  - Collections
-  - Submission
   properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-areas-api-openapi.yml
   - type: Documentation
     url: https://musicbrainz.org/doc/MusicBrainz_API
-  - type: OpenAPI
-    url: openapi/musicbrainz-web-service-openapi.yml
   - type: GettingStarted
     url: https://musicbrainz.org/doc/MusicBrainz_API
   - type: Authentication
@@ -118,108 +102,921 @@ apis:
     url: rate-limits/musicbrainz-rate-limits.yml
   - type: SDKs
     url: https://pypi.org/project/musicbrainzngs/
-    title: Python SDK (musicbrainzngs)
   - type: SDKs
     url: https://www.npmjs.com/package/musicbrainz-api
-    title: Node.js SDK (musicbrainz-api)
   - type: SDKs
     url: https://github.com/metabrainz/libmusicbrainz
-    title: C++ Client Library (libmusicbrainz)
   - type: SDKs
     url: https://github.com/metabrainz/mbdata
-    title: Python SQLAlchemy Models (mbdata)
   - type: SDKs
     url: https://github.com/metabrainz/mb-rngpy
-    title: Python RELAX NG Bindings (mb-rngpy)
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-    title: MMD RELAX NG Schema
-  - url: graphql/musicbrainz-graphql.md
-    type: GraphQL
-  features:
-  - type: EntityLookup
-    description: Fetch any of twelve entity types (artist, release, release-group,
-      recording, work, label, place, area, event, instrument, series, url) by MBID
-      with configurable sub-resource includes.
-  - type: BrowseRelationships
-    description: List all entities linked to a given parent entity (e.g. all releases
-      by an artist, all recordings on a release) with pagination.
-  - type: LuceneSearch
-    description: Full Lucene query syntax across all indexed entities with per-entity
-      searchable fields, scoring, and 100-result pages.
-  - type: IdentifierLookups
-    description: Direct lookups by industry identifiers - ISRC for recordings, ISWC
-      for works, DiscID for releases, and arbitrary URLs.
-  - type: RichRelationships
-    description: First-class typed relationships between entities (composer, lyricist,
-      performer, member-of-band, location-of-event, etc.) returned via `inc=*-rels`
-      parameters.
-  - type: CommunityTagsAndRatings
-    description: Public folksonomy tags and aggregate 1-5 ratings on every entity,
-      plus per-user tags and ratings for authenticated users.
-  - type: UserCollections
-    description: Authenticated users can maintain typed collections (release, recording,
-      work, etc.) and clients can add or remove entities via PUT/DELETE.
-  - type: SubmissionEndpoints
-    description: Authenticated POST endpoints for submitting user tags, ratings, release
-      barcodes, and recording ISRCs without going through the editor UI.
-  - type: GenreTaxonomy
-    description: Dedicated `/genre/all` endpoint returning the full curated genre
-      taxonomy in XML, JSON, or plain text.
-  - type: FormatChoice
-    description: All responses available in MMD-2 XML (default, supports submission)
-      or JSON (`fmt=json`, read-only).
-  useCases:
-  - type: MusicLibraryTagging
-    description: Look up canonical artist, release, recording, and work metadata to
-      tag local music libraries (Picard, beets, MusicBee, Roon).
-  - type: DiscographyEnrichment
-    description: Pull complete discographies, credits, and relationships for an artist
-      or label into a music app, store, or knowledge graph.
-  - type: AcousticIdentification
-    description: Combine MusicBrainz IDs with AcoustID fingerprints to identify unknown
-      audio files and retrieve full metadata.
-  - type: CDIdentification
-    description: Use libdiscid + the `/discid` endpoint to identify physical CDs from
-      their TOC and fetch the corresponding release.
-  - type: ISRCAndISWCResolution
-    description: Resolve industry identifiers (ISRC, ISWC) to canonical recording
-      and work metadata for rights management and analytics workflows.
-  - type: KnowledgeGraphIngestion
-    description: Ingest MusicBrainz dumps or the live replication feed into a property
-      graph or RDF store for music research and recommendation systems.
-  - type: WikidataCrossReference
-    description: Bridge between MusicBrainz MBIDs and Wikidata QIDs / Wikipedia articles
-      via stored URL relationships.
-  - type: CoverArtRetrieval
-    description: Use MBIDs returned by the API to fetch high-resolution release artwork
-      from the companion Cover Art Archive.
-  integrations:
-  - name: MusicBrainz Picard
-    description: Official cross-platform music tagger built on the MusicBrainz API;
-      canonical end-user client.
-    url: https://picard.musicbrainz.org/
-  - name: AcoustID
-    description: Open audio fingerprinting database that returns MBIDs for identified
-      recordings.
-    url: https://acoustid.org/
-  - name: Cover Art Archive
-    description: Sister project that stores release artwork keyed by MusicBrainz release
-      MBID.
-    url: https://coverartarchive.org/
-  - name: ListenBrainz
-    description: MetaBrainz sister project for listening history; uses MusicBrainz
-      MBIDs as the canonical identifier for tracks and artists.
-    url: https://listenbrainz.org/
-  - name: Wikidata
-    description: Bidirectional cross-references via the MusicBrainz MBID external
-      identifier on Wikidata and URL relationships in MusicBrainz.
-    url: https://www.wikidata.org/wiki/Property:P434
-  - name: Discogs
-    description: Cross-referenced via stored URL relationships; many MusicBrainz releases
-      link to a Discogs release.
-    url: https://www.discogs.com/
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-artists-api
+  name: MusicBrainz Artists API
+  description: Lookup, browse, and search for artists (people, bands, orchestras).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Artists
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-artists-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-collections-api
+  name: MusicBrainz Collections API
+  description: Authenticated user collections of entities.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-collections-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-events-api
+  name: MusicBrainz Events API
+  description: Lookup, browse, and search for music events (concerts, festivals, etc.).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-events-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-genres-api
+  name: MusicBrainz Genres API
+  description: List the curated genre taxonomy.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Genres
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-genres-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-identifiers-api
+  name: MusicBrainz Identifiers API
+  description: Non-MBID lookups by ISRC, ISWC, and DiscID.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Identifiers
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-identifiers-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-instruments-api
+  name: MusicBrainz Instruments API
+  description: Lookup and search for instruments used in recordings.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Instruments
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-instruments-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-labels-api
+  name: MusicBrainz Labels API
+  description: Lookup, browse, and search for record labels.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-labels-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-places-api
+  name: MusicBrainz Places API
+  description: Lookup, browse, and search for places (venues, studios, etc.).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Places
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-places-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-recordings-api
+  name: MusicBrainz Recordings API
+  description: Lookup, browse, and search for recordings (distinct audio captures of a performance).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Recordings
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-recordings-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-release-groups-api
+  name: MusicBrainz Release Groups API
+  description: Lookup, browse, and search for release groups (logical grouping of releases).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Release Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-release-groups-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-releases-api
+  name: MusicBrainz Releases API
+  description: Lookup, browse, and search for releases (specific issues of an album).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-releases-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-series-api
+  name: MusicBrainz Series API
+  description: Lookup, browse, and search for series (ordered groups of entities).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Series
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-series-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-submission-api
+  name: MusicBrainz Submission API
+  description: Authenticated submission of tags, ratings, barcodes, and ISRCs.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Submission
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-submission-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-urls-api
+  name: MusicBrainz URLs API
+  description: Lookup URLs linked to other MusicBrainz entities.
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - URLs
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-urls-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
+- aid: musicbrainz:musicbrainz-works-api
+  name: MusicBrainz Works API
+  description: Lookup, browse, and search for musical works (abstract compositions).
+  humanURL: https://musicbrainz.org/doc/MusicBrainz_API
+  baseURL: https://musicbrainz.org/ws/2
+  tags:
+  - Works
+  properties:
+  - type: OpenAPI
+    url: openapi/musicbrainz-works-api-openapi.yml
+  - type: Documentation
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: GettingStarted
+    url: https://musicbrainz.org/doc/MusicBrainz_API
+  - type: Authentication
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Authentication
+  - type: RateLimits
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Rate_Limiting
+  - type: Search
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Search
+  - type: Examples
+    url: https://musicbrainz.org/doc/MusicBrainz_API/Examples
+  - type: Schema
+    url: https://musicbrainz.org/doc/MusicBrainz_Database/Schema
+  - type: Identifiers
+    url: https://musicbrainz.org/doc/MusicBrainz_Identifier
+  - type: JSONSchema
+    url: json-schema/musicbrainz-artist-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-release-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-recording-schema.json
+  - type: JSONSchema
+    url: json-schema/musicbrainz-work-schema.json
+  - type: JSONStructure
+    url: json-structure/musicbrainz-artist-structure.json
+  - type: JSONLD
+    url: json-ld/musicbrainz-context.jsonld
+  - type: SpectralRules
+    url: rules/musicbrainz-rules.yml
+  - type: Vocabulary
+    url: vocabulary/musicbrainz-vocabulary.yml
+  - type: Plans
+    url: plans/musicbrainz-plans-pricing.yml
+  - type: RateLimitsSpec
+    url: rate-limits/musicbrainz-rate-limits.yml
+  - type: SDKs
+    url: https://pypi.org/project/musicbrainzngs/
+  - type: SDKs
+    url: https://www.npmjs.com/package/musicbrainz-api
+  - type: SDKs
+    url: https://github.com/metabrainz/libmusicbrainz
+  - type: SDKs
+    url: https://github.com/metabrainz/mbdata
+  - type: SDKs
+    url: https://github.com/metabrainz/mb-rngpy
+  - type: Schema
+    url: https://github.com/metabrainz/mmd-schema
+  - type: GraphQL
+    url: graphql/musicbrainz-graphql.md
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/musicbrainz/overview
 - type: AgenticAccess
   url: agentic-access/musicbrainz-agentic-access.yml
 - type: DomainSecurity
