@@ -1,0 +1,1028 @@
+{
+  "info": {
+    "_postman_id": "28e7ccf9-8d1b-40bd-8e85-6d2e8900747b",
+    "name": "MusicBrainz Web Service v2 Areas Releases API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:50.000Z",
+    "updatedAt": "2026-07-28T02:15:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-28e7ccf9-8d1b-40bd-8e85-6d2e8900747b"
+  },
+  "item": [
+    {
+      "name": "release",
+      "item": [
+        {
+          "name": "{mbid}",
+          "item": [
+            {
+              "name": "Lookup Release",
+              "id": "ae208be9-9792-49cc-b223-a874e3199ee2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/release/:mbid?inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release",
+                    ":mbid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "e1014eef-7443-4179-acf4-274cb1934402",
+                      "key": "mbid",
+                      "value": "8421509e-1001-c264-9965-656e956e6b47",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "description": "Look up a release by MBID. Common includes are `artist-credits`, `labels`, `discids`, `recordings`, `release-groups`, `media`, `isrcs`."
+              },
+              "response": [
+                {
+                  "id": "825ba2fb-9a0f-4231-8c2c-a36de78f4f1a",
+                  "name": "Release found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/release/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "release",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"cc5fb7a0-9530-c90e-4598-3b37c62f8be1\",\n  \"title\": \"<string>\",\n  \"status\": \"Bootleg\",\n  \"status-id\": \"<string>\",\n  \"quality\": \"normal\",\n  \"packaging\": \"<string>\",\n  \"packaging-id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"script\": \"<string>\",\n  \"date\": \"<string>\",\n  \"country\": \"<string>\",\n  \"barcode\": \"<string>\",\n  \"asin\": \"<string>\",\n  \"disambiguation\": \"<string>\",\n  \"artist-credit\": [\n    {\n      \"name\": \"<string>\",\n      \"joinphrase\": \"<string>\",\n      \"artist\": {\n        \"id\": \"499f1fe6-24db-b680-1b24-b1b0081e6172\",\n        \"name\": \"<string>\",\n        \"sort-name\": \"<string>\",\n        \"type\": \"Other\",\n        \"type-id\": \"af2af7d4-2feb-cef1-da8d-b9ea60e1f7ea\",\n        \"gender\": \"Male\",\n        \"gender-id\": \"<string>\",\n        \"country\": \"<string>\",\n        \"area\": {\n          \"id\": \"6a3dfac2-0bdc-c3c5-127d-5b82ff03ddce\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Subdivision\",\n          \"type-id\": \"74f31ddc-13fc-246f-3e6c-8e7569acf620\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"begin-area\": {\n          \"id\": \"488c1dd7-b511-51c5-7bba-9f09cce49999\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"County\",\n          \"type-id\": \"96616814-da03-1d48-2e90-00e581806264\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"end-area\": {\n          \"id\": \"a62455e2-a9dc-ee0f-d6ba-9b61e2ef4054\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Subdivision\",\n          \"type-id\": \"53267b6f-676e-a797-71f1-3fff1c090a48\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"disambiguation\": \"<string>\",\n        \"isnis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"ipis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"life-span\": {\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        \"aliases\": [\n          {\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"locale\": \"<string>\",\n            \"type\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"locale\": \"<string>\",\n            \"type\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"f689ff07-14ba-34dd-7495-9785d9f50f70\",\n            \"direction\": \"forward\",\n            \"target-type\": \"<string>\",\n            \"target-credit\": \"<string>\",\n            \"attributes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"artist\": {\n              \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n            },\n            \"url\": {\n              \"id\": \"89411dca-f613-381f-a3eb-1c6f23fc8f5e\",\n              \"resource\": \"<uri>\",\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"work\": {\n              \"id\": \"cde92bbb-f1fa-1624-1bc2-c37f1214d0aa\",\n              \"title\": \"<string>\",\n              \"type\": \"<string>\",\n              \"type-id\": \"<string>\",\n              \"language\": \"<string>\",\n              \"languages\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iswcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"attributes\": [\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                },\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                }\n              ],\n              \"disambiguation\": \"<string>\",\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"recording\": {\n              \"id\": \"713ca334-1e03-fc53-4df3-cad51d2d24c3\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"video\": \"<boolean>\",\n              \"disambiguation\": \"<string>\",\n              \"first-release-date\": \"<string>\",\n              \"isrcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"releases\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                }\n              ],\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"9c968854-9ad4-69ae-b9fe-d684851376d6\",\n            \"direction\": \"forward\",\n            \"target-type\": \"<string>\",\n            \"target-credit\": \"<string>\",\n            \"attributes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"artist\": {\n              \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n            },\n            \"url\": {\n              \"id\": \"eb6dad9c-7a17-ef93-3f77-699ab7c98d74\",\n              \"resource\": \"<uri>\",\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"work\": {\n              \"id\": \"f7d56f4e-d995-6d36-8f7f-94d21b6dacb8\",\n              \"title\": \"<string>\",\n              \"type\": \"<string>\",\n              \"type-id\": \"<string>\",\n              \"language\": \"<string>\",\n              \"languages\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iswcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"attributes\": [\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                },\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                }\n              ],\n              \"disambiguation\": \"<string>\",\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"recording\": {\n              \"id\": \"78897216-a417-9f21-c403-5cdca1958a5d\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"video\": \"<boolean>\",\n              \"disambiguation\": \"<string>\",\n              \"first-release-date\": \"<string>\",\n              \"isrcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"releases\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                }\n              ],\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        ]\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"joinphrase\": \"<string>\",\n      \"artist\": {\n        \"id\": \"3c2c7646-d983-3b63-9be3-fa38189e5ebd\",\n        \"name\": \"<string>\",\n        \"sort-name\": \"<string>\",\n        \"type\": \"Orchestra\",\n        \"type-id\": \"26d54aa6-9df4-c5e9-b403-fff291501ffe\",\n        \"gender\": \"Not applicable\",\n        \"gender-id\": \"<string>\",\n        \"country\": \"<string>\",\n        \"area\": {\n          \"id\": \"f457b1fb-6761-3328-5e58-6745c802d97b\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Island\",\n          \"type-id\": \"a55052c9-ddc0-65de-e1fb-bc57ce997905\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"begin-area\": {\n          \"id\": \"7d28ed52-a12a-3bf8-0275-9f2403d8cc8d\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Subdivision\",\n          \"type-id\": \"853952e3-3383-7ae5-19f1-081c955a7d95\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"end-area\": {\n          \"id\": \"04188528-9097-cb6f-37f9-f632984cd3e7\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Municipality\",\n          \"type-id\": \"75c027f6-10fe-6014-9712-a862c33047cc\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"disambiguation\": \"<string>\",\n        \"isnis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"ipis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"life-span\": {\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        \"aliases\": [\n          {\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"locale\": \"<string>\",\n            \"type\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"locale\": \"<string>\",\n            \"type\": \"<string>\",\n            \"primary\": \"<boolean>\",\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"2368d326-1552-fdd0-645f-57c625c3ae6e\",\n            \"direction\": \"backward\",\n            \"target-type\": \"<string>\",\n            \"target-credit\": \"<string>\",\n            \"attributes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"artist\": {\n              \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n            },\n            \"url\": {\n              \"id\": \"ba9fff2f-32fa-d0b9-f45a-f4d2bd841800\",\n              \"resource\": \"<uri>\",\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"work\": {\n              \"id\": \"c1d32bd7-afdc-d11f-9cf0-6a20c2905125\",\n              \"title\": \"<string>\",\n              \"type\": \"<string>\",\n              \"type-id\": \"<string>\",\n              \"language\": \"<string>\",\n              \"languages\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iswcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"attributes\": [\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                },\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                }\n              ],\n              \"disambiguation\": \"<string>\",\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"recording\": {\n              \"id\": \"80a03d00-4073-2312-f57f-fea3ff0ce669\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"video\": \"<boolean>\",\n              \"disambiguation\": \"<string>\",\n              \"first-release-date\": \"<string>\",\n              \"isrcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"releases\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                }\n              ],\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"30795747-ca68-3fbd-f205-b489b1a8f61b\",\n            \"direction\": \"forward\",\n            \"target-type\": \"<string>\",\n            \"target-credit\": \"<string>\",\n            \"attributes\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"artist\": {\n              \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n            },\n            \"url\": {\n              \"id\": \"5c18b370-0285-b93f-bfde-27f46d4fbb6d\",\n              \"resource\": \"<uri>\",\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"work\": {\n              \"id\": \"5a2c22eb-9e43-359a-434b-1d8c223d3e6a\",\n              \"title\": \"<string>\",\n              \"type\": \"<string>\",\n              \"type-id\": \"<string>\",\n              \"language\": \"<string>\",\n              \"languages\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iswcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"attributes\": [\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                },\n                {\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"value\": \"<string>\",\n                  \"value-id\": \"<string>\"\n                }\n              ],\n              \"disambiguation\": \"<string>\",\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"recording\": {\n              \"id\": \"bbf0c676-49c2-1255-b187-569ad959af3c\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"video\": \"<boolean>\",\n              \"disambiguation\": \"<string>\",\n              \"first-release-date\": \"<string>\",\n              \"isrcs\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"releases\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                }\n              ],\n              \"tags\": [\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                },\n                {\n                  \"name\": \"<string>\",\n                  \"count\": \"<integer>\"\n                }\n              ],\n              \"rating\": {\n                \"value\": \"<float>\",\n                \"votes-count\": \"<integer>\"\n              },\n              \"relations\": [\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                },\n                {\n                  \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                }\n              ]\n            },\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"release-group\": {\n    \"id\": \"8faff55b-d96b-1a91-be51-6e20bbb95e0f\",\n    \"title\": \"<string>\",\n    \"primary-type\": \"Broadcast\",\n    \"primary-type-id\": \"<string>\",\n    \"secondary-types\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"secondary-type-ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"first-release-date\": \"<string>\",\n    \"disambiguation\": \"<string>\",\n    \"releases\": [\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n      },\n      {\n        \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"name\": \"<string>\",\n        \"count\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"count\": \"<integer>\"\n      }\n    ],\n    \"rating\": {\n      \"value\": \"<float>\",\n      \"votes-count\": \"<integer>\"\n    }\n  },\n  \"label-info\": [\n    {\n      \"catalog-number\": \"<string>\",\n      \"label\": {\n        \"id\": \"922bc1a7-5462-ae25-ea3b-5ea2e88bdefb\",\n        \"name\": \"<string>\",\n        \"sort-name\": \"<string>\",\n        \"type\": \"Reissue Production\",\n        \"type-id\": \"<string>\",\n        \"label-code\": \"<integer>\",\n        \"country\": \"<string>\",\n        \"area\": {\n          \"id\": \"5cd1fce5-5353-12f3-b9d4-9a38f2c0f232\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Country\",\n          \"type-id\": \"976be515-f185-45bb-a067-720a7215de2d\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"ipis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"isnis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"disambiguation\": \"<string>\",\n        \"life-span\": {\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        }\n      }\n    },\n    {\n      \"catalog-number\": \"<string>\",\n      \"label\": {\n        \"id\": \"75fe7fde-ff10-0ceb-d871-29b08298e357\",\n        \"name\": \"<string>\",\n        \"sort-name\": \"<string>\",\n        \"type\": \"Distributor\",\n        \"type-id\": \"<string>\",\n        \"label-code\": \"<integer>\",\n        \"country\": \"<string>\",\n        \"area\": {\n          \"id\": \"29d0d52b-d2de-1861-edcd-351b9840a85c\",\n          \"name\": \"<string>\",\n          \"sort-name\": \"<string>\",\n          \"type\": \"Subdivision\",\n          \"type-id\": \"f2e16594-12a8-4ebb-8788-75d0a3d7f18e\",\n          \"iso-3166-1-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-2-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"iso-3166-3-codes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"disambiguation\": \"<string>\",\n          \"life-span\": {\n            \"begin\": \"<string>\",\n            \"end\": \"<string>\",\n            \"ended\": \"<boolean>\"\n          }\n        },\n        \"ipis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"isnis\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"disambiguation\": \"<string>\",\n        \"life-span\": {\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        }\n      }\n    }\n  ],\n  \"media\": [\n    {\n      \"position\": \"<integer>\",\n      \"format\": \"<string>\",\n      \"format-id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"track-count\": \"<integer>\",\n      \"tracks\": [\n        {\n          \"id\": \"7e3aff63-694f-5558-70db-6574f5b9a54b\",\n          \"position\": \"<integer>\",\n          \"number\": \"<string>\",\n          \"title\": \"<string>\",\n          \"length\": \"<integer>\",\n          \"recording\": {\n            \"id\": \"7874edee-5a09-41a9-3f6a-25a9831be76c\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          }\n        },\n        {\n          \"id\": \"95ca8eec-2843-7562-4815-3e08b206dc68\",\n          \"position\": \"<integer>\",\n          \"number\": \"<string>\",\n          \"title\": \"<string>\",\n          \"length\": \"<integer>\",\n          \"recording\": {\n            \"id\": \"74f7e672-ea99-b0e6-3c8e-ba1d54446359\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"discs\": [\n        {\n          \"id\": \"<string>\",\n          \"sectors\": \"<integer>\",\n          \"offsets\": [\n            \"<integer>\",\n            \"<integer>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"sectors\": \"<integer>\",\n          \"offsets\": [\n            \"<integer>\",\n            \"<integer>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"position\": \"<integer>\",\n      \"format\": \"<string>\",\n      \"format-id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"track-count\": \"<integer>\",\n      \"tracks\": [\n        {\n          \"id\": \"555f99f4-a206-ffff-2f13-8746fbe8c1cb\",\n          \"position\": \"<integer>\",\n          \"number\": \"<string>\",\n          \"title\": \"<string>\",\n          \"length\": \"<integer>\",\n          \"recording\": {\n            \"id\": \"50d135e4-bb60-4ce4-2f6e-581eca575715\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          }\n        },\n        {\n          \"id\": \"8a956cb0-6918-df9f-854c-a22dd8921d67\",\n          \"position\": \"<integer>\",\n          \"number\": \"<string>\",\n          \"title\": \"<string>\",\n          \"length\": \"<integer>\",\n          \"recording\": {\n            \"id\": \"13147d27-394f-5a01-ffaa-14c6cd60c313\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"discs\": [\n        {\n          \"id\": \"<string>\",\n          \"sectors\": \"<integer>\",\n          \"offsets\": [\n            \"<integer>\",\n            \"<integer>\"\n          ]\n        },\n        {\n          \"id\": \"<string>\",\n          \"sectors\": \"<integer>\",\n          \"offsets\": [\n            \"<integer>\",\n            \"<integer>\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"cover-art-archive\": {\n    \"artwork\": \"<boolean>\",\n    \"count\": \"<integer>\",\n    \"front\": \"<boolean>\",\n    \"back\": \"<boolean>\",\n    \"darkened\": \"<boolean>\"\n  },\n  \"text-representation\": {\n    \"language\": \"<string>\",\n    \"script\": \"<string>\"\n  },\n  \"tags\": [\n    {\n      \"name\": \"<string>\",\n      \"count\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"count\": \"<integer>\"\n    }\n  ],\n  \"rating\": {\n    \"value\": \"<float>\",\n    \"votes-count\": \"<integer>\"\n  },\n  \"relations\": [\n    {\n      \"type\": \"<string>\",\n      \"type-id\": \"8e4d1ee2-6d4d-9407-a57e-0841d30d068a\",\n      \"direction\": \"backward\",\n      \"target-type\": \"<string>\",\n      \"target-credit\": \"<string>\",\n      \"attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"artist\": {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      },\n      \"url\": {\n        \"id\": \"ea9ca0e1-4808-7187-58c6-6bdac80e001c\",\n        \"resource\": \"<uri>\",\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"work\": {\n        \"id\": \"6860f0da-2ac3-95e1-ba69-5631210cb37a\",\n        \"title\": \"<string>\",\n        \"type\": \"<string>\",\n        \"type-id\": \"<string>\",\n        \"language\": \"<string>\",\n        \"languages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"iswcs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"attributes\": [\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"value\": \"<string>\",\n            \"value-id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"value\": \"<string>\",\n            \"value-id\": \"<string>\"\n          }\n        ],\n        \"disambiguation\": \"<string>\",\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"recording\": {\n        \"id\": \"a0489fba-dd6d-8143-a455-17851a13959a\",\n        \"title\": \"<string>\",\n        \"length\": \"<integer>\",\n        \"video\": \"<boolean>\",\n        \"disambiguation\": \"<string>\",\n        \"first-release-date\": \"<string>\",\n        \"isrcs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"releases\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"begin\": \"<string>\",\n      \"end\": \"<string>\",\n      \"ended\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"type-id\": \"09fd8afc-ee32-6b78-d170-41b55c777610\",\n      \"direction\": \"forward\",\n      \"target-type\": \"<string>\",\n      \"target-credit\": \"<string>\",\n      \"attributes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"artist\": {\n        \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n      },\n      \"url\": {\n        \"id\": \"5223f591-6dfd-e060-93dd-fd972a84b8b0\",\n        \"resource\": \"<uri>\",\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"work\": {\n        \"id\": \"38546e57-a7fe-8880-c2be-22e53de5e440\",\n        \"title\": \"<string>\",\n        \"type\": \"<string>\",\n        \"type-id\": \"<string>\",\n        \"language\": \"<string>\",\n        \"languages\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"iswcs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"attributes\": [\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"value\": \"<string>\",\n            \"value-id\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"value\": \"<string>\",\n            \"value-id\": \"<string>\"\n          }\n        ],\n        \"disambiguation\": \"<string>\",\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"recording\": {\n        \"id\": \"9388ab02-81b1-0095-ee45-07092e517e8c\",\n        \"title\": \"<string>\",\n        \"length\": \"<integer>\",\n        \"video\": \"<boolean>\",\n        \"disambiguation\": \"<string>\",\n        \"first-release-date\": \"<string>\",\n        \"isrcs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"releases\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"begin\": \"<string>\",\n      \"end\": \"<string>\",\n      \"ended\": \"<boolean>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-825ba2fb-9a0f-4231-8c2c-a36de78f4f1a"
+                },
+                {
+                  "id": "3df5791e-1b99-410f-a4ac-8c03b570e633",
+                  "name": "Malformed request or invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/release/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "release",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-3df5791e-1b99-410f-a4ac-8c03b570e633"
+                },
+                {
+                  "id": "7dace1fa-f3cd-46ad-bab8-e3d259b4e398",
+                  "name": "Entity not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/release/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "release",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-7dace1fa-f3cd-46ad-bab8-e3d259b4e398"
+                },
+                {
+                  "id": "3449f895-d65e-49d2-935e-d938cd34eb46",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/release/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "release",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-3449f895-d65e-49d2-935e-d938cd34eb46"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:51.000Z",
+              "updatedAt": "2026-07-28T02:15:51.000Z",
+              "uid": "35240-ae208be9-9792-49cc-b223-a874e3199ee2"
+            }
+          ],
+          "id": "d1d8c564-bf2b-4b04-b9e3-09d849a3bf8a",
+          "createdAt": "2026-07-28T02:15:51.000Z",
+          "updatedAt": "2026-07-28T02:15:51.000Z",
+          "uid": "35240-d1d8c564-bf2b-4b04-b9e3-09d849a3bf8a"
+        },
+        {
+          "name": "Browse Or Search Releases",
+          "id": "850c303f-a629-44f3-a492-12982b92174c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/release?query=<string>&area=<uuid>&artist=<uuid>&collection=<uuid>&label=<uuid>&recording=<uuid>&release-group=<uuid>&track=<uuid>&track_artist=<uuid>&type=<string>&status=promotion&limit=25&offset=0&inc=<string>&fmt=xml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "release"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "key": "area",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "artist",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "collection",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "label",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "recording",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "release-group",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "track",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "track_artist",
+                  "value": "<uuid>"
+                },
+                {
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "key": "status",
+                  "value": "promotion"
+                },
+                {
+                  "description": "Maximum number of results to return (1-100, default 25).",
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "description": "Zero-based offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                  "key": "inc",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                  "key": "fmt",
+                  "value": "xml"
+                }
+              ]
+            },
+            "description": "Browse releases linked to a parent entity or search by Lucene query. Browse may be filtered by `type`, `status`, and `release-group-status`."
+          },
+          "response": [
+            {
+              "id": "76f9083b-f868-4afb-84f2-c18a22e9f241",
+              "name": "Browse or search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/release?query=<string>&area=<uuid>&artist=<uuid>&collection=<uuid>&label=<uuid>&recording=<uuid>&release-group=<uuid>&track=<uuid>&track_artist=<uuid>&type=<string>&status=promotion&limit=25&offset=0&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "area",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "recording",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "release-group",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track_artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "promotion"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"release-count\": \"<integer>\",\n  \"release-offset\": \"<integer>\",\n  \"releases\": [\n    {\n      \"id\": \"8132f54d-54eb-7829-706f-fc7c4bcb8d13\",\n      \"title\": \"<string>\",\n      \"status\": \"Official\",\n      \"status-id\": \"<string>\",\n      \"quality\": \"high\",\n      \"packaging\": \"<string>\",\n      \"packaging-id\": \"<string>\",\n      \"language\": \"<string>\",\n      \"script\": \"<string>\",\n      \"date\": \"<string>\",\n      \"country\": \"<string>\",\n      \"barcode\": \"<string>\",\n      \"asin\": \"<string>\",\n      \"disambiguation\": \"<string>\",\n      \"artist-credit\": [\n        {\n          \"name\": \"<string>\",\n          \"joinphrase\": \"<string>\",\n          \"artist\": {\n            \"id\": \"76371abc-fdde-d95b-8e88-700d2fa725f2\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Person\",\n            \"type-id\": \"74c71b6e-d9e1-28e3-bbf4-d5aa8efa2a76\",\n            \"gender\": \"Male\",\n            \"gender-id\": \"<string>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"fe8f5cff-133b-2e27-7e70-ca7407ca20ce\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"City\",\n              \"type-id\": \"75f4eb5b-9a49-dff8-a1e0-019b671a871e\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"begin-area\": {\n              \"id\": \"be0f1700-cb68-9b4f-3b14-158e2fd99b91\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Subdivision\",\n              \"type-id\": \"1e7251cf-a93e-0428-9049-3cbb382124ee\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"end-area\": {\n              \"id\": \"a37c4262-bb18-a6e5-0337-b2790c04054c\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Subdivision\",\n              \"type-id\": \"71334bb5-8aa7-1cb9-f16f-8489c7ea7ec9\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"disambiguation\": \"<string>\",\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"aliases\": [\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"4312114f-b04b-dbc9-aa2c-d1180c04b341\",\n                \"direction\": \"forward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"872bc734-36ed-5515-d68b-fe2d328638c6\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"f2786a36-d760-65a3-e47e-93f1b11cea94\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"02504c58-71de-3b02-ad3a-01899fce32cd\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"6765b49e-599d-e5e9-6baf-ad624858ab83\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"e8387b95-8524-7293-9a94-d8579eb6f971\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"7bad2513-2b7f-8330-1e8f-07d369df047f\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"41cdbba5-4414-1faf-7f24-4016e8eb1fe7\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            ]\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"joinphrase\": \"<string>\",\n          \"artist\": {\n            \"id\": \"f6ec118f-6e9c-8f6e-cac0-937e8cce9785\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Character\",\n            \"type-id\": \"3222fa89-10df-038d-35a4-3f2add187c46\",\n            \"gender\": \"Female\",\n            \"gender-id\": \"<string>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"1843499a-1a93-f935-c857-10a955ea4195\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Country\",\n              \"type-id\": \"75cc41b6-3f30-6623-d277-d5e592a32ad9\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"begin-area\": {\n              \"id\": \"a8146974-4b30-f51f-9530-19fc4cf019cf\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Country\",\n              \"type-id\": \"20bde06f-3e0b-b090-7f70-d7926c8269bd\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"end-area\": {\n              \"id\": \"23a96070-12fc-2bd8-0ac5-4578b6abbd45\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"City\",\n              \"type-id\": \"844b7f35-ea0d-2933-c3ad-5d374a69e62d\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"disambiguation\": \"<string>\",\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"aliases\": [\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"0147f9f8-8cc9-46ff-8278-7692f9efcd59\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"2765a675-24d8-21f7-5f9c-1bf58673eddb\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"a81fd111-4e8b-d72b-ca02-89784f018e5e\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"ea2436ec-5873-7db9-9d27-185f11c2775d\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"3a330f0c-849d-9f3f-b53f-dda0ece84c49\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"cfff0636-6284-37f5-0485-83a36e3ac2f5\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"0ceeef34-a490-a1f4-5635-1caddec0d066\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"3e351629-40e7-757e-4fba-0f504c865de8\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"release-group\": {\n        \"id\": \"b35fa474-aaaa-c551-5328-9cab09ac2161\",\n        \"title\": \"<string>\",\n        \"primary-type\": \"Album\",\n        \"primary-type-id\": \"<string>\",\n        \"secondary-types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"secondary-type-ids\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"first-release-date\": \"<string>\",\n        \"disambiguation\": \"<string>\",\n        \"releases\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        }\n      },\n      \"label-info\": [\n        {\n          \"catalog-number\": \"<string>\",\n          \"label\": {\n            \"id\": \"90ee0efc-0041-f8d7-3630-50019097eaec\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Imprint\",\n            \"type-id\": \"<string>\",\n            \"label-code\": \"<integer>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"97610346-86ba-3c3c-a97b-e45c9ba65394\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Municipality\",\n              \"type-id\": \"dfa25f1c-fd84-193d-8de4-e550ebd403b5\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"disambiguation\": \"<string>\",\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            }\n          }\n        },\n        {\n          \"catalog-number\": \"<string>\",\n          \"label\": {\n            \"id\": \"a3606975-06e5-3f45-126f-914bb26a2efb\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Publisher\",\n            \"type-id\": \"<string>\",\n            \"label-code\": \"<integer>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"42d8ae2c-ebe4-ec63-5241-372d46c802ef\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"District\",\n              \"type-id\": \"0b1f32b4-5f67-41c5-d8e8-2968c82ecec3\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"disambiguation\": \"<string>\",\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            }\n          }\n        }\n      ],\n      \"media\": [\n        {\n          \"position\": \"<integer>\",\n          \"format\": \"<string>\",\n          \"format-id\": \"<string>\",\n          \"title\": \"<string>\",\n          \"track-count\": \"<integer>\",\n          \"tracks\": [\n            {\n              \"id\": \"98c0ec36-46aa-da6d-dce9-52ca6c306320\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"ae01f37d-67c2-f9f6-cf5a-69428376c8ba\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            },\n            {\n              \"id\": \"107c61fc-614a-bbb4-4fd6-894216ab70ec\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"aa0cfdfa-11ee-7893-2721-4fb1866ead54\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            }\n          ],\n          \"discs\": [\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            },\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            }\n          ]\n        },\n        {\n          \"position\": \"<integer>\",\n          \"format\": \"<string>\",\n          \"format-id\": \"<string>\",\n          \"title\": \"<string>\",\n          \"track-count\": \"<integer>\",\n          \"tracks\": [\n            {\n              \"id\": \"910574c1-5bea-a9b9-6c1d-0e02e3a87d6d\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"2ff38d98-d660-7baa-de5a-3d5ab0352083\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            },\n            {\n              \"id\": \"15fee454-bc85-7da3-5eb6-12c7ff48c805\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"57ffeeec-4489-a0b4-1e97-8840c551d051\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            }\n          ],\n          \"discs\": [\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            },\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            }\n          ]\n        }\n      ],\n      \"cover-art-archive\": {\n        \"artwork\": \"<boolean>\",\n        \"count\": \"<integer>\",\n        \"front\": \"<boolean>\",\n        \"back\": \"<boolean>\",\n        \"darkened\": \"<boolean>\"\n      },\n      \"text-representation\": {\n        \"language\": \"<string>\",\n        \"script\": \"<string>\"\n      },\n      \"tags\": [\n        {\n          \"name\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"count\": \"<integer>\"\n        }\n      ],\n      \"rating\": {\n        \"value\": \"<float>\",\n        \"votes-count\": \"<integer>\"\n      },\n      \"relations\": [\n        {\n          \"type\": \"<string>\",\n          \"type-id\": \"b1f0d29b-dcb5-7651-5b44-e338a89e0f37\",\n          \"direction\": \"backward\",\n          \"target-type\": \"<string>\",\n          \"target-credit\": \"<string>\",\n          \"attributes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"artist\": {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          \"url\": {\n            \"id\": \"b63742f1-0ede-8756-c9da-1d98309d01b3\",\n            \"resource\": \"<uri>\",\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": \"873fae6a-dfd5-fc0a-ebd4-9603cd1f234e\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"language\": \"<string>\",\n            \"languages\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"iswcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"attributes\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              }\n            ],\n            \"disambiguation\": \"<string>\",\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"id\": \"a4cb9b2e-2d35-b6a5-e42f-ba4237ce75e6\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"type-id\": \"01d69fb9-b970-af95-147f-825e78306011\",\n          \"direction\": \"forward\",\n          \"target-type\": \"<string>\",\n          \"target-credit\": \"<string>\",\n          \"attributes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"artist\": {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          \"url\": {\n            \"id\": \"455b8adc-f087-5334-9841-8b6e0dbdbfa2\",\n            \"resource\": \"<uri>\",\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": \"c221c5b5-4450-1ed9-1848-bf5a0c94712e\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"language\": \"<string>\",\n            \"languages\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"iswcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"attributes\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              }\n            ],\n            \"disambiguation\": \"<string>\",\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"id\": \"05e03930-cfbb-9b37-5d0b-6ac1b6c93b3d\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"89fd1d2f-e099-908b-6b2b-1294253d73b1\",\n      \"title\": \"<string>\",\n      \"status\": \"Bootleg\",\n      \"status-id\": \"<string>\",\n      \"quality\": \"high\",\n      \"packaging\": \"<string>\",\n      \"packaging-id\": \"<string>\",\n      \"language\": \"<string>\",\n      \"script\": \"<string>\",\n      \"date\": \"<string>\",\n      \"country\": \"<string>\",\n      \"barcode\": \"<string>\",\n      \"asin\": \"<string>\",\n      \"disambiguation\": \"<string>\",\n      \"artist-credit\": [\n        {\n          \"name\": \"<string>\",\n          \"joinphrase\": \"<string>\",\n          \"artist\": {\n            \"id\": \"e11c4726-0ca1-2a64-dc5e-d1a6b0a16bfb\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Other\",\n            \"type-id\": \"61ff8f41-9488-215e-0a0a-16fa1db3a5ee\",\n            \"gender\": \"Male\",\n            \"gender-id\": \"<string>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"77ef0721-d088-3142-f4e6-4f85020d7be7\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Island\",\n              \"type-id\": \"f52d94e2-2ad5-55e2-7697-73a0445d5c87\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"begin-area\": {\n              \"id\": \"71be255d-c05c-f1a7-a3ae-e5def095bb84\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"County\",\n              \"type-id\": \"64105704-2dc0-5d93-8756-7fdfc2fc9442\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"end-area\": {\n              \"id\": \"17c9e80b-c498-3a72-d813-a25ebeedceab\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Island\",\n              \"type-id\": \"9214c928-3556-4395-7205-bc1a91cd5880\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"disambiguation\": \"<string>\",\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"aliases\": [\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"be1480f8-21d4-29c8-dcd7-5634f42f94f6\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"e15a8e18-8a22-2adf-987b-a0ffe7f520ac\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"89b5b9bd-e170-ad97-a71b-13c77504cf54\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"e6d25251-065c-eee0-017b-535de6cd9f2d\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"28967648-3455-8526-ccbe-d146df1cf840\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"c837be46-9734-e22d-8797-4875aafdd809\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"a5ef135c-9158-e14d-670a-d2b710464648\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"7ca3c6c0-8c8c-70d6-ba47-bfa66f5d3471\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            ]\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"joinphrase\": \"<string>\",\n          \"artist\": {\n            \"id\": \"6e7d746f-256d-ac8d-5c3b-ecd8cf3a6d93\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Group\",\n            \"type-id\": \"ac500ff9-be0d-2c19-c657-c1b0a7927388\",\n            \"gender\": \"Other\",\n            \"gender-id\": \"<string>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"d6f28c2a-41f8-8cc7-6b73-bcd2d6b51d9b\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"City\",\n              \"type-id\": \"98f8beae-a1da-50b2-7366-aa91955dcd15\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"begin-area\": {\n              \"id\": \"c9cd143b-8599-145c-b1d1-4cb17ec08d6b\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"District\",\n              \"type-id\": \"afc379ea-9087-23e7-5073-00b53e6f82e7\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"end-area\": {\n              \"id\": \"d7b5029e-58a0-7bc6-005c-7d27b842782e\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Country\",\n              \"type-id\": \"3b2c1931-c9aa-abc7-0c11-af6a1f827f93\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"disambiguation\": \"<string>\",\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"aliases\": [\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"sort-name\": \"<string>\",\n                \"locale\": \"<string>\",\n                \"type\": \"<string>\",\n                \"primary\": \"<boolean>\",\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"11b1c014-3188-ee73-d54d-7cc83863f3be\",\n                \"direction\": \"backward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"e1bb6fdf-d535-7146-e4a7-54d33186f531\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"302f0a09-4289-3a96-46a6-6e8656b3517d\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"111f566b-0436-d5f7-4c9d-62ed11414188\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"9c31f800-1af4-592b-50da-8f0d96255267\",\n                \"direction\": \"forward\",\n                \"target-type\": \"<string>\",\n                \"target-credit\": \"<string>\",\n                \"attributes\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"artist\": {\n                  \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n                },\n                \"url\": {\n                  \"id\": \"4c899762-91b8-9a1a-044e-45fdf2d35b6e\",\n                  \"resource\": \"<uri>\",\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"work\": {\n                  \"id\": \"07365f11-b1fd-7006-a906-c3470e2198d6\",\n                  \"title\": \"<string>\",\n                  \"type\": \"<string>\",\n                  \"type-id\": \"<string>\",\n                  \"language\": \"<string>\",\n                  \"languages\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"iswcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"attributes\": [\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    },\n                    {\n                      \"type\": \"<string>\",\n                      \"type-id\": \"<string>\",\n                      \"value\": \"<string>\",\n                      \"value-id\": \"<string>\"\n                    }\n                  ],\n                  \"disambiguation\": \"<string>\",\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"recording\": {\n                  \"id\": \"7054534b-7f66-e929-0a4c-83975219c124\",\n                  \"title\": \"<string>\",\n                  \"length\": \"<integer>\",\n                  \"video\": \"<boolean>\",\n                  \"disambiguation\": \"<string>\",\n                  \"first-release-date\": \"<string>\",\n                  \"isrcs\": [\n                    \"<string>\",\n                    \"<string>\"\n                  ],\n                  \"releases\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                    }\n                  ],\n                  \"tags\": [\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    },\n                    {\n                      \"name\": \"<string>\",\n                      \"count\": \"<integer>\"\n                    }\n                  ],\n                  \"rating\": {\n                    \"value\": \"<float>\",\n                    \"votes-count\": \"<integer>\"\n                  },\n                  \"relations\": [\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    },\n                    {\n                      \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                    }\n                  ]\n                },\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            ]\n          }\n        }\n      ],\n      \"release-group\": {\n        \"id\": \"fc0753ba-0817-440f-b1c2-9bda2ed05767\",\n        \"title\": \"<string>\",\n        \"primary-type\": \"Broadcast\",\n        \"primary-type-id\": \"<string>\",\n        \"secondary-types\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"secondary-type-ids\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"first-release-date\": \"<string>\",\n        \"disambiguation\": \"<string>\",\n        \"releases\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"count\": \"<integer>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": \"<float>\",\n          \"votes-count\": \"<integer>\"\n        }\n      },\n      \"label-info\": [\n        {\n          \"catalog-number\": \"<string>\",\n          \"label\": {\n            \"id\": \"36f8737c-0461-314a-3b9e-0ecee4d323ce\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Publisher\",\n            \"type-id\": \"<string>\",\n            \"label-code\": \"<integer>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"e5b87bf6-2589-081d-c716-e846aab7185f\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Municipality\",\n              \"type-id\": \"a22e160c-71f3-aafd-949f-3c874183c936\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"disambiguation\": \"<string>\",\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            }\n          }\n        },\n        {\n          \"catalog-number\": \"<string>\",\n          \"label\": {\n            \"id\": \"ffc88933-2488-a06a-cdda-a095038f848b\",\n            \"name\": \"<string>\",\n            \"sort-name\": \"<string>\",\n            \"type\": \"Bootleg Production\",\n            \"type-id\": \"<string>\",\n            \"label-code\": \"<integer>\",\n            \"country\": \"<string>\",\n            \"area\": {\n              \"id\": \"341c98d0-fc49-da90-9530-0a43abacdbd0\",\n              \"name\": \"<string>\",\n              \"sort-name\": \"<string>\",\n              \"type\": \"Island\",\n              \"type-id\": \"2fe97cf4-da5a-efe6-7b82-24ca3e8667e0\",\n              \"iso-3166-1-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-2-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"iso-3166-3-codes\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"disambiguation\": \"<string>\",\n              \"life-span\": {\n                \"begin\": \"<string>\",\n                \"end\": \"<string>\",\n                \"ended\": \"<boolean>\"\n              }\n            },\n            \"ipis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"isnis\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"disambiguation\": \"<string>\",\n            \"life-span\": {\n              \"begin\": \"<string>\",\n              \"end\": \"<string>\",\n              \"ended\": \"<boolean>\"\n            },\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            }\n          }\n        }\n      ],\n      \"media\": [\n        {\n          \"position\": \"<integer>\",\n          \"format\": \"<string>\",\n          \"format-id\": \"<string>\",\n          \"title\": \"<string>\",\n          \"track-count\": \"<integer>\",\n          \"tracks\": [\n            {\n              \"id\": \"08286f35-5e86-edae-dd06-56f2dc64d858\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"5f162f28-dc06-5f44-df54-829abae60935\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            },\n            {\n              \"id\": \"014aab12-e050-28f3-2cd0-84cb807cc430\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"e0811b1f-6e3f-0332-c40b-3fc4b8a80389\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            }\n          ],\n          \"discs\": [\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            },\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            }\n          ]\n        },\n        {\n          \"position\": \"<integer>\",\n          \"format\": \"<string>\",\n          \"format-id\": \"<string>\",\n          \"title\": \"<string>\",\n          \"track-count\": \"<integer>\",\n          \"tracks\": [\n            {\n              \"id\": \"9474c9a6-c352-0adb-2d22-0e8202742838\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"51dea6e1-64cc-71fd-a721-0e856b2aed55\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            },\n            {\n              \"id\": \"bf543f7b-f8d7-33ff-78c2-112bb47caab2\",\n              \"position\": \"<integer>\",\n              \"number\": \"<string>\",\n              \"title\": \"<string>\",\n              \"length\": \"<integer>\",\n              \"recording\": {\n                \"id\": \"14456eed-3734-8b61-a0eb-403f233a830e\",\n                \"title\": \"<string>\",\n                \"length\": \"<integer>\",\n                \"video\": \"<boolean>\",\n                \"disambiguation\": \"<string>\",\n                \"first-release-date\": \"<string>\",\n                \"isrcs\": [\n                  \"<string>\",\n                  \"<string>\"\n                ],\n                \"releases\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n                  }\n                ],\n                \"tags\": [\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  },\n                  {\n                    \"name\": \"<string>\",\n                    \"count\": \"<integer>\"\n                  }\n                ],\n                \"rating\": {\n                  \"value\": \"<float>\",\n                  \"votes-count\": \"<integer>\"\n                },\n                \"relations\": [\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  },\n                  {\n                    \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n                  }\n                ]\n              }\n            }\n          ],\n          \"discs\": [\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            },\n            {\n              \"id\": \"<string>\",\n              \"sectors\": \"<integer>\",\n              \"offsets\": [\n                \"<integer>\",\n                \"<integer>\"\n              ]\n            }\n          ]\n        }\n      ],\n      \"cover-art-archive\": {\n        \"artwork\": \"<boolean>\",\n        \"count\": \"<integer>\",\n        \"front\": \"<boolean>\",\n        \"back\": \"<boolean>\",\n        \"darkened\": \"<boolean>\"\n      },\n      \"text-representation\": {\n        \"language\": \"<string>\",\n        \"script\": \"<string>\"\n      },\n      \"tags\": [\n        {\n          \"name\": \"<string>\",\n          \"count\": \"<integer>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"count\": \"<integer>\"\n        }\n      ],\n      \"rating\": {\n        \"value\": \"<float>\",\n        \"votes-count\": \"<integer>\"\n      },\n      \"relations\": [\n        {\n          \"type\": \"<string>\",\n          \"type-id\": \"bcb6978a-a896-fca7-cd96-06254b13354d\",\n          \"direction\": \"backward\",\n          \"target-type\": \"<string>\",\n          \"target-credit\": \"<string>\",\n          \"attributes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"artist\": {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          \"url\": {\n            \"id\": \"223167ff-0bc8-bb09-6770-7806c1bdfddb\",\n            \"resource\": \"<uri>\",\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": \"8fcf213b-dafd-61e2-dffe-c46339f55c08\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"language\": \"<string>\",\n            \"languages\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"iswcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"attributes\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              }\n            ],\n            \"disambiguation\": \"<string>\",\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"id\": \"e534a8fd-97ed-8234-e0c5-bfc9b2d7a002\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"type-id\": \"fcd73954-7405-7434-bdd2-a6763ff1c471\",\n          \"direction\": \"backward\",\n          \"target-type\": \"<string>\",\n          \"target-credit\": \"<string>\",\n          \"attributes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"artist\": {\n            \"value\": \"<Circular reference to #/components/schemas/Artist detected>\"\n          },\n          \"url\": {\n            \"id\": \"b20f8548-fdc6-2d0c-dfec-a17788525669\",\n            \"resource\": \"<uri>\",\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": \"fb29e1e1-a375-70c3-59b8-c9cd66026f9b\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"type-id\": \"<string>\",\n            \"language\": \"<string>\",\n            \"languages\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"iswcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"attributes\": [\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              },\n              {\n                \"type\": \"<string>\",\n                \"type-id\": \"<string>\",\n                \"value\": \"<string>\",\n                \"value-id\": \"<string>\"\n              }\n            ],\n            \"disambiguation\": \"<string>\",\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"id\": \"194e2a63-0d15-10e2-5032-677068844ebd\",\n            \"title\": \"<string>\",\n            \"length\": \"<integer>\",\n            \"video\": \"<boolean>\",\n            \"disambiguation\": \"<string>\",\n            \"first-release-date\": \"<string>\",\n            \"isrcs\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Release detected>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              },\n              {\n                \"name\": \"<string>\",\n                \"count\": \"<integer>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<float>\",\n              \"votes-count\": \"<integer>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n              }\n            ]\n          },\n          \"begin\": \"<string>\",\n          \"end\": \"<string>\",\n          \"ended\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:15:51.000Z",
+              "updatedAt": "2026-07-28T02:15:51.000Z",
+              "uid": "35240-76f9083b-f868-4afb-84f2-c18a22e9f241"
+            },
+            {
+              "id": "a4ce6978-77d7-4105-9b5e-d0a58eb39600",
+              "name": "Malformed request or invalid parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/release?query=<string>&area=<uuid>&artist=<uuid>&collection=<uuid>&label=<uuid>&recording=<uuid>&release-group=<uuid>&track=<uuid>&track_artist=<uuid>&type=<string>&status=promotion&limit=25&offset=0&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "area",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "recording",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "release-group",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track_artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "promotion"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:51.000Z",
+              "updatedAt": "2026-07-28T02:15:51.000Z",
+              "uid": "35240-a4ce6978-77d7-4105-9b5e-d0a58eb39600"
+            },
+            {
+              "id": "e097239f-d34e-4dac-bb47-310582432960",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/release?query=<string>&area=<uuid>&artist=<uuid>&collection=<uuid>&label=<uuid>&recording=<uuid>&release-group=<uuid>&track=<uuid>&track_artist=<uuid>&type=<string>&status=promotion&limit=25&offset=0&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "area",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "recording",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "release-group",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "track_artist",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "promotion"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:51.000Z",
+              "updatedAt": "2026-07-28T02:15:51.000Z",
+              "uid": "35240-e097239f-d34e-4dac-bb47-310582432960"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:51.000Z",
+          "updatedAt": "2026-07-28T02:15:51.000Z",
+          "uid": "35240-850c303f-a629-44f3-a492-12982b92174c"
+        }
+      ],
+      "id": "449b8737-eb0d-480a-949a-8260fa40d03a",
+      "createdAt": "2026-07-28T02:15:51.000Z",
+      "updatedAt": "2026-07-28T02:15:51.000Z",
+      "uid": "35240-449b8737-eb0d-480a-949a-8260fa40d03a"
+    },
+    {
+      "name": "discid",
+      "item": [
+        {
+          "name": "{discid}",
+          "item": [
+            {
+              "name": "Lookup Releases By Disc ID",
+              "id": "c60412c6-94a0-42af-9e0a-272c780d8362",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/discid/:discid?toc=<string>&cdstubs=yes&media-format=<string>&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "discid",
+                    ":discid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found.",
+                      "key": "toc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Whether to include CD-stub matches when no release matches.",
+                      "key": "cdstubs",
+                      "value": "yes"
+                    },
+                    {
+                      "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`).",
+                      "key": "media-format",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "6a9f6984-9a12-416e-8ce0-2ae0baecfe3d",
+                      "key": "discid",
+                      "value": "<string>",
+                      "description": "(Required) 28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+                    }
+                  ]
+                },
+                "description": "Look up releases that match a CD's MusicBrainz Disc ID. Supports fuzzy TOC matching and optional CD-stub fallback."
+              },
+              "response": [
+                {
+                  "id": "a240f7a6-ef90-4355-9f8c-4667258f9385",
+                  "name": "Releases or CD stubs matching the Disc ID",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/discid/:discid?toc=<string>&cdstubs=yes&media-format=<string>&inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "discid",
+                        ":discid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found.",
+                          "key": "toc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include CD-stub matches when no release matches.",
+                          "key": "cdstubs",
+                          "value": "yes"
+                        },
+                        {
+                          "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`).",
+                          "key": "media-format",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "discid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-a240f7a6-ef90-4355-9f8c-4667258f9385"
+                },
+                {
+                  "id": "aa97f406-1fe3-461f-b89c-d0010b816de4",
+                  "name": "Entity not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/discid/:discid?toc=<string>&cdstubs=yes&media-format=<string>&inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "discid",
+                        ":discid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found.",
+                          "key": "toc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include CD-stub matches when no release matches.",
+                          "key": "cdstubs",
+                          "value": "yes"
+                        },
+                        {
+                          "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`).",
+                          "key": "media-format",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "discid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-aa97f406-1fe3-461f-b89c-d0010b816de4"
+                },
+                {
+                  "id": "c7ee4277-8fd2-4b24-bca3-df4d8a04d7f4",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/discid/:discid?toc=<string>&cdstubs=yes&media-format=<string>&inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "discid",
+                        ":discid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found.",
+                          "key": "toc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether to include CD-stub matches when no release matches.",
+                          "key": "cdstubs",
+                          "value": "yes"
+                        },
+                        {
+                          "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`).",
+                          "key": "media-format",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "discid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:51.000Z",
+                  "updatedAt": "2026-07-28T02:15:51.000Z",
+                  "uid": "35240-c7ee4277-8fd2-4b24-bca3-df4d8a04d7f4"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:51.000Z",
+              "updatedAt": "2026-07-28T02:15:51.000Z",
+              "uid": "35240-c60412c6-94a0-42af-9e0a-272c780d8362"
+            }
+          ],
+          "id": "7e9ec7de-3422-408a-9e2d-7ef8fa32e3a1",
+          "createdAt": "2026-07-28T02:15:51.000Z",
+          "updatedAt": "2026-07-28T02:15:51.000Z",
+          "uid": "35240-7e9ec7de-3422-408a-9e2d-7ef8fa32e3a1"
+        }
+      ],
+      "id": "7ceb86af-f77f-4d69-88ca-d45c37058b21",
+      "createdAt": "2026-07-28T02:15:51.000Z",
+      "updatedAt": "2026-07-28T02:15:51.000Z",
+      "uid": "35240-7ceb86af-f77f-4d69-88ca-d45c37058b21"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "info": {
+    "_postman_id": "9f39d516-08b7-46a6-aa11-70cf992752db",
+    "name": "MusicBrainz Web Service v2 Areas Genres API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:31.000Z",
+    "updatedAt": "2026-07-28T02:15:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9f39d516-08b7-46a6-aa11-70cf992752db"
+  },
+  "item": [
+    {
+      "name": "genre",
+      "item": [
+        {
+          "name": "all",
+          "item": [
+            {
+              "name": "List All Genres",
+              "id": "4bc95ad3-1f27-468a-8fef-74561369da7f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/genre/all?limit=25&offset=0&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "genre",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                },
+                "description": "Return every entry from the curated MusicBrainz genre taxonomy. Also supports `fmt=txt` for a plain-text list of genre names."
+              },
+              "response": [
+                {
+                  "id": "68f814a9-c5e8-4b44-bb10-9604f53cb701",
+                  "name": "Genre list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/genre/all?limit=25&offset=0&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "genre",
+                        "all"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (1-100, default 25).",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Zero-based offset into the result set for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"genre-count\": \"<integer>\",\n  \"genre-offset\": \"<integer>\",\n  \"genres\": [\n    {\n      \"id\": \"e8352887-4118-9039-4d03-73eb9ece0073\",\n      \"name\": \"<string>\",\n      \"disambiguation\": \"<string>\"\n    },\n    {\n      \"id\": \"85f654f8-64ff-8300-c49e-c094117d3527\",\n      \"name\": \"<string>\",\n      \"disambiguation\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:15:32.000Z",
+                  "updatedAt": "2026-07-28T02:15:32.000Z",
+                  "uid": "35240-68f814a9-c5e8-4b44-bb10-9604f53cb701"
+                },
+                {
+                  "id": "c7d8c53a-7fc0-48a0-b9ae-dea91e19cd83",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/genre/all?limit=25&offset=0&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "genre",
+                        "all"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return (1-100, default 25).",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Zero-based offset into the result set for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:32.000Z",
+                  "updatedAt": "2026-07-28T02:15:32.000Z",
+                  "uid": "35240-c7d8c53a-7fc0-48a0-b9ae-dea91e19cd83"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:32.000Z",
+              "updatedAt": "2026-07-28T02:15:32.000Z",
+              "uid": "35240-4bc95ad3-1f27-468a-8fef-74561369da7f"
+            }
+          ],
+          "id": "422868c9-b234-4937-a706-d6388107c2c5",
+          "createdAt": "2026-07-28T02:15:32.000Z",
+          "updatedAt": "2026-07-28T02:15:32.000Z",
+          "uid": "35240-422868c9-b234-4937-a706-d6388107c2c5"
+        }
+      ],
+      "id": "754124ac-c844-49d9-a6b7-ed5d34d4a0f5",
+      "createdAt": "2026-07-28T02:15:32.000Z",
+      "updatedAt": "2026-07-28T02:15:32.000Z",
+      "uid": "35240-754124ac-c844-49d9-a6b7-ed5d34d4a0f5"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}

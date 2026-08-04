@@ -1,0 +1,1269 @@
+{
+  "info": {
+    "_postman_id": "aea59c56-0de9-4fcf-ae43-86404a7d1872",
+    "name": "MusicBrainz Web Service v2 Areas Submission API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:58.000Z",
+    "updatedAt": "2026-07-28T02:15:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-aea59c56-0de9-4fcf-ae43-86404a7d1872"
+  },
+  "item": [
+    {
+      "name": "release",
+      "item": [
+        {
+          "name": "Submit Release Barcodes",
+          "id": "9b2c0a57-35a4-4178-858e-adfe2fe7e5ab",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/release?client=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "release"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                  "key": "client",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Submit GTIN/EAN/UPC barcodes for one or more releases (XML body, requires authentication)."
+          },
+          "response": [
+            {
+              "id": "125e7ec4-3b5a-427d-84e9-54c880e3aea8",
+              "name": "Submission accepted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/release?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-125e7ec4-3b5a-427d-84e9-54c880e3aea8"
+            },
+            {
+              "id": "c9068f12-492f-440f-828c-2d957ad895e2",
+              "name": "Malformed request or invalid parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/release?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-c9068f12-492f-440f-828c-2d957ad895e2"
+            },
+            {
+              "id": "7bb95bfc-1bfc-4d37-8777-cf33c43688b0",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/release?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-7bb95bfc-1bfc-4d37-8777-cf33c43688b0"
+            },
+            {
+              "id": "6233330b-1515-4c95-8258-715026a6fd5c",
+              "name": "Authenticated but not authorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/release?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-6233330b-1515-4c95-8258-715026a6fd5c"
+            },
+            {
+              "id": "6208668d-174d-4ecf-87d8-f512d0906576",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/release?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "release"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-6208668d-174d-4ecf-87d8-f512d0906576"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:58.000Z",
+          "updatedAt": "2026-07-28T02:15:58.000Z",
+          "uid": "35240-9b2c0a57-35a4-4178-858e-adfe2fe7e5ab"
+        }
+      ],
+      "id": "25638850-4c22-4f12-9e4a-ea95d18bc4fb",
+      "createdAt": "2026-07-28T02:15:58.000Z",
+      "updatedAt": "2026-07-28T02:15:58.000Z",
+      "uid": "35240-25638850-4c22-4f12-9e4a-ea95d18bc4fb"
+    },
+    {
+      "name": "recording",
+      "item": [
+        {
+          "name": "Submit Recording ISRCs",
+          "id": "369dcba2-5d42-419c-a7aa-000eadf80fa6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/recording?client=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "recording"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                  "key": "client",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Submit ISRCs for one or more recordings (XML body, requires authentication)."
+          },
+          "response": [
+            {
+              "id": "31622ec1-39d1-48b0-9f39-bc2debf1ceb0",
+              "name": "Submission accepted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/recording?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-31622ec1-39d1-48b0-9f39-bc2debf1ceb0"
+            },
+            {
+              "id": "dda34151-1ea4-4351-8cc4-41b4c6336c3a",
+              "name": "Malformed request or invalid parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/recording?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-dda34151-1ea4-4351-8cc4-41b4c6336c3a"
+            },
+            {
+              "id": "d3777dc1-a0d1-4b5f-b842-6170858cae54",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/recording?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-d3777dc1-a0d1-4b5f-b842-6170858cae54"
+            },
+            {
+              "id": "940f3647-7cde-4aa4-838b-244dc955c4c0",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/recording?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "recording"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-940f3647-7cde-4aa4-838b-244dc955c4c0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:58.000Z",
+          "updatedAt": "2026-07-28T02:15:58.000Z",
+          "uid": "35240-369dcba2-5d42-419c-a7aa-000eadf80fa6"
+        }
+      ],
+      "id": "f7a04eb6-ae17-467d-871d-45ed5f63df6f",
+      "createdAt": "2026-07-28T02:15:58.000Z",
+      "updatedAt": "2026-07-28T02:15:58.000Z",
+      "uid": "35240-f7a04eb6-ae17-467d-871d-45ed5f63df6f"
+    },
+    {
+      "name": "tag",
+      "item": [
+        {
+          "name": "Submit User Tags",
+          "id": "0b96d565-995f-46d7-8b4d-2df83e9b6cb4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tag?client=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tag"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                  "key": "client",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Submit one or more user tags (upvote/downvote/withdraw) on entities (XML body, requires authentication)."
+          },
+          "response": [
+            {
+              "id": "d3ec1dfd-6511-4acc-9e97-c5de268722c2",
+              "name": "Tag submission accepted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tag?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tag"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-d3ec1dfd-6511-4acc-9e97-c5de268722c2"
+            },
+            {
+              "id": "f52c1688-51f5-4020-9cb1-f5308be9fa67",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tag?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tag"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-f52c1688-51f5-4020-9cb1-f5308be9fa67"
+            },
+            {
+              "id": "c330d6f7-a61d-4597-81ed-f153ce3c58ea",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tag?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tag"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-c330d6f7-a61d-4597-81ed-f153ce3c58ea"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:58.000Z",
+          "updatedAt": "2026-07-28T02:15:58.000Z",
+          "uid": "35240-0b96d565-995f-46d7-8b4d-2df83e9b6cb4"
+        }
+      ],
+      "id": "2b43b68a-a997-48e5-a9eb-a1d4741deb86",
+      "createdAt": "2026-07-28T02:15:58.000Z",
+      "updatedAt": "2026-07-28T02:15:58.000Z",
+      "uid": "35240-2b43b68a-a997-48e5-a9eb-a1d4741deb86"
+    },
+    {
+      "name": "rating",
+      "item": [
+        {
+          "name": "Submit User Ratings",
+          "id": "349da0a1-4a32-4f86-8eee-af96767f8352",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "options": {
+                "raw": {
+                  "headerFamily": "xml",
+                  "language": "xml"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/rating?client=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "rating"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                  "key": "client",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Submit one or more user ratings (integer 0-5, with 0 meaning withdraw) on entities (XML body, requires authentication)."
+          },
+          "response": [
+            {
+              "id": "670e28b0-dd79-4287-a923-ad96e8681c24",
+              "name": "Rating submission accepted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rating?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rating"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-670e28b0-dd79-4287-a923-ad96e8681c24"
+            },
+            {
+              "id": "824155a7-0e91-44c6-a02f-60428bbc3764",
+              "name": "Authentication required or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rating?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rating"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-824155a7-0e91-44c6-a02f-60428bbc3764"
+            },
+            {
+              "id": "d9c9c723-42cd-4026-88a7-b817fe3b4c45",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/xml"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "xml",
+                      "language": "xml"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/rating?client=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "rating"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                      "key": "client",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:59.000Z",
+              "updatedAt": "2026-07-28T02:15:59.000Z",
+              "uid": "35240-d9c9c723-42cd-4026-88a7-b817fe3b4c45"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:58.000Z",
+          "updatedAt": "2026-07-28T02:15:58.000Z",
+          "uid": "35240-349da0a1-4a32-4f86-8eee-af96767f8352"
+        }
+      ],
+      "id": "b50b8a95-1ded-4d64-bae7-a443a0e35d97",
+      "createdAt": "2026-07-28T02:15:58.000Z",
+      "updatedAt": "2026-07-28T02:15:58.000Z",
+      "uid": "35240-b50b8a95-1ded-4d64-bae7-a443a0e35d97"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}

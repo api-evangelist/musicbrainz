@@ -1,0 +1,890 @@
+{
+  "info": {
+    "_postman_id": "56347d7e-a8e6-41a8-913e-b4957b64f6c6",
+    "name": "MusicBrainz Web Service v2 Areas Collections API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:29.000Z",
+    "updatedAt": "2026-07-28T02:15:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56347d7e-a8e6-41a8-913e-b4957b64f6c6"
+  },
+  "item": [
+    {
+      "name": "collection",
+      "item": [
+        {
+          "name": "{collection_mbid}",
+          "item": [
+            {
+              "name": "{entity_type}",
+              "item": [
+                {
+                  "name": "Add Entities To Collection",
+                  "id": "0a40f46a-1f0a-4904-adda-2d106fc09a31",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "collection",
+                        ":collection_mbid",
+                        ":entity_type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                          "key": "client",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "b65b7dbf-3457-44fb-9fe5-6670832951f6",
+                          "key": "collection_mbid",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "a96fe342-ac55-4876-aee1-eb731e7255c3",
+                          "key": "entity_type",
+                          "value": "releases",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Add up to ~400 entities (semicolon-separated MBIDs) to an existing collection."
+                  },
+                  "response": [
+                    {
+                      "id": "b067a63f-62c5-4039-81d1-bd88fd5641e1",
+                      "name": "Entities added",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-b067a63f-62c5-4039-81d1-bd88fd5641e1"
+                    },
+                    {
+                      "id": "7f89abe6-0d67-4398-8d98-da13bda6a765",
+                      "name": "Authentication required or invalid credentials",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-7f89abe6-0d67-4398-8d98-da13bda6a765"
+                    },
+                    {
+                      "id": "d00bd1fa-f8e4-428f-abab-7eba986cc4b4",
+                      "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "Seconds to wait before retrying.",
+                            "type": "text/plain"
+                          },
+                          "key": "Retry-After",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-d00bd1fa-f8e4-428f-abab-7eba986cc4b4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:15:30.000Z",
+                  "updatedAt": "2026-07-28T02:15:30.000Z",
+                  "uid": "35240-0a40f46a-1f0a-4904-adda-2d106fc09a31"
+                },
+                {
+                  "name": "Remove Entities From Collection",
+                  "id": "e711be47-e0d0-402b-a017-2cb672c3d16f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "basic",
+                      "basic": [
+                        {
+                          "key": "username",
+                          "value": "{{basicAuthUsername}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "password",
+                          "value": "{{basicAuthPassword}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "collection",
+                        ":collection_mbid",
+                        ":entity_type"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                          "key": "client",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "72f9afe1-ed23-4cff-8961-010ffffb72a4",
+                          "key": "collection_mbid",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        },
+                        {
+                          "id": "4e265090-ed1b-4cd7-ad37-8c66e1e77625",
+                          "key": "entity_type",
+                          "value": "releases",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Remove entities (semicolon-separated MBIDs) from a collection."
+                  },
+                  "response": [
+                    {
+                      "id": "5276ec5f-6812-4195-8dc4-9f71057468be",
+                      "name": "Entities removed",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-5276ec5f-6812-4195-8dc4-9f71057468be"
+                    },
+                    {
+                      "id": "95203fa1-8108-4db8-a2cd-34a8f4309e2c",
+                      "name": "Authentication required or invalid credentials",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-95203fa1-8108-4db8-a2cd-34a8f4309e2c"
+                    },
+                    {
+                      "id": "fb8f1d6c-98ea-422a-8d0b-4738bcedfcb1",
+                      "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/collection/:collection_mbid/:entity_type?client=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "collection",
+                            ":collection_mbid",
+                            ":entity_type"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier in the form `name-version` for submission requests.",
+                              "key": "client",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "collection_mbid"
+                            },
+                            {
+                              "key": "entity_type"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        },
+                        {
+                          "disabled": false,
+                          "description": {
+                            "content": "Seconds to wait before retrying.",
+                            "type": "text/plain"
+                          },
+                          "key": "Retry-After",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T02:15:30.000Z",
+                      "updatedAt": "2026-07-28T02:15:30.000Z",
+                      "uid": "35240-fb8f1d6c-98ea-422a-8d0b-4738bcedfcb1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:15:30.000Z",
+                  "updatedAt": "2026-07-28T02:15:30.000Z",
+                  "uid": "35240-e711be47-e0d0-402b-a017-2cb672c3d16f"
+                }
+              ],
+              "id": "e3eeda03-0d31-44a8-b0d9-2734fe9c711a",
+              "createdAt": "2026-07-28T02:15:30.000Z",
+              "updatedAt": "2026-07-28T02:15:30.000Z",
+              "uid": "35240-e3eeda03-0d31-44a8-b0d9-2734fe9c711a"
+            },
+            {
+              "name": "Lookup Collection",
+              "id": "a25c084b-f0a0-418b-973a-75564175806f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/collection/:collection_mbid?fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collection",
+                    ":collection_mbid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "6f627296-2e20-49a0-8400-15ca92ec8b9f",
+                      "key": "collection_mbid",
+                      "value": "<uuid>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Look up a collection by MBID."
+              },
+              "response": [
+                {
+                  "id": "e11cf108-7486-46f2-88a7-59272c144623",
+                  "name": "Collection metadata",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/collection/:collection_mbid?fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "collection",
+                        ":collection_mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "collection_mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:15:30.000Z",
+                  "updatedAt": "2026-07-28T02:15:30.000Z",
+                  "uid": "35240-e11cf108-7486-46f2-88a7-59272c144623"
+                },
+                {
+                  "id": "c91df227-f505-46d8-9a2c-54230b93735d",
+                  "name": "Entity not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/collection/:collection_mbid?fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "collection",
+                        ":collection_mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "collection_mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:30.000Z",
+                  "updatedAt": "2026-07-28T02:15:30.000Z",
+                  "uid": "35240-c91df227-f505-46d8-9a2c-54230b93735d"
+                },
+                {
+                  "id": "8330a5bf-dcce-4163-bce5-53704b132be3",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/collection/:collection_mbid?fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "collection",
+                        ":collection_mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "collection_mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:30.000Z",
+                  "updatedAt": "2026-07-28T02:15:30.000Z",
+                  "uid": "35240-8330a5bf-dcce-4163-bce5-53704b132be3"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:30.000Z",
+              "updatedAt": "2026-07-28T02:15:30.000Z",
+              "uid": "35240-a25c084b-f0a0-418b-973a-75564175806f"
+            }
+          ],
+          "id": "fbe1e28f-4c81-4bdf-b3f0-c0d226c58d7f",
+          "createdAt": "2026-07-28T02:15:30.000Z",
+          "updatedAt": "2026-07-28T02:15:30.000Z",
+          "uid": "35240-fbe1e28f-4c81-4bdf-b3f0-c0d226c58d7f"
+        },
+        {
+          "name": "List User Collections",
+          "id": "a3e06e1b-74eb-4407-8346-20df5f3ea308",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/collection?editor=<string>&inc=<string>&fmt=xml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "collection"
+              ],
+              "query": [
+                {
+                  "description": "(Required) MusicBrainz editor (username) whose collections to list.",
+                  "key": "editor",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                  "key": "inc",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                  "key": "fmt",
+                  "value": "xml"
+                }
+              ]
+            },
+            "description": "List the collections owned by a MusicBrainz editor. Use `inc=user-collections` while authenticated to also include private collections."
+          },
+          "response": [
+            {
+              "id": "5bcce72f-db8d-4902-a56d-710b2d570c67",
+              "name": "Collection list",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/collection?editor=<string>&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collection"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) MusicBrainz editor (username) whose collections to list.",
+                      "key": "editor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:30.000Z",
+              "updatedAt": "2026-07-28T02:15:30.000Z",
+              "uid": "35240-5bcce72f-db8d-4902-a56d-710b2d570c67"
+            },
+            {
+              "id": "9529d81a-45a3-48bf-9294-d1982f66d0e0",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/collection?editor=<string>&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "collection"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) MusicBrainz editor (username) whose collections to list.",
+                      "key": "editor",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:30.000Z",
+              "updatedAt": "2026-07-28T02:15:30.000Z",
+              "uid": "35240-9529d81a-45a3-48bf-9294-d1982f66d0e0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:30.000Z",
+          "updatedAt": "2026-07-28T02:15:30.000Z",
+          "uid": "35240-a3e06e1b-74eb-4407-8346-20df5f3ea308"
+        }
+      ],
+      "id": "ea6692f0-e18c-4a54-bf45-1635d41ab995",
+      "createdAt": "2026-07-28T02:15:30.000Z",
+      "updatedAt": "2026-07-28T02:15:30.000Z",
+      "uid": "35240-ea6692f0-e18c-4a54-bf45-1635d41ab995"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}

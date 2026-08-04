@@ -1,0 +1,434 @@
+{
+  "info": {
+    "_postman_id": "13df8ebc-82f0-4af9-bb3e-7e83d7fcadb0",
+    "name": "MusicBrainz Web Service v2 Areas API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:26.000Z",
+    "updatedAt": "2026-07-28T02:15:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-13df8ebc-82f0-4af9-bb3e-7e83d7fcadb0"
+  },
+  "item": [
+    {
+      "name": "area",
+      "item": [
+        {
+          "name": "{mbid}",
+          "item": [
+            {
+              "name": "Lookup Area",
+              "id": "ddc744e2-7363-4287-98fa-8c459045b868",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/area/:mbid?inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "area",
+                    ":mbid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "dcf13ab8-059c-4a88-9a20-ffca5eabcc34",
+                      "key": "mbid",
+                      "value": "f8ab1d7e-ddf1-e586-0b8a-85b98dd87d3c",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "description": "Look up a geographic area by MBID."
+              },
+              "response": [
+                {
+                  "id": "466cab31-c774-407f-8007-9f74ccd5105c",
+                  "name": "Area found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/area/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "area",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"7434ebdb-0cfd-22f3-46ab-cb2df6fd5445\",\n  \"name\": \"<string>\",\n  \"sort-name\": \"<string>\",\n  \"type\": \"Island\",\n  \"type-id\": \"61a53e76-a2ca-e8fe-4d00-e6654f20c7ef\",\n  \"iso-3166-1-codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"iso-3166-2-codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"iso-3166-3-codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"disambiguation\": \"<string>\",\n  \"life-span\": {\n    \"begin\": \"<string>\",\n    \"end\": \"<string>\",\n    \"ended\": \"<boolean>\"\n  }\n}",
+                  "createdAt": "2026-07-28T02:15:27.000Z",
+                  "updatedAt": "2026-07-28T02:15:27.000Z",
+                  "uid": "35240-466cab31-c774-407f-8007-9f74ccd5105c"
+                },
+                {
+                  "id": "2898231a-4e3d-40af-8c92-52ecdaff5ffd",
+                  "name": "Entity not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/area/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "area",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:27.000Z",
+                  "updatedAt": "2026-07-28T02:15:27.000Z",
+                  "uid": "35240-2898231a-4e3d-40af-8c92-52ecdaff5ffd"
+                },
+                {
+                  "id": "5d864de8-dcfa-4fd4-99ae-0376ec2fe5b6",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/area/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "area",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:27.000Z",
+                  "updatedAt": "2026-07-28T02:15:27.000Z",
+                  "uid": "35240-5d864de8-dcfa-4fd4-99ae-0376ec2fe5b6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:27.000Z",
+              "updatedAt": "2026-07-28T02:15:27.000Z",
+              "uid": "35240-ddc744e2-7363-4287-98fa-8c459045b868"
+            }
+          ],
+          "id": "f3560e25-acd8-4791-8218-7432aa4ab2bf",
+          "createdAt": "2026-07-28T02:15:27.000Z",
+          "updatedAt": "2026-07-28T02:15:27.000Z",
+          "uid": "35240-f3560e25-acd8-4791-8218-7432aa4ab2bf"
+        },
+        {
+          "name": "Search Areas",
+          "id": "b39a739d-ec26-4182-90eb-b4db49767bda",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/area?query=<string>&limit=25&offset=0&fmt=xml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "area"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Lucene-syntax search query string.",
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results to return (1-100, default 25).",
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "description": "Zero-based offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                  "key": "fmt",
+                  "value": "xml"
+                }
+              ]
+            },
+            "description": "Search areas with a Lucene query."
+          },
+          "response": [
+            {
+              "id": "d99b71a2-649a-4a11-beb4-24e01d3b4f7f",
+              "name": "Search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/area?query=<string>&limit=25&offset=0&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "area"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Lucene-syntax search query string.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:27.000Z",
+              "updatedAt": "2026-07-28T02:15:27.000Z",
+              "uid": "35240-d99b71a2-649a-4a11-beb4-24e01d3b4f7f"
+            },
+            {
+              "id": "41074faf-f167-411f-91ed-2798b447cb42",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/area?query=<string>&limit=25&offset=0&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "area"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Lucene-syntax search query string.",
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:27.000Z",
+              "updatedAt": "2026-07-28T02:15:27.000Z",
+              "uid": "35240-41074faf-f167-411f-91ed-2798b447cb42"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:27.000Z",
+          "updatedAt": "2026-07-28T02:15:27.000Z",
+          "uid": "35240-b39a739d-ec26-4182-90eb-b4db49767bda"
+        }
+      ],
+      "id": "447a08d6-e285-491f-ab83-522b23199854",
+      "createdAt": "2026-07-28T02:15:27.000Z",
+      "updatedAt": "2026-07-28T02:15:27.000Z",
+      "uid": "35240-447a08d6-e285-491f-ab83-522b23199854"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}

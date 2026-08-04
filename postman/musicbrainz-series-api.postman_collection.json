@@ -1,0 +1,458 @@
+{
+  "info": {
+    "_postman_id": "fafd159f-a125-434f-acc1-094e2d0aa2bd",
+    "name": "MusicBrainz Web Service v2 Areas Series API",
+    "description": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** \u2014 fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** \u2014 list entities linked to a given parent entity, with pagination.\n- **Search** \u2014 full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:15:55.000Z",
+    "updatedAt": "2026-07-28T02:15:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fafd159f-a125-434f-acc1-094e2d0aa2bd"
+  },
+  "item": [
+    {
+      "name": "series",
+      "item": [
+        {
+          "name": "{mbid}",
+          "item": [
+            {
+              "name": "Lookup Series",
+              "id": "2610d940-ddae-4e59-a002-00fc6190d452",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/series/:mbid?inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series",
+                    ":mbid"
+                  ],
+                  "query": [
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "ca545f65-cbbb-43a8-a501-378ac5515b84",
+                      "key": "mbid",
+                      "value": "9ae69eab-9a2d-2aee-63cf-2a930dd13031",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "description": "Look up a series by MBID."
+              },
+              "response": [
+                {
+                  "id": "a7184d9e-98d5-47fc-a115-6eb901f6eeab",
+                  "name": "Series found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/series/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "series",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"7731f657-8cfd-2242-9a8f-ec1582179fbe\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"type-id\": \"<string>\",\n  \"ordering-attribute\": \"<string>\",\n  \"disambiguation\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:55.000Z",
+                  "updatedAt": "2026-07-28T02:15:55.000Z",
+                  "uid": "35240-a7184d9e-98d5-47fc-a115-6eb901f6eeab"
+                },
+                {
+                  "id": "5b8cfaf3-1661-45bb-b520-b6b510db0752",
+                  "name": "Entity not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/series/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "series",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:55.000Z",
+                  "updatedAt": "2026-07-28T02:15:55.000Z",
+                  "uid": "35240-5b8cfaf3-1661-45bb-b520-b6b510db0752"
+                },
+                {
+                  "id": "6844710e-0cdd-49d7-8eba-0f29e8532eb9",
+                  "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/series/:mbid?inc=<string>&fmt=xml",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "series",
+                        ":mbid"
+                      ],
+                      "query": [
+                        {
+                          "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                          "key": "inc",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                          "key": "fmt",
+                          "value": "xml"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "mbid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Seconds to wait before retrying.",
+                        "type": "text/plain"
+                      },
+                      "key": "Retry-After",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:15:55.000Z",
+                  "updatedAt": "2026-07-28T02:15:55.000Z",
+                  "uid": "35240-6844710e-0cdd-49d7-8eba-0f29e8532eb9"
+                }
+              ],
+              "createdAt": "2026-07-28T02:15:55.000Z",
+              "updatedAt": "2026-07-28T02:15:55.000Z",
+              "uid": "35240-2610d940-ddae-4e59-a002-00fc6190d452"
+            }
+          ],
+          "id": "3fccfff3-efc5-4b80-9f1c-6da711ece927",
+          "createdAt": "2026-07-28T02:15:55.000Z",
+          "updatedAt": "2026-07-28T02:15:55.000Z",
+          "uid": "35240-3fccfff3-efc5-4b80-9f1c-6da711ece927"
+        },
+        {
+          "name": "Search Series",
+          "id": "7b1479c2-11ee-4aba-ba95-4f8638f96294",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/series?query=<string>&collection=<uuid>&limit=25&offset=0&inc=<string>&fmt=xml",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "series"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "key": "collection",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "Maximum number of results to return (1-100, default 25).",
+                  "key": "limit",
+                  "value": "25"
+                },
+                {
+                  "description": "Zero-based offset into the result set for pagination.",
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                  "key": "inc",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                  "key": "fmt",
+                  "value": "xml"
+                }
+              ]
+            },
+            "description": "Search series with a Lucene query, or browse by collection."
+          },
+          "response": [
+            {
+              "id": "1637f1f7-e024-40d3-9f75-639ff2cb503f",
+              "name": "Browse or search results",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/series?query=<string>&collection=<uuid>&limit=25&offset=0&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:15:55.000Z",
+              "updatedAt": "2026-07-28T02:15:55.000Z",
+              "uid": "35240-1637f1f7-e024-40d3-9f75-639ff2cb503f"
+            },
+            {
+              "id": "011b691a-264f-40e9-af4a-9c279db9f51b",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/series?query=<string>&collection=<uuid>&limit=25&offset=0&inc=<string>&fmt=xml",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "series"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "Maximum number of results to return (1-100, default 25).",
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "description": "Zero-based offset into the result set for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Plus-separated list of sub-resources and relationships to include in the response.",
+                      "key": "inc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response serialization format. Defaults to XML; set to `json` for JSON.",
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Seconds to wait before retrying.",
+                    "type": "text/plain"
+                  },
+                  "key": "Retry-After",
+                  "value": "<integer>"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"help\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:15:55.000Z",
+              "updatedAt": "2026-07-28T02:15:55.000Z",
+              "uid": "35240-011b691a-264f-40e9-af4a-9c279db9f51b"
+            }
+          ],
+          "createdAt": "2026-07-28T02:15:55.000Z",
+          "updatedAt": "2026-07-28T02:15:55.000Z",
+          "uid": "35240-7b1479c2-11ee-4aba-ba95-4f8638f96294"
+        }
+      ],
+      "id": "65a0a8d3-8137-4055-a371-06cb26361843",
+      "createdAt": "2026-07-28T02:15:55.000Z",
+      "updatedAt": "2026-07-28T02:15:55.000Z",
+      "uid": "35240-65a0a8d3-8137-4055-a371-06cb26361843"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://musicbrainz.org/ws/2"
+    }
+  ]
+}
