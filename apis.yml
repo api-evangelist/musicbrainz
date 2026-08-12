@@ -1015,6 +1015,10 @@ apis:
   - type: GraphQL
     url: graphql/musicbrainz-graphql.md
 common:
+- type: CodeOfConduct
+  url: https://github.com/metabrainz/.github/blob/master/CODE_OF_CONDUCT.md
+- type: ContributionGuide
+  url: https://github.com/metabrainz/musicbrainz-server/blob/master/CONTRIBUTING.md
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/musicbrainz/overview
 - type: AgenticAccess
@@ -1037,8 +1041,6 @@ common:
   url: https://musicbrainz.org/doc/Developer_Resources
 - type: Forums
   url: https://community.metabrainz.org/
-- type: IRC
-  url: ircs://irc.libera.chat/#musicbrainz
 - type: Blog
   url: https://blog.metabrainz.org/
 - type: TermsOfService
