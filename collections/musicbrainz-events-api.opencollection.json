@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas Events API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/event/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up an event by MBID."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/event",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "area",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "place",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse events linked to an area, artist, collection, place, or other event, or search with a Lucene query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

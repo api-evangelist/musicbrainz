@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas Identifiers API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Urls By Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/url",
+            "params": [
+              {
+                "name": "resource",
+                "value": "https://www.nin.com/",
+                "type": "query",
+                "description": "A URL to look up. May be repeated up to 100 times in one request."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up one or more URLs by the resource string (up to 100 `resource` parameters per request)."
+        },
+        {
+          "info": {
+            "name": "Lookup Recordings By ISRC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/isrc/:isrc",
+            "params": [
+              {
+                "name": "isrc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Recording Code (12 characters)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up all recordings that share an International Standard Recording Code."
+        },
+        {
+          "info": {
+            "name": "Lookup Works By ISWC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/iswc/:iswc",
+            "params": [
+              {
+                "name": "iswc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Musical Work Code (e.g. T-101.690.320-9)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up all works that share an International Standard Musical Work Code."
+        },
+        {
+          "info": {
+            "name": "Lookup Releases By Disc ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/discid/:discid",
+            "params": [
+              {
+                "name": "discid",
+                "value": "",
+                "type": "path",
+                "description": "28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+              },
+              {
+                "name": "toc",
+                "value": "",
+                "type": "query",
+                "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found."
+              },
+              {
+                "name": "cdstubs",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include CD-stub matches when no release matches."
+              },
+              {
+                "name": "media-format",
+                "value": "",
+                "type": "query",
+                "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up releases that match a CD's MusicBrainz Disc ID. Supports fuzzy TOC matching and optional CD-stub fallback."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

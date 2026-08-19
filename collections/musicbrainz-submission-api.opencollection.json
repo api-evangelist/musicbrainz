@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas Submission API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Submission",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit Release Barcodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/release",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit GTIN/EAN/UPC barcodes for one or more releases (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit Recording ISRCs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/recording",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit ISRCs for one or more recordings (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit User Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/tag",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit one or more user tags (upvote/downvote/withdraw) on entities (XML body, requires authentication)."
+        },
+        {
+          "info": {
+            "name": "Submit User Ratings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://musicbrainz.org/ws/2/rating",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Submit one or more user ratings (integer 0-5, with 0 meaning withdraw) on entities (XML body, requires authentication)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

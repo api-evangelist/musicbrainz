@@ -1,0 +1,190 @@
+{
+  "item": [
+    {
+      "id": "091c68d5-0865-4bfc-ae17-4cded908439c",
+      "name": "Genres",
+      "description": {
+        "content": "List the curated genre taxonomy.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "452f5629-b196-4ba5-8e1e-677f23bc70f7",
+          "name": "List All Genres",
+          "request": {
+            "name": "List All Genres",
+            "description": {
+              "content": "Return every entry from the curated MusicBrainz genre taxonomy. Also supports `fmt=txt` for a plain-text list of genre names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "genre",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return (1-100, default 25)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Zero-based offset into the result set for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a75da1fa-793d-474e-aee8-7456fbec2a9c",
+              "name": "Genre list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "genre",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"genre-count\": 5886,\n  \"genre-offset\": 737,\n  \"genres\": [\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"name\": \"grunge\",\n      \"disambiguation\": \"string\"\n    },\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"name\": \"grunge\",\n      \"disambiguation\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c01bc22c-e4c4-4529-b736-11cbc9aa5616",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "genre",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6959"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://musicbrainz.org/ws/2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bda45d07-e874-4fe3-8aa8-5c107c0e803d",
+    "name": "MusicBrainz Web Service v2 Areas Genres API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** — list entities linked to a given parent entity, with pagination.\n- **Search** — full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,444 @@
+{
+  "item": [
+    {
+      "id": "8e8c712f-c571-44b4-8fea-f93e65d40687",
+      "name": "Series",
+      "description": {
+        "content": "Lookup, browse, and search for series (ordered groups of entities).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4515b711-a534-4f3a-bc5d-2abbb547f0ca",
+          "name": "Lookup Series",
+          "request": {
+            "name": "Lookup Series",
+            "description": {
+              "content": "Look up a series by MBID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series",
+                ":mbid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "mbid",
+                  "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7df7dd56-fba6-4d6e-9229-f80f0df37225",
+              "name": "Series found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":mbid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "mbid",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n  \"name\": \"Reading Festival\",\n  \"type\": \"string\",\n  \"type-id\": \"string\",\n  \"ordering-attribute\": \"string\",\n  \"disambiguation\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f76e137a-820c-46b0-b298-0b38285e6854",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":mbid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "mbid",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5e03ac5-517f-408f-8790-1105cfcc4260",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series",
+                    ":mbid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "mbid",
+                      "description": "(Required) MusicBrainz Identifier (UUID v4) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "800"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa2a9b6b-d3e8-4f46-ad19-7a5cb06be41d",
+          "name": "Search Series",
+          "request": {
+            "name": "Search Series",
+            "description": {
+              "content": "Search series with a Lucene query, or browse by collection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "series"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "collection",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "Maximum number of results to return (1-100, default 25)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Zero-based offset into the result set for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14e7973d-d284-46a5-a43f-7043dabf53de",
+              "name": "Browse or search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9244a786-f41d-44b8-984a-e2b04453670b",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "series"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "collection",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "800"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://musicbrainz.org/ws/2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b7e99e05-721c-43e6-b124-7c9f7e8b4026",
+    "name": "MusicBrainz Web Service v2 Areas Series API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** — list entities linked to a given parent entity, with pagination.\n- **Search** — full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+      "type": "text/plain"
+    }
+  }
+}

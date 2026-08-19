@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas URLs API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "URLs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/url/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a URL by MBID."
+        },
+        {
+          "info": {
+            "name": "Lookup Urls By Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/url",
+            "params": [
+              {
+                "name": "resource",
+                "value": "https://www.nin.com/",
+                "type": "query",
+                "description": "A URL to look up. May be repeated up to 100 times in one request."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up one or more URLs by the resource string (up to 100 `resource` parameters per request)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas Collections API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List User Collections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/collection",
+            "params": [
+              {
+                "name": "editor",
+                "value": "",
+                "type": "query",
+                "description": "MusicBrainz editor (username) whose collections to list."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "List the collections owned by a MusicBrainz editor. Use `inc=user-collections` while authenticated to also include private collections."
+        },
+        {
+          "info": {
+            "name": "Lookup Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a collection by MBID."
+        },
+        {
+          "info": {
+            "name": "Add Entities To Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid/:entity_type",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Add up to ~400 entities (semicolon-separated MBIDs) to an existing collection."
+        },
+        {
+          "info": {
+            "name": "Remove Entities From Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://musicbrainz.org/ws/2/collection/:collection_mbid/:entity_type",
+            "params": [
+              {
+                "name": "collection_mbid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "client",
+                "value": "",
+                "type": "query",
+                "description": "Application identifier in the form `name-version` for submission requests."
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Remove entities (semicolon-separated MBIDs) from a collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

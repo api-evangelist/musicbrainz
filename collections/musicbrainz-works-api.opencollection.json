@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MusicBrainz Web Service v2 Areas Works API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Works",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Lookup Work",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/work/:mbid",
+            "params": [
+              {
+                "name": "mbid",
+                "value": "",
+                "type": "path",
+                "description": "MusicBrainz Identifier (UUID v4) of the entity."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up a work by MBID. Common includes are `artist-rels`, `recording-rels`, `aliases`."
+        },
+        {
+          "info": {
+            "name": "Browse Or Search Works",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/work",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "artist",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "collection",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (1-100, default 25)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Zero-based offset into the result set for pagination."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Browse works linked to an artist or collection, or search with a Lucene query."
+        },
+        {
+          "info": {
+            "name": "Lookup Works By ISWC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://musicbrainz.org/ws/2/iswc/:iswc",
+            "params": [
+              {
+                "name": "iswc",
+                "value": "",
+                "type": "path",
+                "description": "International Standard Musical Work Code (e.g. T-101.690.320-9)."
+              },
+              {
+                "name": "inc",
+                "value": "",
+                "type": "query",
+                "description": "Plus-separated list of sub-resources and relationships to include in the response."
+              },
+              {
+                "name": "fmt",
+                "value": "",
+                "type": "query",
+                "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+              }
+            ]
+          },
+          "docs": "Look up all works that share an International Standard Musical Work Code."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

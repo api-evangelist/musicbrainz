@@ -1,0 +1,950 @@
+{
+  "item": [
+    {
+      "id": "3618a30c-84c2-4209-939a-3cb6dfcc0e47",
+      "name": "Identifiers",
+      "description": {
+        "content": "Non-MBID lookups by ISRC, ISWC, and DiscID.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "55d24849-96cd-46ee-9c2a-cd5af8142088",
+          "name": "Lookup Urls By Resource",
+          "request": {
+            "name": "Lookup Urls By Resource",
+            "description": {
+              "content": "Look up one or more URLs by the resource string (up to 100 `resource` parameters per request).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "resource",
+                  "value": "<uri>",
+                  "description": "(Required) A URL to look up. May be repeated up to 100 times in one request."
+                },
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c5adda58-f97d-4e01-ac78-50918fdfb458",
+              "name": "URL or url-list found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource",
+                      "value": "https://www.nin.com/"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n  \"resource\": \"https://www.nin.com/\",\n  \"relations\": [\n    {\n      \"type\": \"composer\",\n      \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"direction\": \"backward\",\n      \"target-type\": \"artist\",\n      \"target-credit\": \"string\",\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"artist\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"name\": \"Nirvana\",\n        \"sort-name\": \"Nirvana\",\n        \"type\": \"Group\",\n        \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"gender\": \"Not applicable\",\n        \"gender-id\": \"string\",\n        \"country\": \"US\",\n        \"area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"begin-area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"end-area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"disambiguation\": \"90s US grunge band\",\n        \"isnis\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ipis\": [\n          \"string\",\n          \"string\"\n        ],\n        \"life-span\": {\n          \"begin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ended\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aliases\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"url\": {\n        \"value\": \"<Circular reference to #/components/schemas/Url detected>\"\n      },\n      \"work\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"title\": \"Smells Like Teen Spirit\",\n        \"type\": \"Song\",\n        \"type-id\": \"string\",\n        \"language\": \"eng\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"iswcs\": [\n          \"T-101.690.320-9\"\n        ],\n        \"attributes\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"disambiguation\": \"string\",\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"recording\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"title\": \"Smells Like Teen Spirit\",\n        \"length\": 301920,\n        \"video\": false,\n        \"disambiguation\": \"string\",\n        \"first-release-date\": \"string\",\n        \"isrcs\": [\n          \"USGF19102751\"\n        ],\n        \"releases\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"begin\": \"string\",\n      \"end\": \"string\",\n      \"ended\": false\n    },\n    {\n      \"type\": \"composer\",\n      \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"direction\": \"backward\",\n      \"target-type\": \"artist\",\n      \"target-credit\": \"string\",\n      \"attributes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"artist\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"name\": \"Nirvana\",\n        \"sort-name\": \"Nirvana\",\n        \"type\": \"Group\",\n        \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"gender\": \"Female\",\n        \"gender-id\": \"string\",\n        \"country\": \"US\",\n        \"area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"begin-area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"end-area\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sort-name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type-id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-1-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-2-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"iso-3166-3-codes\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"disambiguation\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"life-span\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"disambiguation\": \"90s US grunge band\",\n        \"isnis\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ipis\": [\n          \"string\",\n          \"string\"\n        ],\n        \"life-span\": {\n          \"begin\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"ended\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"aliases\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"url\": {\n        \"value\": \"<Circular reference to #/components/schemas/Url detected>\"\n      },\n      \"work\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"title\": \"Smells Like Teen Spirit\",\n        \"type\": \"Song\",\n        \"type-id\": \"string\",\n        \"language\": \"eng\",\n        \"languages\": [\n          \"string\",\n          \"string\"\n        ],\n        \"iswcs\": [\n          \"T-101.690.320-9\"\n        ],\n        \"attributes\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"disambiguation\": \"string\",\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"recording\": {\n        \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n        \"title\": \"Smells Like Teen Spirit\",\n        \"length\": 301920,\n        \"video\": true,\n        \"disambiguation\": \"string\",\n        \"first-release-date\": \"string\",\n        \"isrcs\": [\n          \"USGF19102751\"\n        ],\n        \"releases\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"tags\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"rating\": {\n          \"value\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"votes-count\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"relations\": [\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          },\n          {\n            \"value\": \"<Circular reference to #/components/schemas/Relation detected>\"\n          }\n        ]\n      },\n      \"begin\": \"string\",\n      \"end\": \"string\",\n      \"ended\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379e4192-93eb-4423-acf0-9854d418c5e6",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource",
+                      "value": "https://www.nin.com/"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4826b0fc-e721-41a3-8939-ea560797852b",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "resource",
+                      "value": "https://www.nin.com/"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1292"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95f82d77-3bcd-4db6-bca9-5c27dbcc1267",
+          "name": "Lookup Recordings By ISRC",
+          "request": {
+            "name": "Lookup Recordings By ISRC",
+            "description": {
+              "content": "Look up all recordings that share an International Standard Recording Code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "isrc",
+                ":isrc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "isrc",
+                  "description": "(Required) International Standard Recording Code (12 characters)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "28e9703c-1fc3-4b55-b8d8-50198667b8ad",
+              "name": "Recordings sharing this ISRC",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "isrc",
+                    ":isrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isrc",
+                      "description": "(Required) International Standard Recording Code (12 characters)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"isrc\": \"string\",\n  \"recordings\": [\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"title\": \"Smells Like Teen Spirit\",\n      \"length\": 301920,\n      \"video\": true,\n      \"disambiguation\": \"string\",\n      \"first-release-date\": \"string\",\n      \"isrcs\": [\n        \"USGF19102751\"\n      ],\n      \"releases\": [\n        {\n          \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"title\": \"Nevermind\",\n          \"status\": \"Pseudo-Release\",\n          \"status-id\": \"string\",\n          \"quality\": \"high\",\n          \"packaging\": \"Jewel Case\",\n          \"packaging-id\": \"string\",\n          \"language\": \"eng\",\n          \"script\": \"Latn\",\n          \"date\": \"1991-09-24\",\n          \"country\": \"US\",\n          \"barcode\": \"720642442524\",\n          \"asin\": \"string\",\n          \"disambiguation\": \"string\",\n          \"artist-credit\": [\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"release-group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Nevermind\",\n            \"primary-type\": \"Broadcast\",\n            \"primary-type-id\": \"string\",\n            \"secondary-types\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"secondary-type-ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"first-release-date\": \"1991-09-24\",\n            \"disambiguation\": \"string\",\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"label-info\": [\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"media\": [\n            {\n              \"position\": 6424,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 9473,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"position\": 9626,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 6632,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ],\n          \"cover-art-archive\": {\n            \"artwork\": true,\n            \"count\": 6093,\n            \"front\": true,\n            \"back\": true,\n            \"darkened\": false\n          },\n          \"text-representation\": {\n            \"language\": \"string\",\n            \"script\": \"string\"\n          },\n          \"tags\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"rating\": {\n            \"value\": 4.5,\n            \"votes-count\": 123\n          },\n          \"relations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"title\": \"Nevermind\",\n          \"status\": \"Promotion\",\n          \"status-id\": \"string\",\n          \"quality\": \"normal\",\n          \"packaging\": \"Jewel Case\",\n          \"packaging-id\": \"string\",\n          \"language\": \"eng\",\n          \"script\": \"Latn\",\n          \"date\": \"1991-09-24\",\n          \"country\": \"US\",\n          \"barcode\": \"720642442524\",\n          \"asin\": \"string\",\n          \"disambiguation\": \"string\",\n          \"artist-credit\": [\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"release-group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Nevermind\",\n            \"primary-type\": \"Broadcast\",\n            \"primary-type-id\": \"string\",\n            \"secondary-types\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"secondary-type-ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"first-release-date\": \"1991-09-24\",\n            \"disambiguation\": \"string\",\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"label-info\": [\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"media\": [\n            {\n              \"position\": 7150,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 5607,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"position\": 2882,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 8081,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ],\n          \"cover-art-archive\": {\n            \"artwork\": true,\n            \"count\": 591,\n            \"front\": true,\n            \"back\": true,\n            \"darkened\": false\n          },\n          \"text-representation\": {\n            \"language\": \"string\",\n            \"script\": \"string\"\n          },\n          \"tags\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"rating\": {\n            \"value\": 4.5,\n            \"votes-count\": 123\n          },\n          \"relations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        },\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        }\n      ],\n      \"rating\": {\n        \"value\": 4.5,\n        \"votes-count\": 123\n      },\n      \"relations\": [\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"backward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Other\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"type\": \"Song\",\n            \"type-id\": \"string\",\n            \"language\": \"eng\",\n            \"languages\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"iswcs\": [\n              \"T-101.690.320-9\"\n            ],\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"disambiguation\": \"string\",\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"value\": \"<Circular reference to #/components/schemas/Recording detected>\"\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": true\n        },\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"backward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Male\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"type\": \"Song\",\n            \"type-id\": \"string\",\n            \"language\": \"eng\",\n            \"languages\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"iswcs\": [\n              \"T-101.690.320-9\"\n            ],\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"disambiguation\": \"string\",\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"value\": \"<Circular reference to #/components/schemas/Recording detected>\"\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": true\n        }\n      ]\n    },\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"title\": \"Smells Like Teen Spirit\",\n      \"length\": 301920,\n      \"video\": true,\n      \"disambiguation\": \"string\",\n      \"first-release-date\": \"string\",\n      \"isrcs\": [\n        \"USGF19102751\"\n      ],\n      \"releases\": [\n        {\n          \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"title\": \"Nevermind\",\n          \"status\": \"Promotion\",\n          \"status-id\": \"string\",\n          \"quality\": \"normal\",\n          \"packaging\": \"Jewel Case\",\n          \"packaging-id\": \"string\",\n          \"language\": \"eng\",\n          \"script\": \"Latn\",\n          \"date\": \"1991-09-24\",\n          \"country\": \"US\",\n          \"barcode\": \"720642442524\",\n          \"asin\": \"string\",\n          \"disambiguation\": \"string\",\n          \"artist-credit\": [\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"release-group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Nevermind\",\n            \"primary-type\": \"Album\",\n            \"primary-type-id\": \"string\",\n            \"secondary-types\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"secondary-type-ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"first-release-date\": \"1991-09-24\",\n            \"disambiguation\": \"string\",\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"label-info\": [\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"media\": [\n            {\n              \"position\": 7776,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 7539,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"position\": 6538,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 757,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ],\n          \"cover-art-archive\": {\n            \"artwork\": true,\n            \"count\": 5326,\n            \"front\": false,\n            \"back\": false,\n            \"darkened\": true\n          },\n          \"text-representation\": {\n            \"language\": \"string\",\n            \"script\": \"string\"\n          },\n          \"tags\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"rating\": {\n            \"value\": 4.5,\n            \"votes-count\": 123\n          },\n          \"relations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"title\": \"Nevermind\",\n          \"status\": \"Pseudo-Release\",\n          \"status-id\": \"string\",\n          \"quality\": \"normal\",\n          \"packaging\": \"Jewel Case\",\n          \"packaging-id\": \"string\",\n          \"language\": \"eng\",\n          \"script\": \"Latn\",\n          \"date\": \"1991-09-24\",\n          \"country\": \"US\",\n          \"barcode\": \"720642442524\",\n          \"asin\": \"string\",\n          \"disambiguation\": \"string\",\n          \"artist-credit\": [\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": \"string\",\n              \"joinphrase\": \"string\",\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"release-group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Nevermind\",\n            \"primary-type\": \"Single\",\n            \"primary-type-id\": \"string\",\n            \"secondary-types\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"secondary-type-ids\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"first-release-date\": \"1991-09-24\",\n            \"disambiguation\": \"string\",\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"label-info\": [\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"catalog-number\": \"string\",\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"media\": [\n            {\n              \"position\": 6367,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 1882,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"position\": 1996,\n              \"format\": \"CD\",\n              \"format-id\": \"string\",\n              \"title\": \"string\",\n              \"track-count\": 1487,\n              \"tracks\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"discs\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ],\n          \"cover-art-archive\": {\n            \"artwork\": true,\n            \"count\": 8950,\n            \"front\": false,\n            \"back\": true,\n            \"darkened\": true\n          },\n          \"text-representation\": {\n            \"language\": \"string\",\n            \"script\": \"string\"\n          },\n          \"tags\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"rating\": {\n            \"value\": 4.5,\n            \"votes-count\": 123\n          },\n          \"relations\": [\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"type-id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"direction\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-type\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"target-credit\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"attributes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"artist\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"work\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"recording\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"begin\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"end\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"ended\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"tags\": [\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        },\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        }\n      ],\n      \"rating\": {\n        \"value\": 4.5,\n        \"votes-count\": 123\n      },\n      \"relations\": [\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"backward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Other\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"type\": \"Song\",\n            \"type-id\": \"string\",\n            \"language\": \"eng\",\n            \"languages\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"iswcs\": [\n              \"T-101.690.320-9\"\n            ],\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"disambiguation\": \"string\",\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"value\": \"<Circular reference to #/components/schemas/Recording detected>\"\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": false\n        },\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"forward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Other\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"type\": \"Song\",\n            \"type-id\": \"string\",\n            \"language\": \"eng\",\n            \"languages\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"iswcs\": [\n              \"T-101.690.320-9\"\n            ],\n            \"attributes\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"disambiguation\": \"string\",\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"recording\": {\n            \"value\": \"<Circular reference to #/components/schemas/Recording detected>\"\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0534553c-42c6-4337-ac67-5eeb0c7c68c5",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "isrc",
+                    ":isrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isrc",
+                      "description": "(Required) International Standard Recording Code (12 characters)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a51de1c-99b4-4503-9252-9819dd736d56",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "isrc",
+                    ":isrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "isrc",
+                      "description": "(Required) International Standard Recording Code (12 characters)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1292"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0aff3024-ee4a-4abf-a5b2-4661c0e7adca",
+          "name": "Lookup Works By ISWC",
+          "request": {
+            "name": "Lookup Works By ISWC",
+            "description": {
+              "content": "Look up all works that share an International Standard Musical Work Code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "iswc",
+                ":iswc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "iswc",
+                  "description": "(Required) International Standard Musical Work Code (e.g. T-101.690.320-9)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "decc80d1-a7ba-40cf-8768-50d3cfcc61c4",
+              "name": "Works sharing this ISWC",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iswc",
+                    ":iswc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iswc",
+                      "description": "(Required) International Standard Musical Work Code (e.g. T-101.690.320-9)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iswc\": \"string\",\n  \"works\": [\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"title\": \"Smells Like Teen Spirit\",\n      \"type\": \"Song\",\n      \"type-id\": \"string\",\n      \"language\": \"eng\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iswcs\": [\n        \"T-101.690.320-9\"\n      ],\n      \"attributes\": [\n        {\n          \"type\": \"string\",\n          \"type-id\": \"string\",\n          \"value\": \"string\",\n          \"value-id\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"type-id\": \"string\",\n          \"value\": \"string\",\n          \"value-id\": \"string\"\n        }\n      ],\n      \"disambiguation\": \"string\",\n      \"tags\": [\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        },\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        }\n      ],\n      \"rating\": {\n        \"value\": 4.5,\n        \"votes-count\": 123\n      },\n      \"relations\": [\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"forward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Female\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"value\": \"<Circular reference to #/components/schemas/Work detected>\"\n          },\n          \"recording\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"length\": 301920,\n            \"video\": false,\n            \"disambiguation\": \"string\",\n            \"first-release-date\": \"string\",\n            \"isrcs\": [\n              \"USGF19102751\"\n            ],\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": true\n        },\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"backward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Not applicable\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"value\": \"<Circular reference to #/components/schemas/Work detected>\"\n          },\n          \"recording\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"length\": 301920,\n            \"video\": false,\n            \"disambiguation\": \"string\",\n            \"first-release-date\": \"string\",\n            \"isrcs\": [\n              \"USGF19102751\"\n            ],\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": true\n        }\n      ]\n    },\n    {\n      \"id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n      \"title\": \"Smells Like Teen Spirit\",\n      \"type\": \"Song\",\n      \"type-id\": \"string\",\n      \"language\": \"eng\",\n      \"languages\": [\n        \"string\",\n        \"string\"\n      ],\n      \"iswcs\": [\n        \"T-101.690.320-9\"\n      ],\n      \"attributes\": [\n        {\n          \"type\": \"string\",\n          \"type-id\": \"string\",\n          \"value\": \"string\",\n          \"value-id\": \"string\"\n        },\n        {\n          \"type\": \"string\",\n          \"type-id\": \"string\",\n          \"value\": \"string\",\n          \"value-id\": \"string\"\n        }\n      ],\n      \"disambiguation\": \"string\",\n      \"tags\": [\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        },\n        {\n          \"name\": \"grunge\",\n          \"count\": 42\n        }\n      ],\n      \"rating\": {\n        \"value\": 4.5,\n        \"votes-count\": 123\n      },\n      \"relations\": [\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"forward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Not applicable\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"value\": \"<Circular reference to #/components/schemas/Work detected>\"\n          },\n          \"recording\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"length\": 301920,\n            \"video\": true,\n            \"disambiguation\": \"string\",\n            \"first-release-date\": \"string\",\n            \"isrcs\": [\n              \"USGF19102751\"\n            ],\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": true\n        },\n        {\n          \"type\": \"composer\",\n          \"type-id\": \"5b11f4ce-a62d-471e-81fc-a69a8278c7da\",\n          \"direction\": \"backward\",\n          \"target-type\": \"artist\",\n          \"target-credit\": \"string\",\n          \"attributes\": [\n            \"string\",\n            \"string\"\n          ],\n          \"artist\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"Nirvana\",\n            \"sort-name\": \"Nirvana\",\n            \"type\": \"Group\",\n            \"type-id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gender\": \"Other\",\n            \"gender-id\": \"string\",\n            \"country\": \"US\",\n            \"area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"begin-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"end-area\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"disambiguation\": \"90s US grunge band\",\n            \"isnis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"ipis\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"life-span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"aliases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"url\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resource\": \"https://www.nin.com/\",\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"work\": {\n            \"value\": \"<Circular reference to #/components/schemas/Work detected>\"\n          },\n          \"recording\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": \"Smells Like Teen Spirit\",\n            \"length\": 301920,\n            \"video\": false,\n            \"disambiguation\": \"string\",\n            \"first-release-date\": \"string\",\n            \"isrcs\": [\n              \"USGF19102751\"\n            ],\n            \"artist-credit\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"releases\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"tags\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"rating\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relations\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          \"begin\": \"string\",\n          \"end\": \"string\",\n          \"ended\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eaafa797-6708-4144-8d02-1fc628c5a0cf",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iswc",
+                    ":iswc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iswc",
+                      "description": "(Required) International Standard Musical Work Code (e.g. T-101.690.320-9)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d374b6-8b6c-4ea1-840b-cb98b2d55f5e",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "iswc",
+                    ":iswc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "iswc",
+                      "description": "(Required) International Standard Musical Work Code (e.g. T-101.690.320-9)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1292"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2265050-844b-47c2-ab40-234ce21dd7d2",
+          "name": "Lookup Releases By Disc ID",
+          "request": {
+            "name": "Lookup Releases By Disc ID",
+            "description": {
+              "content": "Look up releases that match a CD's MusicBrainz Disc ID. Supports fuzzy TOC matching and optional CD-stub fallback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "discid",
+                ":discid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "toc",
+                  "value": "<string>",
+                  "description": "Table-of-contents string used for fuzzy matching when the Disc ID is not found."
+                },
+                {
+                  "disabled": false,
+                  "key": "cdstubs",
+                  "value": "yes",
+                  "description": "Whether to include CD-stub matches when no release matches."
+                },
+                {
+                  "disabled": false,
+                  "key": "media-format",
+                  "value": "<string>",
+                  "description": "Restrict matched releases to a specific media format (e.g. `CD`, `all`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "inc",
+                  "value": "<string>",
+                  "description": "Plus-separated list of sub-resources and relationships to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "fmt",
+                  "value": "xml",
+                  "description": "Response serialization format. Defaults to XML; set to `json` for JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "discid",
+                  "description": "(Required) 28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc7c570e-3637-4c54-a3a5-4d3c1516d01c",
+              "name": "Releases or CD stubs matching the Disc ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discid",
+                    ":discid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cdstubs",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "media-format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discid",
+                      "description": "(Required) 28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5c53849-a846-4e0a-8b71-362c1f937872",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discid",
+                    ":discid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cdstubs",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "media-format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discid",
+                      "description": "(Required) 28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b051d6eb-e6b4-49f4-9db9-9a7dace5cf50",
+              "name": "Rate limit exceeded - clients must throttle to 1 request per second per IP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "discid",
+                    ":discid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cdstubs",
+                      "value": "yes"
+                    },
+                    {
+                      "key": "media-format",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inc",
+                      "value": "aliases+tags+ratings+artist-rels"
+                    },
+                    {
+                      "key": "fmt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "discid",
+                      "description": "(Required) 28-character MusicBrainz Disc ID computed by libdiscid from a CD's TOC."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "1292"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"help\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://musicbrainz.org/ws/2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5162e955-e9f3-4a99-9608-d9d471a62773",
+    "name": "MusicBrainz Web Service v2 Areas Identifiers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,\noperated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).\n\nThe API supports three primary access patterns over twelve core entity types\n(artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):\n\n- **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.\n- **Browse** — list entities linked to a given parent entity, with pagination.\n- **Search** — full Lucene query syntax across the indexed catalog.\n\nNon-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.\n\nResponses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.\n\nThe API enforces a strict rate limit of **one request per IP per second** and requires a meaningful\n**User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).\nSubmission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.\n\n\nContact Support:\n Name: MetaBrainz Foundation\n Email: support@metabrainz.org",
+      "type": "text/plain"
+    }
+  }
+}
