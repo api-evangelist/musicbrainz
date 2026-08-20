@@ -51,6 +51,25 @@ tags:
 - Works
 - Labels
 - Cover Art
+- Open-Source
+- Non-Profit
+tags_raw:
+- Music
+- Metadata
+- Encyclopedia
+- Open Data
+- Catalog
+- Identifiers
+- ISRC
+- ISWC
+- MBID
+- DiscID
+- Artists
+- Releases
+- Recordings
+- Works
+- Labels
+- Cover Art
 - Open Source
 - Non Profit
 apis:
@@ -180,6 +199,8 @@ apis:
   humanURL: https://musicbrainz.org/doc/MusicBrainz_API
   baseURL: https://musicbrainz.org/ws/2
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
@@ -240,6 +261,8 @@ apis:
   humanURL: https://musicbrainz.org/doc/MusicBrainz_API
   baseURL: https://musicbrainz.org/ws/2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
