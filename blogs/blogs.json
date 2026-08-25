@@ -2,13 +2,20 @@
   "repo": "musicbrainz",
   "feeds": [
     {
-      "source": "https://blog.metabrainz.org/",
+      "source": "https://blog.metabrainz.org/feed/",
       "feed_url": "https://blog.metabrainz.org/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://community.metabrainz.org/",
+      "feed_url": "https://community.metabrainz.org/",
+      "title": "",
+      "saved": 0,
       "method": "none"
     }
   ],
-  "post_count": 14,
-  "fetched": "2026-08-15T12:11:08Z"
+  "post_count": 15,
+  "fetched": "2026-08-22T20:20:02Z"
 }
