@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Places API
   version: '2.0'
@@ -112,16 +112,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Offset:
       name: offset
       in: query
@@ -131,14 +121,6 @@ components:
         type: integer
         minimum: 0
         default: 0
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
     Limit:
       name: limit
       in: query
@@ -160,7 +142,90 @@ components:
         - xml
         - json
         default: xml
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
+    MBID:
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Place:
+      type: object
+      description: A physical location (venue, studio, etc.).
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: Sound City Studios
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Studio
+          - Venue
+          - Stadium
+          - Indoor arena
+          - Religious building
+          - Educational institution
+          - Pressing plant
+          - Other
+        type-id:
+          type:
+          - string
+          - 'null'
+        address:
+          type:
+          - string
+          - 'null'
+        area:
+          $ref: '#/components/schemas/Area'
+        coordinates:
+          type:
+          - object
+          - 'null'
+          properties:
+            latitude:
+              type: number
+              format: float
+            longitude:
+              type: number
+              format: float
+        disambiguation:
+          type: string
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
     MBID:
       type: string
       format: uuid
@@ -179,8 +244,9 @@ components:
         sort-name:
           type: string
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - Country
           - Subdivision
@@ -209,56 +275,6 @@ components:
           type: string
         life-span:
           $ref: '#/components/schemas/LifeSpan'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
-    Place:
-      type: object
-      description: A physical location (venue, studio, etc.).
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: Sound City Studios
-        type:
-          type: string
-          nullable: true
-          enum:
-          - Studio
-          - Venue
-          - Stadium
-          - Indoor arena
-          - Religious building
-          - Educational institution
-          - Pressing plant
-          - Other
-        type-id:
-          type: string
-          nullable: true
-        address:
-          type: string
-          nullable: true
-        area:
-          $ref: '#/components/schemas/Area'
-        coordinates:
-          type: object
-          nullable: true
-          properties:
-            latitude:
-              type: number
-              format: float
-            longitude:
-              type: number
-              format: float
-        disambiguation:
-          type: string
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
     LifeSpan:
       type: object
       description: Begin/end dates and whether the entity has ended.
@@ -268,31 +284,21 @@ components:
           description: Begin date (year, year-month, or full ISO date).
           example: 1988-01
         end:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: End date (year, year-month, or full ISO date), null if ongoing.
           example: '1994-04-05'
         ended:
           type: boolean
           description: Whether the entity has ended.
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http

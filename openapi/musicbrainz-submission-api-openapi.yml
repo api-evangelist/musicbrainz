@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Submission API
   version: '2.0'
@@ -179,14 +179,19 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
-    Forbidden:
-      description: Authenticated but not authorized
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required or invalid credentials
+    Forbidden:
+      description: Authenticated but not authorized
       content:
         application/json:
           schema:
@@ -197,13 +202,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
+    Unauthorized:
+      description: Authentication required or invalid credentials
       content:
         application/json:
           schema:

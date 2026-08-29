@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Series API
   version: '2.0'
@@ -107,16 +107,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Offset:
       name: offset
       in: query
@@ -126,6 +116,16 @@ components:
         type: integer
         minimum: 0
         default: 0
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results to return (1-100, default 25).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
     Format:
       name: fmt
       in: query
@@ -145,57 +145,17 @@ components:
       schema:
         type: string
         example: aliases+tags+ratings+artist-rels
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results to return (1-100, default 25).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 25
-  schemas:
     MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
-    Series:
-      type: object
-      description: An ordered grouping of related entities (tour, festival series, award ceremony series, etc.).
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: Reading Festival
-        type:
-          type: string
-          nullable: true
-        type-id:
-          type: string
-          nullable: true
-        ordering-attribute:
-          type: string
-          nullable: true
-        disambiguation:
-          type: string
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
   responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -207,6 +167,49 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Series:
+      type: object
+      description: An ordered grouping of related entities (tour, festival series, award ceremony series, etc.).
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: Reading Festival
+        type:
+          type:
+          - string
+          - 'null'
+        type-id:
+          type:
+          - string
+          - 'null'
+        ordering-attribute:
+          type:
+          - string
+          - 'null'
+        disambiguation:
+          type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http

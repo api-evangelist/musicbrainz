@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Instruments API
   version: '2.0'
@@ -98,16 +98,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Offset:
       name: offset
       in: query
@@ -117,14 +107,6 @@ components:
         type: integer
         minimum: 0
         default: 0
-    Query:
-      name: query
-      in: query
-      required: true
-      description: Lucene-syntax search query string.
-      schema:
-        type: string
-        example: artist:nirvana AND country:US
     Limit:
       name: limit
       in: query
@@ -135,14 +117,6 @@ components:
         minimum: 1
         maximum: 100
         default: 25
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
     Format:
       name: fmt
       in: query
@@ -154,13 +128,33 @@ components:
         - xml
         - json
         default: xml
-  schemas:
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
     MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Query:
+      name: query
+      in: query
+      required: true
+      description: Lucene-syntax search query string.
+      schema:
+        type: string
+        example: artist:nirvana AND country:US
+  schemas:
     Error:
       type: object
       properties:
@@ -168,6 +162,12 @@ components:
           type: string
         help:
           type: string
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Instrument:
       type: object
       description: A musical instrument or family of instruments.
@@ -178,8 +178,9 @@ components:
           type: string
           example: electric guitar
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - Wind instrument
           - String instrument
@@ -189,19 +190,14 @@ components:
           - Ensemble
           - Other instrument
         type-id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         description:
           type: string
         disambiguation:
           type: string
   responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -209,6 +205,12 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Entity not found
       content:
         application/json:
           schema:

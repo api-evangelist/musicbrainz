@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Events API
   version: '2.0'
@@ -122,16 +122,6 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Offset:
       name: offset
       in: query
@@ -141,14 +131,6 @@ components:
         type: integer
         minimum: 0
         default: 0
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
     Limit:
       name: limit
       in: query
@@ -170,79 +152,25 @@ components:
         - xml
         - json
         default: xml
-  schemas:
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
     MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
-    LifeSpan:
-      type: object
-      description: Begin/end dates and whether the entity has ended.
-      properties:
-        begin:
-          type: string
-          description: Begin date (year, year-month, or full ISO date).
-          example: 1988-01
-        end:
-          type: string
-          nullable: true
-          description: End date (year, year-month, or full ISO date), null if ongoing.
-          example: '1994-04-05'
-        ended:
-          type: boolean
-          description: Whether the entity has ended.
-    Event:
-      type: object
-      description: An organized happening at which artists perform (concert, festival, ceremony).
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: Reading Festival 1992
-        type:
-          type: string
-          nullable: true
-          enum:
-          - Concert
-          - Festival
-          - Launch event
-          - Convention/Expo
-          - Masterclass/Clinic
-          - Stage performance
-          - Award ceremony
-          - Other
-        type-id:
-          type: string
-          nullable: true
-        cancelled:
-          type: boolean
-        time:
-          type: string
-          nullable: true
-        setlist:
-          type: string
-          nullable: true
-        disambiguation:
-          type: string
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
   responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -254,6 +182,83 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Event:
+      type: object
+      description: An organized happening at which artists perform (concert, festival, ceremony).
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: Reading Festival 1992
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Concert
+          - Festival
+          - Launch event
+          - Convention/Expo
+          - Masterclass/Clinic
+          - Stage performance
+          - Award ceremony
+          - Other
+        type-id:
+          type:
+          - string
+          - 'null'
+        cancelled:
+          type: boolean
+        time:
+          type:
+          - string
+          - 'null'
+        setlist:
+          type:
+          - string
+          - 'null'
+        disambiguation:
+          type: string
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
+    LifeSpan:
+      type: object
+      description: Begin/end dates and whether the entity has ended.
+      properties:
+        begin:
+          type: string
+          description: Begin date (year, year-month, or full ISO date).
+          example: 1988-01
+        end:
+          type:
+          - string
+          - 'null'
+          description: End date (year, year-month, or full ISO date), null if ongoing.
+          example: '1994-04-05'
+        ended:
+          type: boolean
+          description: Whether the entity has ended.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http

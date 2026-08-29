@@ -39,6 +39,24 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "musicbrainz-areas-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-artists-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-collections-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-events-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-genres-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-identifiers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-instruments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-labels-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-places-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-recordings-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-release-groups-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-releases-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-series-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-submission-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-urls-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "musicbrainz-works-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

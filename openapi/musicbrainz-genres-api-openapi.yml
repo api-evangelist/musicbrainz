@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Genres API
   version: '2.0'
@@ -96,31 +96,6 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  schemas:
-    MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Genre:
-      type: object
-      description: A music genre from the curated MusicBrainz taxonomy.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: grunge
-        disambiguation:
-          type: string
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
   parameters:
     Offset:
       name: offset
@@ -153,6 +128,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Genre:
+      type: object
+      description: A music genre from the curated MusicBrainz taxonomy.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: grunge
+        disambiguation:
+          type: string
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http

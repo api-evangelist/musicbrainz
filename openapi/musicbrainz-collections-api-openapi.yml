@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: MusicBrainz Web Service v2 Areas Collections API
   version: '2.0'
@@ -188,7 +188,42 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  responses:
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Format:
+      name: fmt
+      in: query
+      required: false
+      description: Response serialization format. Defaults to XML; set to `json` for JSON.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        default: xml
     Client:
       name: client
       in: query
@@ -205,41 +240,6 @@ components:
       schema:
         type: string
         example: aliases+tags+ratings+artist-rels
-    Format:
-      name: fmt
-      in: query
-      required: false
-      description: Response serialization format. Defaults to XML; set to `json` for JSON.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        default: xml
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required or invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
