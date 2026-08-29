@@ -10,6 +10,19 @@ description: MusicBrainz is an open-source, community-maintained music encyclope
   web service is read-mostly with authenticated submission endpoints for tags, ratings,
   collections, barcodes, and ISRCs, and is rate-limited to one request per IP per
   second with a mandatory descriptive User-Agent header.
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: open
