@@ -60,7 +60,7 @@ tags:
 - DiscID
 - Artists
 - Releases
-- Recordings
+- Recording
 - Works
 - Labels
 - Cover Art
@@ -636,6 +636,8 @@ apis:
   humanURL: https://musicbrainz.org/doc/MusicBrainz_API
   baseURL: https://musicbrainz.org/ws/2
   tags:
+  - Recording
+  tags_raw:
   - Recordings
   properties:
   - type: OpenAPI
