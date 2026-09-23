@@ -1,22 +1,7 @@
 {
   "provider": "musicbrainz",
   "sources": [
-    "musicbrainz-areas-api-openapi.yml",
-    "musicbrainz-artists-api-openapi.yml",
-    "musicbrainz-collections-api-openapi.yml",
-    "musicbrainz-events-api-openapi.yml",
-    "musicbrainz-genres-api-openapi.yml",
-    "musicbrainz-identifiers-api-openapi.yml",
-    "musicbrainz-instruments-api-openapi.yml",
-    "musicbrainz-labels-api-openapi.yml",
-    "musicbrainz-places-api-openapi.yml",
-    "musicbrainz-recordings-api-openapi.yml",
-    "musicbrainz-release-groups-api-openapi.yml",
-    "musicbrainz-releases-api-openapi.yml",
-    "musicbrainz-series-api-openapi.yml",
-    "musicbrainz-submission-api-openapi.yml",
-    "musicbrainz-urls-api-openapi.yml",
-    "musicbrainz-works-api-openapi.yml"
+    "_ae-authored/musicbrainz-web-service-openapi.yml"
   ],
   "outputs": [
     "musicbrainz-areas-api-openapi.yml",
@@ -40,23 +25,26 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "musicbrainz-areas-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-artists-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-collections-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-events-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-genres-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-identifiers-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-instruments-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-labels-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-places-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-recordings-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-release-groups-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-releases-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-series-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-submission-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-urls-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "musicbrainz-works-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "musicbrainz-web-service-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "musicbrainz-areas-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-artists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-collections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-genres-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-identifiers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-instruments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-labels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-places-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-recordings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-release-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-series-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-submission-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-urls-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "musicbrainz-works-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

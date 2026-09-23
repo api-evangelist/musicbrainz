@@ -4,34 +4,7 @@ info:
   version: '2.0'
   description: 'The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,
 
-    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).
-
-
-    The API supports three primary access patterns over twelve core entity types
-
-    (artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):
-
-
-    - **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.
-
-    - **Browse** — list entities linked to a given parent entity, with pagination.
-
-    - **Search** — full Lucene query syntax across the indexed catalog.
-
-
-    Non-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.
-
-
-    Responses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.
-
-
-    The API enforces a strict rate limit of **one request per IP per second** and requires a meaningful
-
-    **User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).
-
-    Submission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.
-
-    '
+    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).'
   contact:
     name: MetaBrainz Foundation
     url: https://metabrainz.org/
@@ -98,15 +71,24 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   parameters:
-    Offset:
-      name: offset
+    Query:
+      name: query
       in: query
-      required: false
-      description: Zero-based offset into the result set for pagination.
+      required: true
+      description: Lucene-syntax search query string.
       schema:
-        type: integer
-        minimum: 0
-        default: 0
+        type: string
+        example: artist:nirvana AND country:US
+    MBID:
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Limit:
       name: limit
       in: query
@@ -128,6 +110,15 @@ components:
         - xml
         - json
         default: xml
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Zero-based offset into the result set for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     Inc:
       name: inc
       in: query
@@ -136,25 +127,13 @@ components:
       schema:
         type: string
         example: aliases+tags+ratings+artist-rels
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Query:
-      name: query
-      in: query
-      required: true
-      description: Lucene-syntax search query string.
-      schema:
-        type: string
-        example: artist:nirvana AND country:US
   schemas:
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     Error:
       type: object
       properties:
@@ -162,12 +141,23 @@ components:
           type: string
         help:
           type: string
-    MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    LifeSpan:
+      type: object
+      description: Begin/end dates and whether the entity has ended.
+      properties:
+        begin:
+          type: string
+          description: Begin date (year, year-month, or full ISO date).
+          example: 1988-01
+        end:
+          type:
+          - string
+          - 'null'
+          description: End date (year, year-month, or full ISO date), null if ongoing.
+          example: '1994-04-05'
+        ended:
+          type: boolean
+          description: Whether the entity has ended.
     Area:
       type: object
       description: A geographic area (country, subdivision, city, etc.).
@@ -211,23 +201,6 @@ components:
           type: string
         life-span:
           $ref: '#/components/schemas/LifeSpan'
-    LifeSpan:
-      type: object
-      description: Begin/end dates and whether the entity has ended.
-      properties:
-        begin:
-          type: string
-          description: Begin date (year, year-month, or full ISO date).
-          example: 1988-01
-        end:
-          type:
-          - string
-          - 'null'
-          description: End date (year, year-month, or full ISO date), null if ongoing.
-          example: '1994-04-05'
-        ended:
-          type: boolean
-          description: Whether the entity has ended.
   responses:
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP

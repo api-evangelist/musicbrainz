@@ -1,37 +1,10 @@
 openapi: 3.2.0
 info:
-  title: MusicBrainz Web Service v2 Areas Submission API
+  title: MusicBrainz Web Service v2 Submission API
   version: '2.0'
   description: 'The MusicBrainz Web Service v2 is the free public REST API to the MusicBrainz open music encyclopedia,
 
-    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).
-
-
-    The API supports three primary access patterns over twelve core entity types
-
-    (artist, release, release-group, recording, work, label, place, area, event, instrument, series, url, genre):
-
-
-    - **Lookup** — fetch one entity by its MBID with configurable sub-resource includes.
-
-    - **Browse** — list entities linked to a given parent entity, with pagination.
-
-    - **Search** — full Lucene query syntax across the indexed catalog.
-
-
-    Non-MBID lookups are available for ISRC (recordings), ISWC (works), DiscID (releases), and URL.
-
-
-    Responses are returned in MMD-2 XML by default or JSON via the `fmt=json` query parameter.
-
-
-    The API enforces a strict rate limit of **one request per IP per second** and requires a meaningful
-
-    **User-Agent** header on every request (e.g. `MyApp/1.0.0 ( contact@example.com )`).
-
-    Submission and user-specific endpoints require HTTP Basic or OAuth 2.0 authentication.
-
-    '
+    operated by the MetaBrainz Foundation (a US 501(c)(3) non-profit).'
   contact:
     name: MetaBrainz Foundation
     url: https://metabrainz.org/
@@ -179,6 +152,12 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
+    Forbidden:
+      description: Authenticated but not authorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -186,12 +165,6 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Authenticated but not authorized
       content:
         application/json:
           schema:
@@ -208,6 +181,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   parameters:
     Client:
       name: client
@@ -217,14 +198,6 @@ components:
       schema:
         type: string
         example: my-tagger-1.0.0
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
   securitySchemes:
     HTTPBasic:
       type: http
