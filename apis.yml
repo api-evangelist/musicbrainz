@@ -64,7 +64,7 @@ tags:
 - Works
 - Labels
 - Cover Art
-- Open-Source
+- Open Source
 - Non-Profit
 tags_raw:
 - Music
@@ -85,6 +85,7 @@ tags_raw:
 - Cover Art
 - Open Source
 - Non Profit
+- Open-Source
 apis:
 - aid: musicbrainz:musicbrainz-areas-api
   name: MusicBrainz Areas API
@@ -144,8 +145,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-artists-api
   name: MusicBrainz Artists API
   description: Lookup, browse, and search for artists (people, bands, orchestras).
@@ -204,8 +203,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-collections-api
   name: MusicBrainz Collections API
   description: Authenticated user collections of entities.
@@ -266,8 +263,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-events-api
   name: MusicBrainz Events API
   description: Lookup, browse, and search for music events (concerts, festivals, etc.).
@@ -328,8 +323,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-genres-api
   name: MusicBrainz Genres API
   description: List the curated genre taxonomy.
@@ -388,8 +381,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-identifiers-api
   name: MusicBrainz Identifiers API
   description: Non-MBID lookups by ISRC, ISWC, and DiscID.
@@ -448,8 +439,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-instruments-api
   name: MusicBrainz Instruments API
   description: Lookup and search for instruments used in recordings.
@@ -508,8 +497,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-labels-api
   name: MusicBrainz Labels API
   description: Lookup, browse, and search for record labels.
@@ -568,8 +555,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-places-api
   name: MusicBrainz Places API
   description: Lookup, browse, and search for places (venues, studios, etc.).
@@ -628,8 +613,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-recordings-api
   name: MusicBrainz Recordings API
   description: Lookup, browse, and search for recordings (distinct audio captures of a performance).
@@ -690,8 +673,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-release-groups-api
   name: MusicBrainz Release Groups API
   description: Lookup, browse, and search for release groups (logical grouping of releases).
@@ -750,8 +731,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-releases-api
   name: MusicBrainz Releases API
   description: Lookup, browse, and search for releases (specific issues of an album).
@@ -810,8 +789,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-series-api
   name: MusicBrainz Series API
   description: Lookup, browse, and search for series (ordered groups of entities).
@@ -870,8 +847,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-submission-api
   name: MusicBrainz Submission API
   description: Authenticated submission of tags, ratings, barcodes, and ISRCs.
@@ -930,8 +905,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-urls-api
   name: MusicBrainz URLs API
   description: Lookup URLs linked to other MusicBrainz entities.
@@ -990,8 +963,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 - aid: musicbrainz:musicbrainz-works-api
   name: MusicBrainz Works API
   description: Lookup, browse, and search for musical works (abstract compositions).
@@ -1050,8 +1021,6 @@ apis:
     url: https://github.com/metabrainz/mb-rngpy
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
-  - type: GraphQL
-    url: graphql/musicbrainz-graphql.md
 common:
 - type: CodeOfConduct
   url: https://github.com/metabrainz/.github/blob/master/CODE_OF_CONDUCT.md
