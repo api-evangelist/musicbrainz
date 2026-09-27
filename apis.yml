@@ -12,6 +12,10 @@ description: MusicBrainz is an open-source, community-maintained music encyclope
   second with a mandatory descriptive User-Agent header.
 deliveryModel:
   model: unknown
+  license_evidence:
+    repo: metabrainz/musicbrainz-server
+    spdx: NOASSERTION
+    stars: 1092
   open_source: unknown
   commercial: true
   callable_host: true
@@ -21,7 +25,7 @@ deliveryModel:
   - openapi
   - pricing
   - repository-unlicensed
-  generated: '2026-08-28'
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: paid

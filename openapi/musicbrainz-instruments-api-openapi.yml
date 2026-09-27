@@ -70,6 +70,49 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
+    Instrument:
+      type: object
+      description: A musical instrument or family of instruments.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: electric guitar
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Wind instrument
+          - String instrument
+          - Percussion instrument
+          - Electronic instrument
+          - Family
+          - Ensemble
+          - Other instrument
+        type-id:
+          type:
+          - string
+          - 'null'
+        description:
+          type: string
+        disambiguation:
+          type: string
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
   parameters:
     Query:
       name: query
@@ -79,6 +122,15 @@ components:
       schema:
         type: string
         example: artist:nirvana AND country:US
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Zero-based offset into the result set for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
     MBID:
       name: mbid
       in: path
@@ -118,59 +170,13 @@ components:
       schema:
         type: string
         example: aliases+tags+ratings+artist-rels
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Zero-based offset into the result set for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-  schemas:
-    MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
-    Instrument:
-      type: object
-      description: A musical instrument or family of instruments.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: electric guitar
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Wind instrument
-          - String instrument
-          - Percussion instrument
-          - Electronic instrument
-          - Family
-          - Ensemble
-          - Other instrument
-        type-id:
-          type:
-          - string
-          - 'null'
-        description:
-          type: string
-        disambiguation:
-          type: string
   responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -178,12 +184,6 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Entity not found
       content:
         application/json:
           schema:
