@@ -161,14 +161,34 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
+  parameters:
+    Format:
+      name: fmt
+      in: query
+      required: false
+      description: Response serialization format. Defaults to XML; set to `json` for JSON.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        default: xml
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
+    Client:
+      name: client
+      in: query
+      required: true
+      description: Application identifier in the form `name-version` for submission requests.
+      schema:
+        type: string
+        example: my-tagger-1.0.0
   responses:
     Unauthorized:
       description: Authentication required or invalid credentials
@@ -193,34 +213,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    Client:
-      name: client
-      in: query
-      required: true
-      description: Application identifier in the form `name-version` for submission requests.
-      schema:
-        type: string
-        example: my-tagger-1.0.0
-    Format:
-      name: fmt
-      in: query
-      required: false
-      description: Response serialization format. Defaults to XML; set to `json` for JSON.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        default: xml
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http

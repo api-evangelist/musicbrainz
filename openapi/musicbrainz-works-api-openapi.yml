@@ -126,253 +126,19 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  parameters:
-    MBID:
-      name: mbid
-      in: path
-      required: true
-      description: MusicBrainz Identifier (UUID v4) of the entity.
-      schema:
-        type: string
-        format: uuid
-        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Offset:
-      name: offset
-      in: query
-      required: false
-      description: Zero-based offset into the result set for pagination.
-      schema:
-        type: integer
-        minimum: 0
-        default: 0
-    Limit:
-      name: limit
-      in: query
-      required: false
-      description: Maximum number of results to return (1-100, default 25).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 25
-    Format:
-      name: fmt
-      in: query
-      required: false
-      description: Response serialization format. Defaults to XML; set to `json` for JSON.
-      schema:
-        type: string
-        enum:
-        - xml
-        - json
-        default: xml
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
   schemas:
-    Area:
-      type: object
-      description: A geographic area (country, subdivision, city, etc.).
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: United States
-        sort-name:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Country
-          - Subdivision
-          - County
-          - Municipality
-          - City
-          - District
-          - Island
-        type-id:
-          $ref: '#/components/schemas/MBID'
-        iso-3166-1-codes:
-          type: array
-          items:
-            type: string
-          example:
-          - US
-        iso-3166-2-codes:
-          type: array
-          items:
-            type: string
-        iso-3166-3-codes:
-          type: array
-          items:
-            type: string
-        disambiguation:
-          type: string
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
-    Tag:
+    Rating:
       type: object
       properties:
-        name:
-          type: string
-          example: grunge
-        count:
+        value:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+          example: 4.5
+        votes-count:
           type: integer
-          example: 42
-    Label:
-      type: object
-      description: A record label or imprint.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: DGC
-        sort-name:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Imprint
-          - Production
-          - Original Production
-          - Bootleg Production
-          - Reissue Production
-          - Distributor
-          - Holding
-          - Rights Society
-          - Publisher
-        type-id:
-          type:
-          - string
-          - 'null'
-        label-code:
-          type:
-          - integer
-          - 'null'
-          description: Numeric label code without LC prefix
-        country:
-          type:
-          - string
-          - 'null'
-        area:
-          $ref: '#/components/schemas/Area'
-        ipis:
-          type: array
-          items:
-            type: string
-        isnis:
-          type: array
-          items:
-            type: string
-        disambiguation:
-          type: string
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        rating:
-          $ref: '#/components/schemas/Rating'
-    Artist:
-      type: object
-      description: A person, group, orchestra, choir, character, or other artistic entity.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
-          type: string
-          example: Nirvana
-        sort-name:
-          type: string
-          example: Nirvana
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Person
-          - Group
-          - Orchestra
-          - Choir
-          - Character
-          - Other
-          example: Group
-        type-id:
-          $ref: '#/components/schemas/MBID'
-        gender:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Male
-          - Female
-          - Other
-          - Not applicable
-        gender-id:
-          type:
-          - string
-          - 'null'
-        country:
-          type:
-          - string
-          - 'null'
-          description: ISO 3166-1 alpha-2 country code
-          example: US
-        area:
-          $ref: '#/components/schemas/Area'
-        begin-area:
-          $ref: '#/components/schemas/Area'
-        end-area:
-          $ref: '#/components/schemas/Area'
-        disambiguation:
-          type: string
-          example: 90s US grunge band
-        isnis:
-          type: array
-          items:
-            type: string
-          description: International Standard Name Identifiers
-        ipis:
-          type: array
-          items:
-            type: string
-          description: Interested Parties Information codes
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
-        aliases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alias'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        rating:
-          $ref: '#/components/schemas/Rating'
-        relations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
+          example: 123
     BrowseWorksResponse:
       type: object
       properties:
@@ -384,99 +150,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Work'
-    LifeSpan:
+    Alias:
       type: object
-      description: Begin/end dates and whether the entity has ended.
+      description: Alternative name for an entity.
       properties:
-        begin:
+        name:
           type: string
-          description: Begin date (year, year-month, or full ISO date).
-          example: 1988-01
-        end:
+          example: Nirvana
+        sort-name:
+          type: string
+          example: Nirvana
+        locale:
           type:
           - string
           - 'null'
-          description: End date (year, year-month, or full ISO date), null if ongoing.
-          example: '1994-04-05'
-        ended:
-          type: boolean
-          description: Whether the entity has ended.
-    Recording:
-      type: object
-      description: A distinct audio capture of a performance.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        title:
-          type: string
-          example: Smells Like Teen Spirit
-        length:
-          type: integer
-          description: Length in milliseconds
-          example: 301920
-        video:
-          type: boolean
-        disambiguation:
-          type: string
-        first-release-date:
-          type: string
-        isrcs:
-          type: array
-          items:
-            type: string
-          example:
-          - USGF19102751
-        artist-credit:
-          type: array
-          items:
-            type: object
-        releases:
-          type: array
-          items:
-            $ref: '#/components/schemas/Release'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        rating:
-          $ref: '#/components/schemas/Rating'
-        relations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
-    Relation:
-      type: object
-      description: Typed relationship between two MusicBrainz entities.
-      properties:
+          example: en
         type:
-          type: string
-          example: composer
-        type-id:
-          $ref: '#/components/schemas/MBID'
-        direction:
-          type: string
-          enum:
-          - forward
-          - backward
-        target-type:
-          type: string
-          example: artist
-        target-credit:
           type:
           - string
           - 'null'
-        attributes:
-          type: array
-          items:
-            type: string
-        artist:
-          $ref: '#/components/schemas/Artist'
-        url:
-          $ref: '#/components/schemas/Url'
-        work:
-          $ref: '#/components/schemas/Work'
-        recording:
-          $ref: '#/components/schemas/Recording'
+          example: Artist name
+        primary:
+          type:
+          - boolean
+          - 'null'
         begin:
           type:
           - string
@@ -485,8 +182,6 @@ components:
           type:
           - string
           - 'null'
-        ended:
-          type: boolean
     Release:
       type: object
       description: A specific issue of a release-group, with packaging, label, country, and barcode.
@@ -648,26 +343,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Relation'
-    Url:
-      type: object
-      description: A URL linked to other MusicBrainz entities.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        resource:
-          type: string
-          format: uri
-          example: https://www.nin.com/
-        relations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relation'
-    MBID:
-      type: string
-      format: uuid
-      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
-      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
-      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
     ReleaseGroup:
       type: object
       description: A logical grouping of releases (e.g. an album and its reissues).
@@ -718,50 +393,73 @@ components:
             $ref: '#/components/schemas/Tag'
         rating:
           $ref: '#/components/schemas/Rating'
-    Rating:
+    Track:
       type: object
       properties:
-        value:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 5
-          example: 4.5
-        votes-count:
+        id:
+          $ref: '#/components/schemas/MBID'
+        position:
           type: integer
-          example: 123
-    Alias:
+          example: 1
+        number:
+          type: string
+          example: '1'
+        title:
+          type: string
+          example: Smells Like Teen Spirit
+        length:
+          type: integer
+          description: Length in milliseconds
+          example: 301920
+        artist-credit:
+          type: array
+          items:
+            type: object
+        recording:
+          $ref: '#/components/schemas/Recording'
+    Area:
       type: object
-      description: Alternative name for an entity.
+      description: A geographic area (country, subdivision, city, etc.).
       properties:
+        id:
+          $ref: '#/components/schemas/MBID'
         name:
           type: string
-          example: Nirvana
+          example: United States
         sort-name:
           type: string
-          example: Nirvana
-        locale:
-          type:
-          - string
-          - 'null'
-          example: en
         type:
           type:
           - string
           - 'null'
-          example: Artist name
-        primary:
-          type:
-          - boolean
-          - 'null'
-        begin:
-          type:
-          - string
-          - 'null'
-        end:
-          type:
-          - string
-          - 'null'
+          enum:
+          - Country
+          - Subdivision
+          - County
+          - Municipality
+          - City
+          - District
+          - Island
+        type-id:
+          $ref: '#/components/schemas/MBID'
+        iso-3166-1-codes:
+          type: array
+          items:
+            type: string
+          example:
+          - US
+        iso-3166-2-codes:
+          type: array
+          items:
+            type: string
+        iso-3166-3-codes:
+          type: array
+          items:
+            type: string
+        disambiguation:
+          type: string
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
     Work:
       type: object
       description: A distinct intellectual or artistic creation (song, composition, etc.).
@@ -822,17 +520,35 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Relation'
-    Track:
+    Tag:
       type: object
+      properties:
+        name:
+          type: string
+          example: grunge
+        count:
+          type: integer
+          example: 42
+    Url:
+      type: object
+      description: A URL linked to other MusicBrainz entities.
       properties:
         id:
           $ref: '#/components/schemas/MBID'
-        position:
-          type: integer
-          example: 1
-        number:
+        resource:
           type: string
-          example: '1'
+          format: uri
+          example: https://www.nin.com/
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+    Recording:
+      type: object
+      description: A distinct audio capture of a performance.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
         title:
           type: string
           example: Smells Like Teen Spirit
@@ -840,12 +556,247 @@ components:
           type: integer
           description: Length in milliseconds
           example: 301920
+        video:
+          type: boolean
+        disambiguation:
+          type: string
+        first-release-date:
+          type: string
+        isrcs:
+          type: array
+          items:
+            type: string
+          example:
+          - USGF19102751
         artist-credit:
           type: array
           items:
             type: object
+        releases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Release'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        rating:
+          $ref: '#/components/schemas/Rating'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
+    Relation:
+      type: object
+      description: Typed relationship between two MusicBrainz entities.
+      properties:
+        type:
+          type: string
+          example: composer
+        type-id:
+          $ref: '#/components/schemas/MBID'
+        direction:
+          type: string
+          enum:
+          - forward
+          - backward
+        target-type:
+          type: string
+          example: artist
+        target-credit:
+          type:
+          - string
+          - 'null'
+        attributes:
+          type: array
+          items:
+            type: string
+        artist:
+          $ref: '#/components/schemas/Artist'
+        url:
+          $ref: '#/components/schemas/Url'
+        work:
+          $ref: '#/components/schemas/Work'
         recording:
           $ref: '#/components/schemas/Recording'
+        begin:
+          type:
+          - string
+          - 'null'
+        end:
+          type:
+          - string
+          - 'null'
+        ended:
+          type: boolean
+    Label:
+      type: object
+      description: A record label or imprint.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: DGC
+        sort-name:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Imprint
+          - Production
+          - Original Production
+          - Bootleg Production
+          - Reissue Production
+          - Distributor
+          - Holding
+          - Rights Society
+          - Publisher
+        type-id:
+          type:
+          - string
+          - 'null'
+        label-code:
+          type:
+          - integer
+          - 'null'
+          description: Numeric label code without LC prefix
+        country:
+          type:
+          - string
+          - 'null'
+        area:
+          $ref: '#/components/schemas/Area'
+        ipis:
+          type: array
+          items:
+            type: string
+        isnis:
+          type: array
+          items:
+            type: string
+        disambiguation:
+          type: string
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        rating:
+          $ref: '#/components/schemas/Rating'
+    LifeSpan:
+      type: object
+      description: Begin/end dates and whether the entity has ended.
+      properties:
+        begin:
+          type: string
+          description: Begin date (year, year-month, or full ISO date).
+          example: 1988-01
+        end:
+          type:
+          - string
+          - 'null'
+          description: End date (year, year-month, or full ISO date), null if ongoing.
+          example: '1994-04-05'
+        ended:
+          type: boolean
+          description: Whether the entity has ended.
+    Artist:
+      type: object
+      description: A person, group, orchestra, choir, character, or other artistic entity.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: Nirvana
+        sort-name:
+          type: string
+          example: Nirvana
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Person
+          - Group
+          - Orchestra
+          - Choir
+          - Character
+          - Other
+          example: Group
+        type-id:
+          $ref: '#/components/schemas/MBID'
+        gender:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Male
+          - Female
+          - Other
+          - Not applicable
+        gender-id:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 alpha-2 country code
+          example: US
+        area:
+          $ref: '#/components/schemas/Area'
+        begin-area:
+          $ref: '#/components/schemas/Area'
+        end-area:
+          $ref: '#/components/schemas/Area'
+        disambiguation:
+          type: string
+          example: 90s US grunge band
+        isnis:
+          type: array
+          items:
+            type: string
+          description: International Standard Name Identifiers
+        ipis:
+          type: array
+          items:
+            type: string
+          description: Interested Parties Information codes
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
+        aliases:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alias'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        rating:
+          $ref: '#/components/schemas/Rating'
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+    MBID:
+      type: string
+      format: uuid
+      pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
+      example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
   responses:
     NotFound:
       description: Entity not found
@@ -864,6 +815,55 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    MBID:
+      name: mbid
+      in: path
+      required: true
+      description: MusicBrainz Identifier (UUID v4) of the entity.
+      schema:
+        type: string
+        format: uuid
+        pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+        example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Limit:
+      name: limit
+      in: query
+      required: false
+      description: Maximum number of results to return (1-100, default 25).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 25
+    Format:
+      name: fmt
+      in: query
+      required: false
+      description: Response serialization format. Defaults to XML; set to `json` for JSON.
+      schema:
+        type: string
+        enum:
+        - xml
+        - json
+        default: xml
+    Inc:
+      name: inc
+      in: query
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
+      schema:
+        type: string
+        example: aliases+tags+ratings+artist-rels
+    Offset:
+      name: offset
+      in: query
+      required: false
+      description: Zero-based offset into the result set for pagination.
+      schema:
+        type: integer
+        minimum: 0
+        default: 0
   securitySchemes:
     HTTPBasic:
       type: http

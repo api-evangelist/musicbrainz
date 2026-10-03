@@ -100,15 +100,17 @@ components:
         minimum: 1
         maximum: 100
         default: 25
-    Offset:
-      name: offset
+    Format:
+      name: fmt
       in: query
       required: false
-      description: Zero-based offset into the result set for pagination.
+      description: Response serialization format. Defaults to XML; set to `json` for JSON.
       schema:
-        type: integer
-        minimum: 0
-        default: 0
+        type: string
+        enum:
+        - xml
+        - json
+        default: xml
     Inc:
       name: inc
       in: query
@@ -127,31 +129,101 @@ components:
         format: uuid
         pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
         example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Format:
-      name: fmt
+    Offset:
+      name: offset
       in: query
       required: false
-      description: Response serialization format. Defaults to XML; set to `json` for JSON.
+      description: Zero-based offset into the result set for pagination.
       schema:
-        type: string
-        enum:
-        - xml
-        - json
-        default: xml
+        type: integer
+        minimum: 0
+        default: 0
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
     MBID:
       type: string
       format: uuid
       pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
       description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
       example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+    Rating:
+      type: object
+      properties:
+        value:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+          example: 4.5
+        votes-count:
+          type: integer
+          example: 123
+    Tag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: grunge
+        count:
+          type: integer
+          example: 42
+    Label:
+      type: object
+      description: A record label or imprint.
+      properties:
+        id:
+          $ref: '#/components/schemas/MBID'
+        name:
+          type: string
+          example: DGC
+        sort-name:
+          type: string
+        type:
+          type:
+          - string
+          - 'null'
+          enum:
+          - Imprint
+          - Production
+          - Original Production
+          - Bootleg Production
+          - Reissue Production
+          - Distributor
+          - Holding
+          - Rights Society
+          - Publisher
+        type-id:
+          type:
+          - string
+          - 'null'
+        label-code:
+          type:
+          - integer
+          - 'null'
+          description: Numeric label code without LC prefix
+        country:
+          type:
+          - string
+          - 'null'
+        area:
+          $ref: '#/components/schemas/Area'
+        ipis:
+          type: array
+          items:
+            type: string
+        isnis:
+          type: array
+          items:
+            type: string
+        disambiguation:
+          type: string
+        life-span:
+          $ref: '#/components/schemas/LifeSpan'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        rating:
+          $ref: '#/components/schemas/Rating'
     LifeSpan:
       type: object
       description: Begin/end dates and whether the entity has ended.
@@ -212,86 +284,20 @@ components:
           type: string
         life-span:
           $ref: '#/components/schemas/LifeSpan'
-    Tag:
+    Error:
       type: object
       properties:
-        name:
+        error:
           type: string
-          example: grunge
-        count:
-          type: integer
-          example: 42
-    Rating:
-      type: object
-      properties:
-        value:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 5
-          example: 4.5
-        votes-count:
-          type: integer
-          example: 123
-    Label:
-      type: object
-      description: A record label or imprint.
-      properties:
-        id:
-          $ref: '#/components/schemas/MBID'
-        name:
+        help:
           type: string
-          example: DGC
-        sort-name:
-          type: string
-        type:
-          type:
-          - string
-          - 'null'
-          enum:
-          - Imprint
-          - Production
-          - Original Production
-          - Bootleg Production
-          - Reissue Production
-          - Distributor
-          - Holding
-          - Rights Society
-          - Publisher
-        type-id:
-          type:
-          - string
-          - 'null'
-        label-code:
-          type:
-          - integer
-          - 'null'
-          description: Numeric label code without LC prefix
-        country:
-          type:
-          - string
-          - 'null'
-        area:
-          $ref: '#/components/schemas/Area'
-        ipis:
-          type: array
-          items:
-            type: string
-        isnis:
-          type: array
-          items:
-            type: string
-        disambiguation:
-          type: string
-        life-span:
-          $ref: '#/components/schemas/LifeSpan'
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        rating:
-          $ref: '#/components/schemas/Rating'
   responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     TooManyRequests:
       description: Rate limit exceeded - clients must throttle to 1 request per second per IP
       headers:
@@ -299,12 +305,6 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Entity not found
       content:
         application/json:
           schema:

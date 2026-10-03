@@ -151,21 +151,7 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        help:
-          type: string
   responses:
-    BadRequest:
-      description: Malformed request or invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Forbidden:
       description: Authenticated but not authorized
       content:
@@ -174,6 +160,12 @@ components:
             $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request or invalid parameters
       content:
         application/json:
           schema:
@@ -198,6 +190,14 @@ components:
       schema:
         type: string
         example: my-tagger-1.0.0
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        help:
+          type: string
   securitySchemes:
     HTTPBasic:
       type: http
