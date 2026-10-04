@@ -1,22 +1,20 @@
-# Kin Score artifact — musicbrainz — 2026-08-27T094438
+# Kin Score artifact — musicbrainz — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: musicbrainz
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T094438
-  composite: 52.4
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 44.2
   band: developing
   facets:
-    discoverability: 68.5
-    contract_quality: 37.1
-    governance: 28.8
-    operational_transparency: 34.2
-    developer_ergonomics: 57.1
-    commercial_clarity: 52.6
-    contract_governance: 28.8
-    access_clarity: 52.6
+    discoverability: 66.1
+    contract_quality: 28.6
+    contract_governance: 27.3
+    operational_transparency: 31.1
+    developer_ergonomics: 53.6
+    access_clarity: 49.5
   agent_readiness:
     score: 29.9
     band: agent-ready
@@ -44,12 +42,12 @@ kin_score:
     applies: true
     regime: Government & Public Sector
     regime_id: government
-    score: 64.8
+    score: 34.3
     matched_via: tags
   provenance:
     agentic_access: derived
     contracts:
-      total: 16
-      derived: 16
+      total: 17
+      derived: 17
       coverage: 100.0
       callable: 100.0
