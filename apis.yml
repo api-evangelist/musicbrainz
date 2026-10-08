@@ -1026,6 +1026,8 @@ apis:
   - type: Schema
     url: https://github.com/metabrainz/mmd-schema
 common:
+- type: Plans
+  url: plans/musicbrainz-plans-pricing.yml
 - type: CodeOfConduct
   url: https://github.com/metabrainz/.github/blob/master/CODE_OF_CONDUCT.md
 - type: ContributionGuide
