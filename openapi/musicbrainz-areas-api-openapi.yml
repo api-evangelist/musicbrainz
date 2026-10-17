@@ -144,7 +144,33 @@ components:
       pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
       description: MusicBrainz Identifier (UUID v4) - the canonical primary key for every entity.
       example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
+  responses:
+    NotFound:
+      description: Entity not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    TooManyRequests:
+      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    Query:
+      name: query
+      in: query
+      required: true
+      description: Lucene-syntax search query string.
+      schema:
+        type: string
+        example: artist:nirvana AND country:US
     Offset:
       name: offset
       in: query
@@ -164,14 +190,14 @@ components:
         format: uuid
         pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
         example: 5b11f4ce-a62d-471e-81fc-a69a8278c7da
-    Query:
-      name: query
+    Inc:
+      name: inc
       in: query
-      required: true
-      description: Lucene-syntax search query string.
+      required: false
+      description: Plus-separated list of sub-resources and relationships to include in the response.
       schema:
         type: string
-        example: artist:nirvana AND country:US
+        example: aliases+tags+ratings+artist-rels
     Format:
       name: fmt
       in: query
@@ -183,14 +209,6 @@ components:
         - xml
         - json
         default: xml
-    Inc:
-      name: inc
-      in: query
-      required: false
-      description: Plus-separated list of sub-resources and relationships to include in the response.
-      schema:
-        type: string
-        example: aliases+tags+ratings+artist-rels
     Limit:
       name: limit
       in: query
@@ -201,24 +219,6 @@ components:
         minimum: 1
         maximum: 100
         default: 25
-  responses:
-    NotFound:
-      description: Entity not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    TooManyRequests:
-      description: Rate limit exceeded - clients must throttle to 1 request per second per IP
-      headers:
-        Retry-After:
-          schema:
-            type: integer
-          description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     HTTPBasic:
       type: http

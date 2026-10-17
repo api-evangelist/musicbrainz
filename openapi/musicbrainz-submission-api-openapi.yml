@@ -152,14 +152,20 @@ paths:
           $ref: '#/components/responses/TooManyRequests'
 components:
   responses:
-    BadRequest:
-      description: Malformed request or invalid parameters
+    Forbidden:
+      description: Authenticated but not authorized
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Forbidden:
-      description: Authenticated but not authorized
+    Unauthorized:
+      description: Authentication required or invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Malformed request or invalid parameters
       content:
         application/json:
           schema:
@@ -171,12 +177,6 @@ components:
           schema:
             type: integer
           description: Seconds to wait before retrying.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication required or invalid credentials
       content:
         application/json:
           schema:
